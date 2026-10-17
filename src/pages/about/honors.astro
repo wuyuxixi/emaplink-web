@@ -1,0 +1,147 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AboutNav from '@/components/AboutNav.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Icon from '@/components/ui/Icon.astro';
+import { honors } from '@/data/about';
+
+const groups = ['企业资质', '产品认证', '发明专利'] as const;
+---
+
+<BaseLayout
+  title="荣誉资质"
+  description="联易软件高新技术企业证书、商用密码产品认证证书与发明专利等资质荣誉。"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: '荣誉资质',
+    description: '联易软件的企业资质、商用密码产品认证与发明专利。',
+    url: 'https://www.emaplink.com.cn/about/honors/',
+  }}
+>
+  <PageHero
+    eyebrow="关于我们"
+    title="荣誉资质"
+    description="以资质与认证为底座，持续验证产品与服务的合规性与可靠性。"
+    breadcrumbs={[{ label: '首页', href: '/' }, { label: '关于我们', href: '/about/' }, { label: '荣誉资质' }]}
+    compact
+  />
+
+  <section class="section">
+    <div class="container-page grid gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
+      <AboutNav />
+
+      <div class="space-y-14">
+        {
+          groups.map((group) => {
+            const items = honors.filter((honor) => honor.group === group);
+            if (!items.length) return null;
+            return (
+              <div>
+                <div class="flex items-end justify-between gap-4">
+                  <div>
+                    <p class="eyebrow">{group}</p>
+                    <h2 class="mt-3 text-2xl font-semibold text-ink-900 sm:text-3xl">
+                      {group === '企业资质' ? '企业资质与许可' : group === '产品认证' ? '商用密码产品认证' : '发明专利'}
+                    </h2>
+                  </div>
+                  <span class="font-mono text-xs text-muted">{String(items.length).padStart(2, '0')}</span>
+                </div>
+
+                <div class="mt-6 grid gap-4 sm:grid-cols-2">
+                  {items.map((honor) => (
+                    <button
+                      type="button"
+                      class="group card overflow-hidden text-left transition duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-card"
+                      data-honor-open
+                      data-src={honor.image}
+                      data-title={honor.title}
+                      data-description={honor.description}
+                    >
+                      <span class="flex aspect-[4/3] items-center justify-center overflow-hidden bg-paper p-3">
+                        <img
+                          src={honor.image}
+                          alt={honor.alt}
+                          width="1200"
+                          height="900"
+                          class="h-full w-full object-contain transition duration-500 group-hover:scale-[1.02]"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </span>
+                      <span class="block p-5">
+                        <span class="block text-sm font-semibold text-ink-900 transition group-hover:text-brand-600">
+                          {honor.title}
+                        </span>
+                        <span class="mt-1.5 line-clamp-2 block text-xs leading-5 text-muted">
+                          {honor.description}
+                        </span>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+
+<dialog
+  id="honor-dialog"
+  class="m-auto w-[min(56rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-line bg-white p-0 shadow-menu backdrop:bg-ink-950/60"
+  aria-label="证书大图"
+>
+  <div class="flex items-start justify-between gap-4 border-b border-line px-5 py-4">
+    <div>
+      <p id="honor-dialog-title" class="text-sm font-semibold text-ink-900"></p>
+      <p id="honor-dialog-description" class="mt-1 text-xs leading-5 text-muted"></p>
+    </div>
+    <button
+      type="button"
+      class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-900/50 transition hover:bg-paper"
+      aria-label="关闭证书大图"
+      data-honor-close
+    >
+      <Icon name="close" size={18} />
+    </button>
+  </div>
+  <div class="flex max-h-[72vh] items-center justify-center overflow-auto bg-paper p-3">
+    <img
+      id="honor-dialog-image"
+      src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+      alt=""
+      class="max-h-[68vh] w-auto max-w-full object-contain"
+    />
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#honor-dialog');
+  const image = document.querySelector<HTMLImageElement>('#honor-dialog-image');
+  const title = document.querySelector<HTMLElement>('#honor-dialog-title');
+  const description = document.querySelector<HTMLElement>('#honor-dialog-description');
+  const closeButton = document.querySelector<HTMLElement>('[data-honor-close]');
+
+  document.querySelectorAll<HTMLElement>('[data-honor-open]').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!dialog || !image) return;
+      const src = button.dataset.src ?? '';
+      image.src = src;
+      image.alt = button.dataset.title ?? '证书大图';
+      if (title) title.textContent = button.dataset.title ?? '';
+      if (description) description.textContent = button.dataset.description ?? '';
+      dialog.showModal();
+    });
+  });
+
+  closeButton?.addEventListener('click', () => dialog?.close());
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>
+</BaseLayout>

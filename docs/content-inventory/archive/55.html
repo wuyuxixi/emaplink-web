@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <title>3000字，看懂密码学的底层原理（归档）</title>
+  <style>
+    body{font-family:"Microsoft YaHei",system-ui,sans-serif;max-width:52rem;margin:2rem auto;padding:0 1.25rem;line-height:1.8;color:#233545}
+    h1{font-size:1.75rem;line-height:1.4;color:#0a1d2e}
+    .meta{color:#5a6b7b;font-size:.875rem;margin-bottom:2rem}
+    img{max-width:100%;height:auto}
+    table{border-collapse:collapse;width:100%;font-size:.9rem}
+    th,td{border:1px solid #dce5ec;padding:.5rem .625rem;text-align:left;vertical-align:top}
+    pre{overflow:auto;background:#0d1b27;color:#e6edf3;padding:1rem;border-radius:.5rem}
+    blockquote{border-left:3px solid #0062a2;margin-left:0;padding-left:1rem;color:#26465e}
+  </style>
+</head>
+<body>
+  <article>
+    <h1>3000字，看懂密码学的底层原理</h1>
+    <p class="meta">发布时间：2022-07-18 · 来源：赛迪密码信息安全 · 归档稿，未发布</p>
+    
+
+                        
+                        <br>
+                        <br>
+                        <!-- <p class="MsoNormal center">
+                            <img src="../images3/news-details/54-1.gif" alt="" style="max-width: 50%;">
+                        </p> -->
+
+                        <p class="MsoNormal center weight">
+                            一、密码学的定义
+                        </p>
+                        
+                        <p class="MsoNormal   ">
+                            在20世纪晚期之前，密码学更多的是一门艺术，它主要是用于秘密通信。在那个时候没有什么理论可以依赖，也没有什么有效的定义可以构建一个好的密码。直到上个世纪80年代开始，现代密码学的出现使得对密码学的研究成为了一门科学和数学学科。
+                        </p>
+                        
+                        <p class="MsoNormal ">
+                            适用对象：
+                        </p>
+                        <p class="MsoNormal ">
+                            经典密码学：军事组织和政府。
+                        </p>
+                        <p class="MsoNormal ">
+                            现代密码学：everywhere。
+                        </p>
+                        <!-- <p class="MsoNormal center">
+                            <img src="../images3/news-details/54-2.png" alt="" style="max-width: 50%;">
+                        </p> -->
+
+                        <p class="MsoNormal ">
+                            对密码学的定义：
+                        </p>
+                        <p class="MsoNormal ">
+                            《简明牛津英语词典》：编码或破译密码的艺术。（不够完善准确）
+                        </p>
+                        <p class="MsoNormal ">
+                            现在密码学：对保护数字信息、系统和分布式计算免受敌方攻击的数学技术的研究。
+                        </p>
+                        <p class="MsoNormal ">
+                            其演变过程可表示如下：
+                        </p>
+                        <p class="MsoNormal center">
+                            <img src="../images3/news-details/55-1.png" alt="">
+                        </p>
+                        <p class="MsoNormal center weight">
+                            二、对称加密简述
+                        </p>
+                        <p class="MsoNormal ">
+                            经典密码学关注的是对密码的设计和使用，使得在有第三方窃听者监听消息的情况下，双方能够发送消息而不被监听者看到。监听者可以监视他们之间的所有消息。上面所说的“密码”就是后面我们要说的“加密方案”。所有经典密码学的安全性都依赖于一个秘密——密钥 (key)——由通信双方提前生成并交换而窃听者无法获取。这种方式就是private-key encryption。
+                        </p>
+                        <p class="MsoNormal ">
+                            在密码学中，我们将加密方案分为private-key (symmetric) encryption和public-key (asymmetric) encryption。
+                        </p>
+                        <p class="MsoNormal ">
+                            在private-key encryption中，当通信双方想要秘密通信的时候，提前交换一个key。其中一方可以使用这个key来加密一条消息，或者叫明文 (plaintext)，然后发送给另一方。因此可以说，其中一方将一个密文ciphertext发送给了另一方。接收者使用key解密这个密文，得到了原始消息。这里的key都是相同的，并且用于明文和密文之间的转换。这也是为什么人们将之称为symmetric encryption。然而asymmetric encryption与之相反，其加密和解密使用的是不同的key。
+                        </p>
+                        <p class="MsoNormal center">
+                            <img src="../images3/news-details/55-2.jpg" alt="">
+                        </p>
+                        <p class="MsoNormal center weight">
+                            三、加密语法
+                        </p>
+                        <p class="MsoNormal ">
+                            正式地，一个private-key encryption方案由一个消息空间M和三个算法 (Gen 、Enc和Dec) 组成。
+                        </p>
+                        <p class="MsoNormal ">
+                            Gen：密钥生成算法
+                        </p>
+                        <p class="MsoNormal ">
+                            Enc：加密算法
+                        </p>
+                        <p class="MsoNormal ">
+                            Dec：解密算法
+                        </p>
+                        <p class="MsoNormal ">
+                            这三个算法的功能描述如下：
+                        </p>
+                        <p class="MsoNormal ">
+                            1. Gen是一个概率算法，根据某种分布，输出一个密钥k。
+                        </p>
+                        <p class="MsoNormal ">
+                            2. Enc将一个密钥k和一个明文消息m作为输入，输出一个密文c，即Enck(m)表示用密钥k对明文消息m进行加密。
+                        </p>
+                        <p class="MsoNormal ">
+                            3. Dec将一个密钥k和一个密文c作为输入，输出一个明文消息m。即Deck(c)表示用密钥k对密文消息c进行解密。
+                        </p>
+                        <p class="MsoNormal ">
+                            所有由Gen生成的密钥k组成了一个密钥空间，记为K。由Dec生成的密文c 组成了一个明文空间，记为C。
+                        </p>
+                        <p class="MsoNormal ">
+                            一个加密方案必须满足如下 确定性要求 ：对于每一个由Gen输出的密钥k和每一个明文消息m∈M，Deck (Enck(m) = m
+                        </p>
+                        <p class="MsoNormal ">
+                            对称加密流程：运行Gen来生成密钥k，当一方想要发送明文消息m给另一方时，他计算c : = Enck(m)，然后在公开信道中将密文c发送给对方。
+                        </p>
+                        <p class="MsoNormal ">
+                            接收者收到密文c后，计算m : = Deck(c)来得到原始消息。
+                        </p>
+                        <p class="MsoNormal ">
+                            “ := ”表示确定性等式，假设此处的Enc是确定性的，Enc是概率性的算法
+                        </p>
+                        <p class="MsoNormal center weight">
+                            四、Kerckhoffs原则
+                        </p>
+                        <p class="MsoNormal ">
+                            “加密方案没有必要保密，它可以被敌人轻易获得。”
+                        </p>
+                        <p class="MsoNormal ">
+                            也就是说，即使窃听者知道加密方案的所有细节，只要攻击者不知道正在使用的密钥k，这个加密方案应该是安全的。故，Kerckhoffs的原则要求安全性仅仅依赖于密钥k的保密。
+                        </p>
+                        <p class="MsoNormal ">
+                            理由：
+                        </p>
+                        <p class="MsoNormal ">
+                            1. 保密一个密钥k比保密一个相对复杂的加密方案更加容易，尤其是在加密方案被广泛使用的情况下。
+                        </p>
+                        <p class="MsoNormal ">
+                            2. 如果诚实方共享的秘密信息被泄漏，更换密钥比更换加密方案容易得多。此外，生成一个新的随机密钥是相对简单的，而设计一个新的加密方案则是一个巨大的工程。
+                        </p>
+                        <p class="MsoNormal ">
+                            3. 在广泛部署加密方案之前，鼓励公众对该方案进行审查以检查可能存在的弱点，这是一个显著的好处。进一步地，标准化加密方案可以确保不同用户之间的兼容性，公众将使用经过公开审查的强大的加密方案。这更加令人信服。
+                        </p>
+                        <p class="MsoNormal ">
+                            故，广泛、公开地传播加密方案的全部细节是有利的。
+                        </p>
+                        <p class="MsoNormal center weight">
+                            五、经典加密方案
+                        </p>
+                        <p class="MsoNormal ">
+                            以下介绍的加密方案均已被破解，是不安全的，但是其思想值得学习。
+                        </p>
+                        <p class="MsoNormal ">
+                            1. 凯撒加密（Caesar’s cipher）
+                        </p>
+                        <p class="MsoNormal ">
+                            凯撒加密是最古老的加密方案之一，它将字母表中的字母向右移动3个位置进行加密。即，a加密为D，b加密为E，以此类推。当移动到字母表的末尾时，回到字母表的开头，循环移位。该方案没有密钥，且加密方法是固定的。因此任何人可以通过学习凯撒加密的加密方法来轻易的破解密文。其变体ROT-13依然被各种在线论坛使用。我们可以从中发现，它们均没有提供任何的密码学安全性，它们仅仅是使得消息是令人难以理解的，除非消息的读者有意识地决定解密它。
+                        </p>
+                        <p class="MsoNormal ">
+                            2. 移位加密
+                        </p>
+                        <p class="MsoNormal ">
+                            移位加密可以视为凯撒加密的一种密钥变体。在移位加密中，密钥k是一个介于0到25之间的数字，在凯撒加密中，字母移动3个位置，而在移位加密中，字母移动k个位置。其算法可概括如下：明文空间M由任意长度的英文字母字符串组成，其中去掉了标点、空格和数字，并且大小写没有区别。Gen输出一个均匀一致的密钥k ∈ { 0 , . . . , 25 } ，算法Enc将一个密钥k和一个明文作为输入，然后将明文的每个字母向 前 移动k个位置，算法Dec将一个密钥k和一个密文作为输入，然后将将密文中的每个字母向后 移k个位置。
+                        </p>
+                        <p class="MsoNormal ">
+                            在不知道密钥k的情况下，破解密文也是相当容易的。因为它只有26个可能的密钥，攻击者只需要用这些可能的密钥去解密密文即可，故可得到26种可能的候选明文，正确的明文就在这26种之中。此外，如果密文“足够长”，那么正确的明文很可能是列表中唯一“有意义”的候选明文。（这在大多数时候是正确的）
+                        </p>
+                        <p class="MsoNormal ">
+                            这种尝试每一个可能的密钥的攻击被称为 蛮力 (brute-force) 或穷举 (exhausient-search) 攻击 。故如果加密方案要保证安全，就不能轻易受到这种攻击，这个观察被称为充分密钥空间原理 ：任何安全的加密方案必须要有足够大的密钥空间来抵抗穷举搜索攻击。为了防止这种攻击，密钥空间必须非常大，例如，至少280 ，在很多情况下甚至更大。
+                        </p>
+                        <p class="MsoNormal ">
+                            充分密钥空间原理给加密方案的安全性提供了必要条件，但不是充分条件。
+                        </p>
+                        <p class="MsoNormal ">
+                            3. 单字母替换加密
+                        </p>
+                        <p class="MsoNormal ">
+                            在“移位加密”中，明文到密文的映射是一个由密钥决定的固定的移位，而在单字母替换加密中，允许映射是任意的，只受一对一的约束。密钥空间包含字母表的所有双射或置换。如下图：
+                        </p>
+                        <p class="MsoNormal center">
+                            <img src="../images3/news-details/55-3.jpg" alt="">
+                        </p>
+                        <p class="MsoNormal ">
+                            图中的a映射到X，等等。
+                        </p>
+                        <p class="MsoNormal ">
+                            从该加密方案的名称上能够了解到这样一个事实：密钥定义了明文中单个字符的(固定)替换。假设使用的是26英文字母表，那么，密钥空间的大小可计算为：26! = 26·25·24···2·1，大约为288  ，蛮力攻击是不可行的。
+                        </p>
+                        <p class="MsoNormal ">
+                            单字母替代加密可以利用英语语言的统计特性进行攻击。由于每一个字母的映射都是固定的，所以，如果得知e映射为D，那么，其余的e都映射为D。英文字母的概率分布如下图所示：
+                        </p>
+                        <p class="MsoNormal center">
+                            <img src="../images3/news-details/55-4.jpg" alt="">
+                        </p>
+                        <p class="MsoNormal ">
+                            4. 维吉尼亚加密
+                        </p>
+                        <p class="MsoNormal ">
+                            可以使用统计攻击来破解“单字母替代加密”，因为它的密钥定义了一个固定的映射，该映射逐字应用于明文。在“多字母替代加密”中，该攻击无效，它的密钥定义了应用于明文字符块的映射。多字母替代加密“平滑”了密文中字符的频率分布，使其更难进行统计分析。维吉尼亚加密就是多字母替代加密的一种，可以看作是将移位密码的不同实例应用于明文的不同部分。如下图所示，它的密钥是一个字符串。加密是通过按密钥的下一个字符表示的数量移动每个明文字符来完成的，必要时在密钥中环绕。
+                        </p>
+                        <p class="MsoNormal center">
+                            <img src="../images3/news-details/55-5.jpg" alt="">
+                        </p>
+                        <p class="MsoNormal center weight">
+                            六、现代密码学的原则
+                        </p>
+                        <p class="MsoNormal ">
+                            · 原则一：形式化定义：明确“安全”到底是什么意思
+                        </p>
+                        <p class="MsoNormal ">
+                            · 原则二：精确的假设：事实证明，大多数密码证明依赖于关于某些数学问题的算法难度的目前未被证明的假设
+                        </p>
+                        <p class="MsoNormal ">
+                            · 原则三：安全性证明：任何这样的假设都必须明确并精确地陈述。
+                        </p>
+                        <p class="MsoNormal ">
+                            安全的加密方案应该保证：不管攻击者已经拥有什么信息，密文都不应该泄露关于底层明文的额外信息。
+                        </p>
+                        <p class="MsoNormal weight">
+                            威胁模型（按强度增加的顺序）：
+                        </p>
+                        <p class="MsoNormal ">
+                            1. 唯密文攻击（Ciphertext-only attack）：敌手只观察一个密文(或多个密文)，并试图确定关于底层明文(或多个明文)的信息。
+                        </p>
+                        <p class="MsoNormal ">
+                            2. 已知明文攻击（Known-plaintext attack）：在这里，对手能够学习使用某个密钥生成的一个或多个明文/密文对。然后，对手的目标是推断使用相同密钥产生的其他密文的基础明文的信息。
+                        </p>
+                        <p class="MsoNormal ">
+                            3. 选择明文攻击（Chosen-plaintext attack）：在这种攻击中，对手可以获得如上所述的明文/密文对，用于其选择的明文。
+                        </p>
+                        <p class="MsoNormal ">
+                            4. 选择密文攻击（Chosen-ciphertext attack）：攻击者能够额外获得其选择的密文的解密(一些信息)，例如，解密攻击者选择的一些密文是否会产生有效的消息。同样，对手的目标是了解使用相同密钥生成的其他密文(对手无法直接获得其解密)的底层明文信息。
+                        </p>
+                        
+                        
+                        <br>
+                        <br>
+                        <p class="MsoNormal">
+                            来源：赛迪密码信息安全
+                        </p>
+                        <p class="MsoNormal">
+                            注：内容均来源于互联网，版权归作者所有，如有侵权，请联系告知，我们将尽快处理。
+                        </p>
+                    
+  </article>
+</body>
+</html>

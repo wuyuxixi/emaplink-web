@@ -1,0 +1,39 @@
+{
+  "name": "emaplink-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/generate-aliases.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "check:content": "node scripts/check-content.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "lighthouse": "node scripts/lighthouse.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "latest",
+    "astro": "latest",
+    "sharp": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "@playwright/test": "latest",
+    "@tailwindcss/vite": "latest",
+    "cheerio": "latest",
+    "chrome-launcher": "^1.2.2",
+    "gray-matter": "latest",
+    "lighthouse": "latest",
+    "prettier": "latest",
+    "prettier-plugin-astro": "latest",
+    "tailwindcss": "latest",
+    "turndown": "latest",
+    "turndown-plugin-gfm": "latest",
+    "typescript": "^5.9.3",
+    "vitest": "latest"
+  }
+}

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <title>MD5算法可以用来对用户密码进行加密存储吗？（归档）</title>
+  <style>
+    body{font-family:"Microsoft YaHei",system-ui,sans-serif;max-width:52rem;margin:2rem auto;padding:0 1.25rem;line-height:1.8;color:#233545}
+    h1{font-size:1.75rem;line-height:1.4;color:#0a1d2e}
+    .meta{color:#5a6b7b;font-size:.875rem;margin-bottom:2rem}
+    img{max-width:100%;height:auto}
+    table{border-collapse:collapse;width:100%;font-size:.9rem}
+    th,td{border:1px solid #dce5ec;padding:.5rem .625rem;text-align:left;vertical-align:top}
+    pre{overflow:auto;background:#0d1b27;color:#e6edf3;padding:1rem;border-radius:.5rem}
+    blockquote{border-left:3px solid #0062a2;margin-left:0;padding-left:1rem;color:#26465e}
+  </style>
+</head>
+<body>
+  <article>
+    <h1>MD5算法可以用来对用户密码进行加密存储吗？</h1>
+    <p class="meta">发布时间：2025-02-18 · 来源：透明魔方 · 归档稿，未发布</p>
+    
+
+                        <!-- <video src="../images3/news-details/password.mp4" class="video_fill" controls="controls" autoplay muted >
+                            您的浏览器不支持 video 标签
+                        </video>
+                        <br />
+                        <br /> -->
+                        <!-- <p class="MsoNormal center">
+                            <img src="../images3/news-details/91-1.png" alt="" style="max-width: 50%;">
+                        </p> -->
+
+                        <p class="MsoNormal  ">
+                            MD5信息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。这套算法的程序在 RFC 1321 标准中被加以规范。1996年后该算法被证实存在弱点，可以被加以破解，对于需要高度安全性的数据，专家一般建议改用其他算法，如SHA-2。2004年，证实MD5算法无法防止碰撞（collision），因此不适用于安全性认证，如SSL公开密钥认证或是数字签名等用途。
+                        </p>
+
+                        <p class="MsoNormal weight ">
+                            一、MD5是个啥？
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            MD5就是一个散列函数，用于提供消息完整性保护。这个是散列函数通用的功能，散列函数也叫哈希函数（Hash Function）是一种将任意长度的输入数据（通常称为“消息”或“键”）转换为固定长度输出（通常称为“哈希值”或“摘要”）的函数。
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            MD5，不管输入多少字节（可以是文件、图片、视频、压缩包、），输出永远是16个字节（16*8byte=128byte）。而且，输入如果改变了一个byte，输出就会完全不同：
+                        </p>
+
+                        <p class="MsoNormal weight blue  ">
+                            Hello word！—— F4DECA240C3EB47E
+                        </p>
+
+                        <p class="MsoNormal weight blue  ">
+                            Hello word   —— AF77DDB8E72BF344
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            因为这个原因，MD5常用来做密码保护、文件完整性校验和数字签名。
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            密码保护：我们信息系统经常会存储用户密码的MD5后的值，而不存用户的原始密码，这样，当用户输入密码时候，会生成一个MD5值和存储的MD5值进行比较，当相等即认为校验通过。这样的好处是，即便密码数据库被盗，也无法通过MD5反推明文是什么。
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            文件完整性校验：网络中，经常出现丢包现象，为了校验收到的文件和发送的文件一致性，通常在发送文件时进行一次MD5，并将这个值一起发给接收端。接收端收到文件后再进行一次MD5，将这两个值做比较，这样就可以判断文件是否一致。
+                        </p>
+
+                        <p class="MsoNormal  ">
+                            数字签名：发送方首先使用MD5算法对需要签名的消息进行哈希计算，生成一个固定长度的哈希值（128位）；然后，发送方使用自己的私钥对生成的哈希值进行加密，生成数字签名。
+                        </p>
+
+                        <p class="MsoNormal  ">
+                            我们看到，这个签名是分两步走的，首先是要生成一个哈希值，然后是把这个哈希值加密。这样才形成了一个数字签名，只是简单的哈希一下，是不能叫数字签名的哦。因为很可能被篡改。只有通过这种不对称密码体系做加密，接收方才可以确认消息确实来自声称的发送者，这才能有数字签名的作用。
+                        </p>
+
+                        <p class="MsoNormal weight  ">
+                            二、MD5为啥不安全了？
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            前面我们说到，MD5实际上是一个散列算法而非加密算法，所以我们不会把MD5的散列值拿来还原原始明文。因为MD5的计算过程有大量的信息损失，无法还原。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            举个例子：一个200G的电影转换成128bit的MD5值，那你能想象这个128bit的MD5值还原成一个200G的电影吗？
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            既然不能还原密码，有啥可攻击呢？不是非常安全吗？
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            接下来从三个专业术语来说明它的理论的不安全和工程应用的不安全。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            1、原像攻击
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            原像攻击，就是从128bit的MD5值找到任意一个原始的明文。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            首先，我们要知道，原始文件和MD5值并不是一一对应的。任何原始文件计算的MD5值都是128位的MD5值，128位也就2的128次方，是有穷的；而任何原始文件应该是无穷多个的∞。以无穷对有穷，那理论上来说，任意一个MD5值都有无穷个原始文件对应。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            这个就叫做碰撞💥。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            只不过，我们难以找到这些碰撞而已。用暴力穷举的方式也比较难，2的128次方相当于鄱阳湖的整个水分子量，我们要在鄱阳湖中捞出某个特点的水分子，成本会有多大？除非是些简单弱密码，已经被存入彩虹表库了（彩虹表是一种预先计算好的哈希值与原始数据的对应关系表，主要用于快速查找已知哈希值的明文密码。它对简单的密码或常见的哈希值有效，但对于复杂或随机的输入，彩虹表的作用有限）
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            这就说明，原像攻击不太可行。所以，目前很多信息系统还在用MD5存储用户密码，就是利用了原像攻击难以实施的因素。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            2、第二原像攻击（抗弱碰撞性）
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            第二原像攻击，就是给定一个原始明文，找到另外一个原始明文的MD5值和它一样。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            这个目前也无法实现，第二原像攻击也不太可行。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            3、抗碰撞性
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            找出任意两个MD5值相同的消息。这个在2004年就被我国王小云教授团队从学术角度成功突破。2007年，Marc Stevens研究出了进一步的成果，可以从原始内容生成两个内容不一样，但MD5值一样的消息。比如MD5值一样，但完全不一样的可执行程序。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            这样，使用MD5做文件校验和数字签名就不再可行。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            举例：一个金融类的应用，用MD5做签名的摘要算法，可以生成不同金额但MD5值一样的支票，到时候就可以扯皮了，因为已经无法确认消息的唯一性了。
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            回到文字题目的问题： MD5算法可以用来对用户密码进行加密存储吗？ 
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            前面提到几个专业术语，我们看到MD5的不安全并非全场景覆盖，主要还是在抗碰撞性方面存在问题，而在原像攻击和第二原像攻击层面还未有成熟的破解方法。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            所以，目前在工程上，我们还可以用MD5算法进行用户密码的哈希存储（严格来说不能叫加密存储），但是，建议新开发的信息系统就不要用它了。哪怕你MD5加个盐都更好一些（至少可以不落入第二原像攻击的范畴，仅仅限制在原像攻击范围）。
+
+                        </p>
+
+                        <p class="MsoNormal   ">
+                            一定要哈希，用SHA-256、SHA-3更安全。
+                        </p>
+
+                        <br>
+                        <br>
+                        <p class="MsoNormal">
+                            来源：透明魔方
+                        </p>
+                        <p class="MsoNormal">
+                            注：内容均来源于互联网，版权归作者所有，如有侵权，请联系告知，我们将尽快处理。
+                        </p>
+                    
+  </article>
+</body>
+</html>

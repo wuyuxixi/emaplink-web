@@ -1,0 +1,55 @@
+---
+import { site } from '@/data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  image = '/images/home/hero-1.webp',
+  type = 'website',
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const fullTitle = title.includes('联易软件') ? title : `${title}｜联易软件`;
+const canonicalUrl = new URL(canonical ?? Astro.url.pathname, site.url).href;
+const imageUrl = new URL(image, site.url).href;
+const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'} />
+<meta name="theme-color" content="#06131f" />
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+{jsonLdItems.map((item) => (
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(item).replace(/</g, '\\u003c')}
+  />
+))}

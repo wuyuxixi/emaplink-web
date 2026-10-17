@@ -1,0 +1,257 @@
+{
+  "summary": [
+    {
+      "name": "home",
+      "url": "/",
+      "desktop": {
+        "title": "联易软件｜ZSAC 接入安全，国密接入安全体系",
+        "h1": [
+          "始于细节，专注于设备、人员、数据的密码安全服务"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 5219,
+        "links": 80,
+        "images": 6
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "始于细节，专注于设备、人员、数据的密码安全服务"
+        ]
+      }
+    },
+    {
+      "name": "product-gateway",
+      "url": "/products/zsac-gateway/",
+      "desktop": {
+        "title": "ZSAC智能准入控制系统｜联易软件",
+        "h1": [
+          "ZSAC智能准入控制系统"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 3621,
+        "links": 70,
+        "images": 3
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "ZSAC智能准入控制系统"
+        ]
+      }
+    },
+    {
+      "name": "product-crypto",
+      "url": "/products/zsac-crypto-module/",
+      "desktop": {
+        "title": "ZSAC接入安全密码模块｜联易软件",
+        "h1": [
+          "ZSAC接入安全密码模块"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 4377,
+        "links": 69,
+        "images": 4
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "ZSAC接入安全密码模块"
+        ]
+      }
+    },
+    {
+      "name": "solution-multi",
+      "url": "/solutions/multi-terminal-access/",
+      "desktop": {
+        "title": "多形态终端接入安全｜联易软件",
+        "h1": [
+          "多形态终端接入安全"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 4030,
+        "links": 67,
+        "images": 3
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "多形态终端接入安全"
+        ]
+      }
+    },
+    {
+      "name": "news-list",
+      "url": "/news/",
+      "desktop": {
+        "title": "新闻动态｜联易软件",
+        "h1": [
+          "了解企业资讯，洞察行业趋势"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 2117,
+        "links": 68,
+        "images": 3
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "了解企业资讯，洞察行业趋势"
+        ]
+      }
+    },
+    {
+      "name": "news-article",
+      "url": "/news/2026-10-13-websocket-access-control/",
+      "desktop": {
+        "title": "你的终端被接管了？WebSocket 越权访问，一个消息就能冒充他人｜联易软件",
+        "h1": [
+          "你的终端被接管了？WebSocket 越权访问，一个消息就能冒充他人"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 14325,
+        "links": 84,
+        "images": 4
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "你的终端被接管了？WebSocket 越权访问，一个消息就能冒充他人"
+        ]
+      }
+    },
+    {
+      "name": "about",
+      "url": "/about/",
+      "desktop": {
+        "title": "公司简介｜联易软件",
+        "h1": [
+          "公司简介"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 2328,
+        "links": 68,
+        "images": 3
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "公司简介"
+        ]
+      }
+    },
+    {
+      "name": "culture",
+      "url": "/about/culture/",
+      "desktop": {
+        "title": "企业文化｜联易软件",
+        "h1": [
+          "企业文化"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 2142,
+        "links": 69,
+        "images": 5
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "企业文化"
+        ]
+      }
+    },
+    {
+      "name": "honors",
+      "url": "/about/honors/",
+      "desktop": {
+        "title": "荣誉资质｜联易软件",
+        "h1": [
+          "荣誉资质"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 3988,
+        "links": 69,
+        "images": 14
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "荣誉资质"
+        ]
+      }
+    },
+    {
+      "name": "cases",
+      "url": "/about/cases/",
+      "desktop": {
+        "title": "行业案例｜联易软件",
+        "h1": [
+          "行业案例"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 2723,
+        "links": 69,
+        "images": 3
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "行业案例"
+        ]
+      }
+    },
+    {
+      "name": "contact",
+      "url": "/contact/",
+      "desktop": {
+        "title": "联系我们｜联易软件",
+        "h1": [
+          "让我们聊聊你的接入安全场景"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 1752,
+        "links": 67,
+        "images": 3
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "让我们聊聊你的接入安全场景"
+        ]
+      }
+    },
+    {
+      "name": "not-found",
+      "url": "/404.html",
+      "desktop": {
+        "title": "页面未找到｜联易软件",
+        "h1": [
+          "页面没有找到"
+        ],
+        "broken": [],
+        "overflow": false,
+        "height": 1038,
+        "links": 63,
+        "images": 3
+      },
+      "mobile": {
+        "overflow": false,
+        "h1": [
+          "页面没有找到"
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

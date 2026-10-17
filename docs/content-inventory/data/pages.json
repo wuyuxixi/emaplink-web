@@ -1,0 +1,181 @@
+[
+  {
+    "file": "01-home.md",
+    "title": "首页",
+    "route": "/",
+    "sections": [
+      "页面区块（自上而下）",
+      "图片清单",
+      "备注"
+    ]
+  },
+  {
+    "file": "02-products/zsac-crypto-module.md",
+    "title": "ZSAC接入安全密码模块",
+    "route": "/products/zsac-crypto-module/",
+    "sections": [
+      "Hero",
+      "产品介绍",
+      "核心机制（由原页 4 张机制图转录）",
+      "接入安全生态",
+      "产品优势（4 项）",
+      "相关产品",
+      "备注"
+    ]
+  },
+  {
+    "file": "02-products/zsac-gateway.md",
+    "title": "ZSAC智能准入控制系统",
+    "route": "/products/zsac-gateway/",
+    "sections": [
+      "Hero",
+      "产品介绍",
+      "产品功能（7 项）",
+      "适用场景",
+      "相关产品",
+      "备注"
+    ]
+  },
+  {
+    "file": "02-products/zsac-otp.md",
+    "title": "ZSAC动态令（密码模块）",
+    "route": "/products/zsac-otp/",
+    "sections": [
+      "Hero",
+      "产品介绍",
+      "核心能力（2 项）",
+      "产品优势（4 项）",
+      "相关产品",
+      "备注"
+    ]
+  },
+  {
+    "file": "02-products/zsac-server.md",
+    "title": "ZSAC接入安全服务端",
+    "route": "/products/zsac-server/",
+    "sections": [
+      "Hero",
+      "产品介绍",
+      "产品功能（7 项）",
+      "适用场景",
+      "相关产品",
+      "备注"
+    ]
+  },
+  {
+    "file": "03-solutions/app-protection.md",
+    "title": "用户认证与应用保护",
+    "route": "/solutions/app-protection/",
+    "sections": [
+      "Hero",
+      "市场需求",
+      "方案思路",
+      "方案应用（3 项）",
+      "适用场景",
+      "相关方案",
+      "备注"
+    ]
+  },
+  {
+    "file": "03-solutions/data-exchange.md",
+    "title": "数据共享交互安全",
+    "route": "/solutions/data-exchange/",
+    "sections": [
+      "Hero",
+      "市场需求",
+      "方案思路",
+      "方案应用（3 项）",
+      "适用场景",
+      "相关方案",
+      "备注"
+    ]
+  },
+  {
+    "file": "03-solutions/multi-terminal-access.md",
+    "title": "多形态终端接入安全",
+    "route": "/solutions/multi-terminal-access/",
+    "sections": [
+      "Hero",
+      "市场需求",
+      "方案思路",
+      "方案应用（3 项）",
+      "适用场景",
+      "相关方案",
+      "备注"
+    ]
+  },
+  {
+    "file": "04-about/about.md",
+    "title": "公司简介",
+    "route": "/about/",
+    "sections": [
+      "Hero",
+      "正文",
+      "关注方向（4 卡）",
+      "目标",
+      "侧栏",
+      "备注"
+    ]
+  },
+  {
+    "file": "04-about/cases.md",
+    "title": "行业案例",
+    "route": "/about/cases/",
+    "sections": [
+      "现状说明",
+      "案例（3）",
+      "行业覆盖（6 卡）",
+      "备注"
+    ]
+  },
+  {
+    "file": "04-about/contact.md",
+    "title": "联系我们",
+    "route": "/contact/",
+    "sections": [
+      "Hero",
+      "联系方式（3 卡）",
+      "办公地址卡",
+      "备注"
+    ]
+  },
+  {
+    "file": "04-about/culture.md",
+    "title": "企业文化",
+    "route": "/about/culture/",
+    "sections": [
+      "Hero",
+      "使命",
+      "价值观",
+      "配图",
+      "结语",
+      "备注"
+    ]
+  },
+  {
+    "file": "04-about/honors.md",
+    "title": "荣誉资质",
+    "route": "/about/honors/",
+    "sections": [
+      "Hero",
+      "企业资质（2）",
+      "产品认证（4）",
+      "发明专利（4）",
+      "交互",
+      "备注"
+    ]
+  },
+  {
+    "file": "05-news/index.md",
+    "title": "新闻中心",
+    "route": "/news/",
+    "sections": [
+      "线上现状",
+      "新站设计",
+      "初版 5 篇（已发布）",
+      "未发布归档（116）",
+      "旧 URL 兼容",
+      "内容统计"
+    ]
+  }
+]

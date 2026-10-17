@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <title>商用密码科普丨如何正确过密评？（归档）</title>
+  <style>
+    body{font-family:"Microsoft YaHei",system-ui,sans-serif;max-width:52rem;margin:2rem auto;padding:0 1.25rem;line-height:1.8;color:#233545}
+    h1{font-size:1.75rem;line-height:1.4;color:#0a1d2e}
+    .meta{color:#5a6b7b;font-size:.875rem;margin-bottom:2rem}
+    img{max-width:100%;height:auto}
+    table{border-collapse:collapse;width:100%;font-size:.9rem}
+    th,td{border:1px solid #dce5ec;padding:.5rem .625rem;text-align:left;vertical-align:top}
+    pre{overflow:auto;background:#0d1b27;color:#e6edf3;padding:1rem;border-radius:.5rem}
+    blockquote{border-left:3px solid #0062a2;margin-left:0;padding-left:1rem;color:#26465e}
+  </style>
+</head>
+<body>
+  <article>
+    <h1>商用密码科普丨如何正确过密评？</h1>
+    <p class="meta">发布时间：2022-08-10 · 来源：商密君 · 归档稿，未发布</p>
+    
+
+                        
+                        <br>
+                        <br>
+                        <!-- <p class="MsoNormal center">
+                            <img src="../images3/news-details/54-1.gif" alt="" style="max-width: 50%;">
+                        </p> -->
+
+                        <p class="MsoNormal weight ">
+                            2022年，“密评”（即“商用密码应用安全性评估”）成了各行业关注的热词。
+                        </p>
+                        
+                        <p class="MsoNormal  ">
+                            在《密码法》的要求下，在国标《信息安全技术信息系统密码应用基本要求》（GB/T 39786-2021）的指导下，各地各行业积极、严谨地开展密评工作，将是推动密码应用的良好开端。各行业纷纷出台了相关标准、要求，将密评工作提上日程，关键信息基础设施、政务信息系统、等保三级以上信息系统建设 ，都要“过密评”。
+                        </p>
+                    
+                        <p class="MsoNormal weight">
+                            面对各式各样的产品和众说纷纭的方案，究竟密评该如何过？应该遵照哪些技术标准？关注哪些要点？有哪些误区？本文带你一探究竟。
+                        </p>
+                        <p class="MsoNormal weight red">
+                            这些“误区”要辨别
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            误区一：业务系统零改造，信息系统免集成，即可通过密评
+                        </p>
+                        <p class="MsoNormal ">
+                            现状：有些厂家提出业务系统零改造过密评的方案，还有些密码服务厂商抓住了客户信息系统改造难度大、成本高的痛点，打出“信息系统免集成，即可通过密评”的宣传口号。
+                        </p>
+                        <p class="MsoNormal blue">
+                            专家解读：
+                        </p>
+                        <p class="MsoNormal ">
+                            事实上信息系统开展密评工作 主要目的在于推动密码应用的合规性、正确性、有效性。 在常见的密码应用中的安全性问题包括：密码技术被弃用 （例如完全未用密码）、密码技术被乱用（例如简化使用密码协议导致出现安全漏洞）、密码技术被误用（例如使用固定值而非随机数作为初始向量）。这一切都指向“用”，即 信息系统要正确调用密码产品、密码服务。
+                        </p>
+                        <p class="MsoNormal ">
+                            不针对信息系统实际情况、重要数据安全需求等加以分析，进而适当改造信息系统以“用”密码，是难以全面保障信息系统安全，也难以通过密评。
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            误区二：忽略应用层，只靠物理、网络层也能过密评
+                        </p>
+                        <p class="MsoNormal ">
+                            现状：部分厂商向客户提出“应用层不拿分，靠其他几层拿分也能及格”的说辞。
+                        </p>
+                        <p class="MsoNormal blue">
+                            专家解读：
+                        </p>
+                        <p class="MsoNormal ">
+                            根据《商用密码应用安全性评估量化评估规则》第6部分整体结论判定，整体量化评估结果是百分制，应用和数据安全占30分。只有达到分数阈值、且没有高风险项，才能判定被测信息系统基本符合GB/T39786-2021相应等级要求。
+                        </p>
+                        <p class="MsoNormal ">
+                            目前执行的阈值是60分，这意味着如果应用和数据层完全不拿分，就只剩下10分的机动空间；更重要的是，应用和数据安全涉及5项高风险项，如果完全不加以考虑，很容易碰到高风险“一票否决”。
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            误区三：密评是针对密码产品的测评
+                        </p>
+                        <p class="MsoNormal ">
+                            现状：一些机构疑问：“如果系统中没有应用密码技术或密码产品，是不是就不需要过密评，或者可以直接通过密评？”
+                        </p>
+                        <p class="MsoNormal blue">
+                            专家解读：
+                        </p>
+                        <p class="MsoNormal ">
+                            密评是针对应用方业务系统的测评 ，看密码是否得到合规、正确、有效的应用，而非针对密码产品的检测。按照相关法律法规规定，关键信息基础设施、政务信息系统、等保三级以上信息系统需要同步规划、同步建设、同步运营密码保障系统，定期进行密评，这项要求与其当前是否使用密码无关。如果上述业务系统完全未用到密码，那么在密评中“高风险项”是肯定存在的，因而肯定无法通过密评。
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            误区四：划定测评对象范围模糊
+                        </p>
+                        <p class="MsoNormal ">
+                            现状：一些机构疑惑等保定级的范围和密评范围是否一致，在做密码测评的时候是要所有的系统测试通过才算通过密评吗？如何划定测评对象范围？
+                        </p>
+                        <p class="MsoNormal blue">
+                            专家解读：
+                        </p>
+                        <p class="MsoNormal ">
+                            密评当前没有独立的定级，而是依赖等保定级的。因而在划定测评范围的时候，原则上应与等保定级的范围一致。如果等保定级系统里有多个应用或多个子系统，密评时会针对每个应用或子系统都做测评，最终分数判定需综合考虑所有应用或子系统在相应层次的密码应用情况。详情可参照GM/T 0115《信息系统密码应用测评要求》。
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            误区五：采购一些密码设备并部署上，就满足了密评要求
+                        </p>
+                        <p class="MsoNormal ">
+                            现状：开展密评工作必然离不开密码设备的建设工作，密码设备的采购数量、采购金额必然是各行业关注的重点之一。部分密码设备厂商基于自身产品推广，宣称“采购一些密码设备、一类产品即可通过密码应用测评” 。
+                        </p>
+                        <p class="MsoNormal blue">
+                            专家解读：
+                        </p>
+                        <p class="MsoNormal weight">
+                            密评工作的目标是“以评促用”，脱离信息系统的当前状况去谈产品的配用是不科学的。对于已建的信息系统，首先开展差距分析，梳理保护对象、应用场景及防护现状，总结当前差距形成密码应用需求，根据密码应用需求设计密码应用措施，才能谈得上需要什么样的产品来实现这些措施。
+                        </p>
+                        <!-- <p class="MsoNormal center">
+                            <img src="../images3/news-details/59-1.jpg" alt="" style="max-width: 50%;">
+                        </p>
+                        <br /> -->
+                        <p class="MsoNormal weight red center">
+                            误区六：包过密评？
+                        </p>
+                        <p class="MsoNormal ">
+                            现状：密评工作对于各行业来说属于新业务、新要求，在缺乏有效参考经验的情况下，一些销售人员为了争取商业机会，打出“包过密评”包票。
+                        </p>
+                        <p class="MsoNormal blue">
+                            专家解读：
+                        </p>
+                        <p class="MsoNormal ">
+                            这样的宣传虽然可能给了用户通过“密评”的信心，但能否通过密评，是由正规测评机构给出结论为标志的。密码测评机构绝不会在尚未了解任何情况之前就去判定“符合”；同样的，协助用户做密码应用的厂商，也只有在充分了解用户业务、梳理密码应用需求之后，才能明确有哪些GB/T 39786规定的密码应用要求未得到满足，此前的“包票”都只能是噱头。即便明确了需求，是否能够设计出既满足了密码应用需求、又不对业务造成太大影响的技术措施，仍是要具体问题具体分析。
+                        </p>
+                        <p class="MsoNormal ">
+                            科学的说法，是专业密码厂商会竭尽所能帮助用户通过“密评”，但在未充分了解情况之前的“包票”，都是过于夸张的。
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            误区七：已建设的CA认证产品和密评关系认知不明
+                        </p>
+                        <p class="MsoNormal ">
+                            现状：一些机构疑惑现有的CA电子签名、数据保护等和密评是什么关系？
+                        </p>
+                        <p class="MsoNormal blue">
+                            专家解读：
+                        </p>
+                        <p class="MsoNormal ">
+                            基于公钥密码的电子签名，是当前主流的密码应用技术之一。行业现阶段为无纸化业务而开展的电子签名、数据保护等工作，同样属于密码技术应用，能够解决重要数据的真实性、完整性和不可否认性，为合规密码应用建设打下了良好基础。但如前所述，并非一类密码应用技术就可解决所有问题，因此也不能有“用了电子签名就一定能过密评”的认识。
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            误区八：只用对新机房进行密码应用改造
+                        </p>
+                        <p class="MsoNormal ">
+                            现状：随着信息化发展，部分机构在原有机房难以支撑信息化应用的情况下，采用了多机房并行的情况。针对此类情况，机构认为只对新机房开展密码应用改造，就可以完成密评工作。
+                        </p>
+                        <p class="MsoNormal blue">
+                            专家解读：
+                        </p>
+                        <p class="MsoNormal ">
+                            GB/T 39786规定的物理环境安全要求，是所有物理环境都需要满足的。因此如果多机房，每个机房都要根据完整的测评单元开展评估工作，综合的物理环境安全得分值是取加权平均，而非只有一个机房合规就能得到全部的分数。对于高风险项，如果任何一个机房存在高风险，则是“一票否决”。
+                        </p>
+                        <p class="MsoNormal  weight red">
+                            这些“要点”要掌握
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            01 密评工作的参与方及职责
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            责任单位：
+                        </p>
+                        <p class="MsoNormal ">
+                            网络运营者即网络和信息系统的责任单位（包括建设、使用、管理单位），是密评的被测评单位，应当认真履行好密码安全主体责任，明确密码安全负责人，制定完善的密码管理制度，按照要求开展商用密码应用安全性评估、备案和整改，配合密码管理部门和有关部门的安全检查。
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            测评机构：
+                        </p>
+                        <p class="MsoNormal ">
+                            测评机构是密评的执行单位，应当按照有关法律法规和标准要求科学、公正地开展评估。从事密评工作的测评人员应当通过国家密码管理部门（或其授权的机构）组织的考核，遵守国家有关法律法规，按照相关标准，为用户提供安全、客观、公正的评估服务，保证评估的质量和效果。
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            密码管理部门：
+                        </p>
+                        <!-- <p class="MsoNormal center">
+                            <img src="../images3/news-details/59-2.jpg" alt="" style="max-width: 50%;">
+                        </p>
+                        <br /> -->
+                        <p class="MsoNormal ">
+                            国家密码管理部门负责指导、监督和检查全国的密评工作；省（部）密码管理部门负责指导、监督和检查本地区、本部门、本行业（系统）的密评工作。国家密码管理部门依据有关规定，组织对测评机构工作开展情况进行监督检查。
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            02 遵循的技术标准
+                        </p>
+                        <p class="MsoNormal ">
+                            《信息安全技术 信息系统密码应用基本要求》（GB/T 39786-2021）是贯彻落实《中华人民共和国密码法》，指导我国商用密码应用与安全性评估工作开展的纲领性、框架性标准。中国密码学会密评联委会发布并持续更新依照GB/T 39786-2021开展密评的系列指导文件，目前包括5项：
+                        </p>
+                        <p class="MsoNormal ">
+                            1.GM/T 0115-2021《信息系统密码应用测评要求》
+                        </p>
+                        <p></p>
+                        <p class="MsoNormal ">
+                            2.GM/T 0116-2021《信息系统密码应用测评过程指南》
+                        </p>
+                        <p></p>
+                        <p class="MsoNormal ">
+                            3.《信息系统密码应用高风险判定指引》
+                        </p>
+                        <p></p>
+                        <p class="MsoNormal ">
+                            4.《商用密码应用安全性评估量化评估规则》
+                        </p>
+                        <p></p>
+                        <p class="MsoNormal ">
+                            5.《商用密码应用安全性评估报告模板（2021版）》
+                        </p>
+                        <p class="MsoNormal ">
+                            另外，2021年新增发布了《商用密码应用安全性评估FAQ》，对于密评工作中的常见问题进行了解答。
+                        </p>
+                        <p class="MsoNormal weight red center">
+                            03 密评的基本要求和程序设计
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            范围要求：
+                        </p>
+                        <p class="MsoNormal ">
+                            法律、行政法规和国家有关规定要求使用商用密码进行保护的网络与信息系统，其运营者应当使用商用密码进行保护，制定商用密码应用方案，配备必要的资金和专业人员，同步规划、同步建设、同步运行商用密码保障系统并定期进行密评。
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            机构性质：
+                        </p>
+                        <p class="MsoNormal ">
+                            密评机构应当经国家密码管理局认定，依法取得商用密码检测机构资质，且资质认定业务范围载明“商用密码应用安全性评估”。目前密评工作仍处于“试点”阶段，因此当前公布的是密评“试点”机构名录。不久的将来随着《商用密码管理条例》《密码检测机构管理办法》等制度文件的正式颁布，密评机构认定工作将走向常态化。
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            实施要求：
+                        </p>
+                        <p class="MsoNormal ">
+                            包含方案测评、系统测评、运营者支持配合义务、结果备案等。
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            信息系统密码应用基本要求（如图所示）：
+                        </p>
+                        <p class="MsoNormal center">
+                            <img src="../images3/news-details/60-1.png" alt="">
+                        </p>
+                        <br>
+                        <p class="MsoNormal weight red center">
+                            04 密评工作关注的重点
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            （1）遵循“三同步，一评估”原则
+                        </p>
+                        <p class="MsoNormal ">
+                            项目建设单位应当 同步规划、同步建设、同步运行 密码保障系统并定期进行评估，其中同步规划的核心是密码应用方案编制。密码应用方案编制是至关重要的环节，好的方案会为后续的建设指明方向、铺平道路；如果方案未做好，后期的项目建设将面临诸多困难和反复。
+                        </p>
+                        <p class="MsoNormal ">
+                            典型的“方案未做好”是没有对业务进行仔细梳理、对密码应用需求的详细分析，而是直接生搬硬套密码应用措施和产品，导致建设时出现无法落地实施的状况。
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            （2）把握“以评促用”的指导思想
+                        </p>
+                        <p class="MsoNormal ">
+                            只有正确、合规、有效地使用密码技术，才能更好地保护网络安全和数据安全——密码用得对不对，需要前期的同步规划、同步建设、同步运行密码保障系统，然后靠测评来证明。
+                        </p>
+                        <p class="MsoNormal weight blue">
+                            （3）尊重客观规律
+                        </p>
+                        <p class="MsoNormal">
+                            根据差距分析，进行分阶段规划，稳步推进密码建设。原则上优先解决高风险，再考虑解决中低风险；先解决重要业务线，再补充其他；先保护好基础设施，再考虑构建在其上的应用。
+                        </p>
+                        
+                        
+                        
+                        <br>
+                        <br>
+                        <p class="MsoNormal">
+                            来源：商密君
+                        </p>
+                        <p class="MsoNormal">
+                            注：内容均来源于互联网，版权归作者所有，如有侵权，请联系告知，我们将尽快处理。
+                        </p>
+                    
+  </article>
+</body>
+</html>

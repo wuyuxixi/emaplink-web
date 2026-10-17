@@ -1,0 +1,340 @@
+---
+import { mainNav, site } from '@/data/site';
+import Icon from './ui/Icon.astro';
+import Logo from './ui/Logo.astro';
+import SearchDialog from './SearchDialog.astro';
+
+const navKey = (label: string) =>
+  label === '产品中心' ? 'products' : label === '解决方案' ? 'solutions' : 'about';
+---
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 border-b border-line/80 bg-white/90 backdrop-blur-xl transition-shadow duration-300"
+>
+  <div class="container-page flex h-[4.5rem] items-center justify-between gap-4">
+    <Logo />
+
+    <nav class="hidden lg:block" aria-label="主导航">
+      <ul class="flex items-center gap-1">
+        {
+          mainNav.map((item) =>
+            item.children ? (
+              <li class="nav-item group relative" data-nav-item>
+                <button
+                  type="button"
+                  class="flex items-center gap-1 rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-ink-900/80 transition hover:bg-paper hover:text-ink-900"
+                  aria-expanded="false"
+                  aria-controls={`nav-panel-${navKey(item.label)}`}
+                  data-nav-toggle
+                >
+                  {item.label}
+                  <Icon
+                    name="chevron-down"
+                    size={14}
+                    class="mt-0.5 text-ink-900/45 transition-transform duration-200 group-data-[open=true]:rotate-180"
+                  />
+                </button>
+
+                <div
+                  id={`nav-panel-${navKey(item.label)}`}
+                  class="invisible absolute left-1/2 top-full z-50 mt-2 w-[min(42rem,calc(100vw-3rem))] -translate-x-1/2 translate-y-2 rounded-2xl border border-line bg-white p-3 opacity-0 shadow-menu transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-data-[open=true]:visible group-data-[open=true]:translate-y-0 group-data-[open=true]:opacity-100"
+                >
+                  <div class="grid gap-1 sm:grid-cols-2">
+                    {item.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class="group/link flex items-start gap-3 rounded-xl p-3 transition hover:bg-paper"
+                      >
+                        <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-600 transition group-hover/link:bg-brand-600 group-hover/link:text-white">
+                          <Icon name="arrow-up-right" size={16} />
+                        </span>
+                        <span>
+                          <span class="block text-sm font-semibold text-ink-900">{child.label}</span>
+                          {child.description && (
+                            <span class="mt-0.5 block text-xs leading-relaxed text-muted">
+                              {child.description}
+                            </span>
+                          )}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                  <div class="mt-2 border-t border-line pt-2">
+                    <a
+                      href={item.href}
+                      class="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100"
+                    >
+                      查看全部{item.label}
+                      <Icon name="arrow-right" size={15} />
+                    </a>
+                  </div>
+                </div>
+              </li>
+            ) : (
+              <li>
+                <a
+                  href={item.href}
+                  class="rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-ink-900/80 transition hover:bg-paper hover:text-ink-900"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ),
+          )
+        }
+      </ul>
+    </nav>
+
+    <div class="hidden items-center gap-2 lg:flex">
+      <button
+        type="button"
+        class="flex h-10 w-10 items-center justify-center rounded-full text-ink-900/60 transition hover:bg-paper hover:text-ink-900"
+        aria-label="搜索"
+        data-search-open
+      >
+        <Icon name="search" size={18} />
+      </button>
+      <a
+        href={site.phoneHref}
+        class="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-ink-900/75 transition hover:text-brand-600"
+      >
+        <Icon name="phone" size={15} class="text-brand-600" />
+        {site.phone}
+      </a>
+      <a href="/contact/" class="btn btn-primary ml-1 min-h-10 px-4 text-sm">联系我们</a>
+    </div>
+
+    <div class="flex items-center gap-1 lg:hidden">
+      <button
+        type="button"
+        class="flex h-10 w-10 items-center justify-center rounded-full text-ink-900/70"
+        aria-label="搜索"
+        data-search-open
+      >
+        <Icon name="search" size={19} />
+      </button>
+      <button
+        type="button"
+        class="flex h-10 w-10 items-center justify-center rounded-full text-ink-900"
+        aria-label="打开菜单"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <Icon name="menu" size={22} />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  id="mobile-backdrop"
+  class="fixed inset-0 z-[60] hidden bg-ink-950/40 backdrop-blur-sm lg:hidden"
+  aria-hidden="true"
+  data-menu-backdrop
+>
+</div>
+
+<div
+  id="mobile-menu"
+  class="fixed inset-y-0 right-0 z-[70] hidden w-[min(22rem,88vw)] overflow-y-auto bg-white p-5 shadow-2xl lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="移动导航"
+  data-menu-panel
+>
+  <div class="flex items-center justify-between">
+    <Logo />
+    <button
+      type="button"
+      class="flex h-10 w-10 items-center justify-center rounded-full text-ink-900/70 transition hover:bg-paper"
+      aria-label="关闭菜单"
+      data-menu-close
+    >
+      <Icon name="close" size={22} />
+    </button>
+  </div>
+
+  <nav class="mt-6" aria-label="移动端主导航">
+    <ul class="divide-y divide-line">
+      {
+        mainNav.map((item) =>
+          item.children ? (
+            <li>
+              <button
+                type="button"
+                class="flex w-full items-center justify-between py-3.5 text-left text-[0.9375rem] font-semibold text-ink-900"
+                aria-expanded="false"
+                aria-controls={`mobile-panel-${navKey(item.label)}`}
+                data-accordion-toggle
+              >
+                {item.label}
+                <Icon name="chevron-down" size={16} class="text-ink-900/40" />
+              </button>
+              <div id={`mobile-panel-${navKey(item.label)}`} class="hidden pb-3" data-accordion-panel>
+                <div class="space-y-1 rounded-xl bg-paper p-2">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block rounded-lg px-3 py-2.5 text-sm text-ink-900/75 transition hover:bg-white hover:text-brand-600"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                  <a
+                    href={item.href}
+                    class="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-600"
+                  >
+                    查看全部
+                    <Icon name="arrow-right" size={14} />
+                  </a>
+                </div>
+              </div>
+            </li>
+          ) : (
+            <li>
+              <a
+                href={item.href}
+                class="block py-3.5 text-[0.9375rem] font-semibold text-ink-900"
+              >
+                {item.label}
+              </a>
+            </li>
+          ),
+        )
+      }
+    </ul>
+  </nav>
+
+  <div class="mt-8 rounded-2xl bg-ink-950 p-4 text-white">
+    <p class="text-xs font-medium tracking-wider text-white/50">联系我们</p>
+    <a href={site.phoneHref} class="mt-2 flex items-center gap-2 text-lg font-semibold">
+      <Icon name="phone" size={17} class="text-cyan-400" />
+      {site.phone}
+    </a>
+    <a href={site.emailHref} class="mt-1 flex items-center gap-2 text-sm text-white/70">
+      <Icon name="mail" size={15} class="text-cyan-400" />
+      {site.email}
+    </a>
+    <a href="/contact/" class="btn btn-light mt-4 w-full text-sm">前往联系页</a>
+  </div>
+</div>
+
+<SearchDialog />
+
+<script>
+  const header = document.querySelector<HTMLElement>('#site-header');
+
+  if (header) {
+    const onScroll = () => {
+      header.classList.toggle('shadow-[0_8px_30px_-18px_rgba(6,19,31,0.35)]', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  const navItems = Array.from(document.querySelectorAll<HTMLElement>('[data-nav-item]'));
+
+  const closeNav = (except?: HTMLElement) => {
+    navItems.forEach((item) => {
+      if (item === except) return;
+      item.dataset.open = 'false';
+      item.querySelector<HTMLButtonElement>('[data-nav-toggle]')?.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  navItems.forEach((item) => {
+    const toggle = item.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+    if (!toggle) return;
+
+    toggle.addEventListener('click', () => {
+      const open = item.dataset.open === 'true';
+      closeNav(item);
+      item.dataset.open = open ? 'false' : 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+    });
+
+    item.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        item.dataset.open = 'false';
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as Node;
+    if (!navItems.some((item) => item.contains(target))) closeNav();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeNav();
+  });
+
+  // 移动端菜单
+  const menuPanel = document.querySelector<HTMLElement>('[data-menu-panel]');
+  const menuBackdrop = document.querySelector<HTMLElement>('[data-menu-backdrop]');
+  const menuToggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menuClose = document.querySelector<HTMLButtonElement>('[data-menu-close]');
+  let lastFocused: HTMLElement | null = null;
+
+  const setMenuOpen = (open: boolean) => {
+    if (!menuPanel || !menuBackdrop || !menuToggle) return;
+    menuPanel.classList.toggle('hidden', !open);
+    menuBackdrop.classList.toggle('hidden', !open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
+    document.body.style.overflow = open ? 'hidden' : '';
+
+    if (open) {
+      lastFocused = document.activeElement as HTMLElement;
+      menuClose?.focus();
+    } else if (lastFocused) {
+      lastFocused.focus();
+    }
+  };
+
+  menuToggle?.addEventListener('click', () => setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true'));
+  menuClose?.addEventListener('click', () => setMenuOpen(false));
+  menuBackdrop?.addEventListener('click', () => setMenuOpen(false));
+  menuPanel?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuOpen(false)));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !menuPanel || menuPanel.classList.contains('hidden')) return;
+    setMenuOpen(false);
+  });
+
+  menuPanel?.addEventListener('keydown', (event) => {
+    if (event.key !== 'Tab' || !menuPanel) return;
+    const focusables = Array.from(
+      menuPanel.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])'),
+    ).filter((el) => el.offsetParent !== null);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  document.querySelectorAll<HTMLElement>('[data-accordion-toggle]').forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const panelId = toggle.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      panel?.classList.toggle('hidden', open);
+      const icon = toggle.querySelector('svg');
+      icon?.classList.toggle('rotate-180', !open);
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) setMenuOpen(false);
+  });
+</script>

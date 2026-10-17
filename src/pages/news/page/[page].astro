@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import NewsListPage from '@/components/NewsListPage.astro';
+import { NEWS_PAGE_SIZE, getPublishedNews, newsPageCount } from '@/lib/news';
+
+export async function getStaticPaths() {
+  const news = await getPublishedNews();
+  const totalPages = newsPageCount(news.length);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => {
+    const page = index + 2;
+    return {
+      params: { page: String(page) },
+      props: {
+        items: news.slice((page - 1) * NEWS_PAGE_SIZE, page * NEWS_PAGE_SIZE),
+        page,
+        totalPages,
+      },
+    };
+  });
+}
+
+interface Props {
+  items: CollectionEntry<'news'>[];
+  page: number;
+  totalPages: number;
+}
+
+const { items, page, totalPages } = Astro.props;
+---
+
+<NewsListPage items={items} page={page} totalPages={totalPages} />

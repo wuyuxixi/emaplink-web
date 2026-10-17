@@ -1,0 +1,226 @@
+---
+import type { HeroSlide } from '@/data/home';
+import Icon from './ui/Icon.astro';
+
+interface Props {
+  slides: HeroSlide[];
+}
+
+const { slides } = Astro.props;
+---
+
+<section
+  class="relative overflow-hidden bg-ink-950 text-white"
+  aria-roledescription="carousel"
+  aria-label="首页重点内容"
+  data-hero
+>
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.08]"
+    style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 72px 72px;"
+    aria-hidden="true"
+  ></div>
+  <div class="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl" aria-hidden="true"></div>
+
+  <div class="container-page relative min-h-[36rem] py-14 sm:min-h-[38rem] lg:min-h-[40rem] lg:py-20">
+    {
+      slides.map((slide, index) => (
+        <div
+          class="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14"
+          data-hero-slide
+          data-active={index === 0 ? 'true' : 'false'}
+          aria-hidden={index === 0 ? 'false' : 'true'}
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${index + 1} / ${slides.length}`}
+        >
+          <div class="relative z-10">
+            <p class="eyebrow text-cyan-400">{slide.eyebrow}</p>
+            {index === 0 ? (
+              <h1 class="mt-5 max-w-[40rem] text-[1.95rem] font-semibold leading-[1.2] tracking-[-0.02em] text-white sm:text-[2.5rem] lg:text-[3rem]">
+                {slide.title}
+              </h1>
+            ) : (
+              <h2 class="mt-5 max-w-[40rem] text-[1.95rem] font-semibold leading-[1.2] tracking-[-0.02em] text-white sm:text-[2.5rem] lg:text-[3rem]">
+                {slide.title}
+              </h2>
+            )}
+            <p class="mt-5 max-w-xl text-base leading-8 text-white/65 sm:text-lg">
+              {slide.subtitle}
+            </p>
+            <div class="mt-8 flex flex-wrap items-center gap-3">
+              <a href={slide.primary.href} class="btn btn-light">
+                {slide.primary.label}
+                <Icon name="arrow-right" size={16} />
+              </a>
+              <a
+                href={slide.secondary.href}
+                class="btn border border-white/20 text-white/85 transition hover:border-white/40 hover:bg-white/5"
+              >
+                {slide.secondary.label}
+              </a>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-ink-900 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.65)]">
+              <img
+                src={slide.image}
+                alt={slide.imageAlt}
+                width="1020"
+                height="705"
+                class="h-full w-full object-cover"
+                style="object-position: 62% center;"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchpriority={index === 0 ? 'high' : undefined}
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950/45 via-transparent to-transparent" aria-hidden="true"></div>
+            </div>
+
+            <div class="absolute -bottom-4 -left-4 hidden items-center gap-3 rounded-xl border border-white/10 bg-ink-900/90 px-4 py-3 backdrop-blur sm:flex">
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-400/15 text-cyan-400">
+                <Icon name="shield" size={18} />
+              </span>
+              <span>
+                <span class="block text-xs text-white/65">ZSAC 接入安全生态</span>
+                <span class="block text-sm font-semibold text-white">设备 · 用户 · 应用 · 授权</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+
+    <div class="relative z-10 mt-10 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2" role="tablist" aria-label="选择轮播内容">
+        {
+          slides.map((slide, index) => (
+            <button
+              type="button"
+              class="hero-dot flex h-6 w-6 items-center justify-center rounded-full"
+              role="tab"
+              aria-label={`第 ${index + 1} 屏：${slide.eyebrow}`}
+              aria-current={index === 0 ? 'true' : 'false'}
+              data-hero-dot
+              data-index={index}
+            >
+              <span class="block h-1.5 w-1.5 rounded-full bg-white/40"></span>
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <button
+          type="button"
+          class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-white/35 hover:text-white"
+          aria-label="暂停自动轮播"
+          data-hero-pause
+        >
+          <Icon name="pause" size={14} />
+        </button>
+        <button
+          type="button"
+          class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-white/35 hover:text-white"
+          aria-label="上一屏"
+          data-hero-prev
+        >
+          <Icon name="chevron-left" size={16} />
+        </button>
+        <button
+          type="button"
+          class="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-white/35 hover:text-white"
+          aria-label="下一屏"
+          data-hero-next
+        >
+          <Icon name="chevron-right" size={16} />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-hero]').forEach((hero) => {
+    const slides = Array.from(hero.querySelectorAll<HTMLElement>('[data-hero-slide]'));
+    const dots = Array.from(hero.querySelectorAll<HTMLButtonElement>('[data-hero-dot]'));
+    const pauseButton = hero.querySelector<HTMLButtonElement>('[data-hero-pause]');
+    const prevButton = hero.querySelector<HTMLButtonElement>('[data-hero-prev]');
+    const nextButton = hero.querySelector<HTMLButtonElement>('[data-hero-next]');
+    if (slides.length < 2) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0;
+    let timer: number | undefined;
+    let paused = false;
+
+    const show = (nextIndex: number) => {
+      current = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, index) => {
+        const active = index === current;
+        slide.dataset.active = String(active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      dots.forEach((dot, index) => {
+        dot.setAttribute('aria-current', String(index === current));
+      });
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    const start = () => {
+      if (reduceMotion || paused) return;
+      stop();
+      timer = window.setInterval(() => show(current + 1), 7000);
+    };
+
+    const setPaused = (value: boolean) => {
+      paused = value;
+      if (pauseButton) {
+        pauseButton.setAttribute('aria-label', value ? '继续自动轮播' : '暂停自动轮播');
+        pauseButton.innerHTML = value
+          ? '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 7 8 5-8 5V7z"/></svg>'
+          : '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5v14"/><path d="M15 5v14"/></svg>';
+      }
+      if (value) stop();
+      else start();
+    };
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        show(Number(dot.dataset.index ?? 0));
+        start();
+      });
+    });
+    prevButton?.addEventListener('click', () => {
+      show(current - 1);
+      start();
+    });
+    nextButton?.addEventListener('click', () => {
+      show(current + 1);
+      start();
+    });
+    pauseButton?.addEventListener('click', () => setPaused(!paused));
+
+    hero.addEventListener('mouseenter', () => stop());
+    hero.addEventListener('mouseleave', () => {
+      if (!paused) start();
+    });
+    hero.addEventListener('focusin', () => stop());
+    hero.addEventListener('focusout', (event) => {
+      if (!hero.contains(event.relatedTarget as Node) && !paused) start();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (!paused) start();
+    });
+
+    show(0);
+    start();
+  });
+</script>

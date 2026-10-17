@@ -1,0 +1,74 @@
+---
+import type { Solution } from '@/data/solutions';
+import Icon from './ui/Icon.astro';
+
+interface Props {
+  solution: Solution;
+  index: number;
+  tone?: 'dark' | 'light';
+}
+
+const { solution, index, tone = 'dark' } = Astro.props;
+
+const iconBySlug: Record<string, 'device' | 'network' | 'users'> = {
+  'multi-terminal-access': 'device',
+  'data-exchange': 'network',
+  'app-protection': 'users',
+};
+---
+
+<a
+  href={`/solutions/${solution.slug}/`}
+  class:list={[
+    'group relative flex flex-col overflow-hidden rounded-2xl border p-6 transition duration-300 hover:-translate-y-1 sm:p-7',
+    tone === 'dark'
+      ? 'border-white/10 bg-white/[0.04] hover:border-cyan-400/35 hover:bg-white/[0.07]'
+      : 'border-line bg-white hover:border-brand-500/40 hover:shadow-card',
+  ]}
+>
+  <div
+    class:list={[
+      'pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full blur-2xl transition duration-500',
+      tone === 'dark' ? 'bg-cyan-400/10 group-hover:bg-cyan-400/15' : 'bg-brand-100/70 group-hover:bg-brand-100',
+    ]}
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative flex items-start justify-between">
+    <span
+      class:list={[
+        'flex h-12 w-12 items-center justify-center rounded-xl border transition',
+        tone === 'dark'
+          ? 'border-white/10 bg-white/5 text-cyan-400 group-hover:border-cyan-400/30 group-hover:bg-cyan-400/10'
+          : 'border-line bg-brand-100 text-brand-600 group-hover:border-brand-500/30 group-hover:bg-brand-600 group-hover:text-white',
+      ]}
+    >
+      <Icon name={iconBySlug[solution.slug] ?? 'shield'} size={22} />
+    </span>
+    <span class:list={['font-mono text-[0.6875rem] tracking-[0.18em]', tone === 'dark' ? 'text-white/65' : 'text-muted']}>
+      0{index}
+    </span>
+  </div>
+
+  <h3
+    class:list={[
+      'relative mt-8 text-lg font-semibold leading-snug transition',
+      tone === 'dark' ? 'text-white group-hover:text-cyan-400' : 'text-ink-900 group-hover:text-brand-600',
+    ]}
+  >
+    {solution.name}
+  </h3>
+  <p class:list={['relative mt-2 line-clamp-2 text-sm leading-6', tone === 'dark' ? 'text-white/65' : 'text-muted']}>
+    {solution.tagline}
+  </p>
+
+  <span
+    class:list={[
+      'relative mt-8 inline-flex items-center gap-1.5 text-sm font-semibold',
+      tone === 'dark' ? 'text-cyan-400' : 'text-brand-600',
+    ]}
+  >
+    了解更多
+    <Icon name="arrow-right" size={15} class="transition-transform duration-200 group-hover:translate-x-1" />
+  </span>
+</a>

@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'primary' | 'ghost' | 'light' | 'text';
+  icon?: 'arrow-right' | 'arrow-up-right' | 'phone' | 'mail' | 'external';
+  class?: string;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  href,
+  label,
+  variant = 'primary',
+  icon = 'arrow-right',
+  class: className = '',
+  target,
+  rel,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class:list={[
+    'group inline-flex items-center justify-center gap-2 font-semibold transition',
+    variant === 'primary' && 'btn btn-primary',
+    variant === 'ghost' && 'btn btn-ghost',
+    variant === 'light' && 'btn btn-light',
+    variant === 'text' && 'text-sm text-brand-600 hover:text-brand-700',
+    className,
+  ]}
+>
+  <span>{label}</span>
+  <Icon
+    name={icon}
+    size={16}
+    class:list={[
+      'transition-transform duration-200 group-hover:translate-x-0.5',
+      variant === 'text' && 'group-hover:translate-x-1',
+    ]}
+  />
+</a>

@@ -1,0 +1,10 @@
+---
+import NewsListPage from '@/components/NewsListPage.astro';
+import { NEWS_PAGE_SIZE, getPublishedNews, newsPageCount } from '@/lib/news';
+
+const news = await getPublishedNews();
+const items = news.slice(0, NEWS_PAGE_SIZE);
+const totalPages = newsPageCount(news.length);
+---
+
+<NewsListPage items={items} page={1} totalPages={totalPages} />

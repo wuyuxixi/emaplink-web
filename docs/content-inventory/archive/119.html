@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <title>从“万物互联”到“万物皆危”：2025物联网网络安全全景扫描与破局之路（归档）</title>
+  <style>
+    body{font-family:"Microsoft YaHei",system-ui,sans-serif;max-width:52rem;margin:2rem auto;padding:0 1.25rem;line-height:1.8;color:#233545}
+    h1{font-size:1.75rem;line-height:1.4;color:#0a1d2e}
+    .meta{color:#5a6b7b;font-size:.875rem;margin-bottom:2rem}
+    img{max-width:100%;height:auto}
+    table{border-collapse:collapse;width:100%;font-size:.9rem}
+    th,td{border:1px solid #dce5ec;padding:.5rem .625rem;text-align:left;vertical-align:top}
+    pre{overflow:auto;background:#0d1b27;color:#e6edf3;padding:1rem;border-radius:.5rem}
+    blockquote{border-left:3px solid #0062a2;margin-left:0;padding-left:1rem;color:#26465e}
+  </style>
+</head>
+<body>
+  <article>
+    <h1>从“万物互联”到“万物皆危”：2025物联网网络安全全景扫描与破局之路</h1>
+    <p class="meta">发布时间：2026-01-28 · 来源：千家网 · 归档稿，未发布</p>
+    
+
+                        <!-- <video src="../images3/news-details/password.mp4" class="video_fill" controls="controls" autoplay muted >
+                            您的浏览器不支持 video 标签
+                        </video>
+                        <br />
+                        <br /> -->
+
+                        <p class="MsoNormal  ">2025年全球物联网活跃设备已突破300亿，平均每秒新增127台摄像头、传感器或PLC。它们把物理世界翻译成比特，也把比特世界的风险带回物理世界：心脏起搏器可被远程停跳，电网PLC可遭诱导跳闸，工厂机械臂可被勒索软件“绑架”。当“连接”成为缺省配置，“安全”却仍是可选项——Mirai变种仍在扫描23端口，医院物联网被加密勒索平均停机6.8天。</p>
+                        <!-- <p class="MsoNormal center">
+                            <img src="../images3/news-details/116-1.png" alt="" style="max-width: 50%;">
+                        </p> -->
+                        <p class="MsoNormal weight">
+                            威胁图谱  2025年物联网攻击的四大关键词
+                        </p>
+                        <p class="MsoNormal">
+                            规模更大：Mirai后续家族2025年Q1感染量仍达230万台，峰值DDoS 2.3 Tbps，瞄准家庭路由、NV DVR、智能充电桩。
+                        </p>
+                        <p class="MsoNormal  ">
+                            目标更准：勒索组织开始“精准锁厂”，先扫描Modbus TCP，再识别PLC型号，最后下发加密脚本，赎金从比特币转向“算力券”。
+                        </p>
+                        <p class="MsoNormal">
+                            链路更杂：5G RedCap让IoT终端一跳入5GC，切片ID成为新的攻击向量；NB-IoT明文CoAP+UDP被伪基站重放，可让远程水表“多跑1000吨”。
+                        </p>
+                        <p class="MsoNormal  ">
+                            潜伏更深：侧信道攻击从高端MCU下沉至Cortex-M0，通过功耗曲线提取AES密钥只需42秒，让“轻量级”不再等于“轻安全”。
+                        </p>
+                        <p class="MsoNormal weight">
+                            感知层  设备本体仍是“最软柿子”
+                        </p>
+                        <p class="MsoNormal">
+                            硬件缺陷：硬编码凭证、调试口遗忘，让全球83万台IP Camera裸奔互联网；智能门锁留UART，10分钟可dump固件并回写“万能钥匙”。
+                        </p>
+                        <p class="MsoNormal  ">
+                            固件泥潭：升级无签名、OTA回退，让血糖仪“挖矿”与测血糖同步进行；电梯控制器回退旧版触发已知CVE，导致“冲顶”事故。
+                        </p>
+                        <p class="MsoNormal">
+                            无线裸奔：ZigBee 3.0默认信任中心链路密钥为well-known key，嗅探器抓下网络密钥后，可伪造灯泡OTA让工厂灯全灭并触发消防喷淋。
+                        </p>
+                        <p class="MsoNormal weight">
+                            网络层  异构拼接带来的“裂缝”
+                        </p>
+                        <p class="MsoNormal">
+                            物联网流量平均穿越4种介质：LoRa→4G→MPLS→云PC，每段协议各自加密，却在网关处被解包再封装，形成“裂缝平原”。
+                        </p>
+                        <p class="MsoNormal">
+                            跨网重放：MQTT over TLS 1.3在云侧断链，边缘网关fallback到明文MQTT，攻击者重放“开启燃气阀”指令，造成锅炉爆燃。
+                        </p>
+                        <p class="MsoNormal">
+                            切片逃逸：5G uRLLC切片承载配电自动化，攻击者从eMBB切片通过共享UPF灌入GRE隧道，再向配电终端下发跳闸命令。
+                        </p>
+                        <p class="MsoNormal">
+                            NB-IoT伪基站：千元软件定义无线电即可伪装运营商频段，下发fake System Information Block，引导终端附着后发送伪造SMS，远程重启充电桩。
+                        </p>
+                        <p class="MsoNormal weight">
+                            速报应用层  数据洪流里的“暗桩”
+                        </p>
+                        <p class="MsoNormal">
+                            API清洗：某省智慧停车平台开放“车牌查询”API，无速率限制，被黑产调用2.1亿次，建立“全国车主住址库”。
+                        </p>
+                        <p class="MsoNormal">
+                            深度伪造：AI换脸+语音合成攻破银行声纹，结合泄露的IoT家用摄像头画面，完成“可视化社工”，2025年Q2已造成全球约3.2亿美元损失。
+                        </p>
+                        <p class="MsoNormal">
+                            供应链污染：攻击者在GitHub上传伪装成“温湿度驱动”的库，被多家智能农业厂商集成，收获2000台僵尸，形成“毒源码”事件。
+                        </p>
+                        <p class="MsoNormal weight">
+                            典型案例复盘  当医院成为战场
+                        </p>
+                        <p class="MsoNormal">
+                            2025年6月，某三甲医院MRI设备被勒索软件锁定。攻击路径：利用超声设备默认口令登陆；在内网横向扫描，发现MRI控制主机Win7未打补丁；投放定制勒索，加密影像文件；要求支付218万元等值比特币，医院被迫停诊48小时。事后溯源发现，MRI厂商为维护便利，把TeamViewer密码写进说明书，且七年未换。此事件被写入《医院物联网安全体系建设指南》草案，首次把“医疗设备安全”纳入等级保护2.0扩展要求。
+                        </p>
+                        <p class="MsoNormal weight">
+                            防护策略  从“重”到“轻”再到“零”
+                        </p>
+                        <p class="MsoNormal">
+                            设备层：安全隔区、轻量加密、无口令引导，让最小设备也能可信；网络层：端到端隧道、切片隔离、DPI+白名单，把裂缝缝成隧道；应用层：动态令牌、AI行为画像、后量子前瞻，让API与AI互相看住。
+                        </p>
+                        <p class="MsoNormal weight">
+                            监管与标准  从“推荐”到“强制”
+                        </p>
+                        <p class="MsoNormal">
+                            欧盟CRA：2025年生效，要求所有≥2欧元的IoT产品必须带漏洞披露机制，否则禁售。
+                        </p>
+                        <p class="MsoNormal">
+                            美国NIST IR 8473：2025版把“软件物料清单SBOM”扩大到固件，医疗IoT上市前须提交加密模块证明。
+                        </p>
+                        <p class="MsoNormal">
+                            中国《物联网终端安全分级要求》：2026年起，视频监控、智能表计必须通过EAL4+认证，否则无法进入政采清单。
+                        </p>
+                        <p class="MsoNormal weight">
+                            总结
+                        </p>
+                        <p class="MsoNormal">
+                            IoT安全不是“锦上添花”，而是“0到1”的生死线。当设备数量以“百亿”为单位，任何1%的漏洞都会被放大成“百万级僵尸”。只有把“轻量级可信”写进硅片、把“零信任”嵌入协议栈、把“后量子”预装到密钥，才能让万物互联真正走向“万物可信”。否则，我们迎来的将不是智能社会，而是“亿物皆危”。
+                        </p>
+                        
+                        <p class="MsoNormal">
+                            来源：千家网
+                        </p>
+                        <p class="MsoNormal">
+                            注：内容均来源于互联网，版权归作者所有，如有侵权，请联系告知，我们将尽快处理。
+                        </p>
+                    
+  </article>
+</body>
+</html>

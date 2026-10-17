@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Icon from '@/components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="页面未找到"
+  description="你访问的页面不存在或已被移动。"
+  noindex
+>
+  <section class="relative overflow-hidden bg-ink-950 py-24 text-white lg:py-32">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.07]"
+      style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 72px 72px;"
+      aria-hidden="true"
+    ></div>
+    <div class="container-page relative text-center">
+      <p class="font-mono text-sm tracking-[0.2em] text-cyan-400">404</p>
+      <h1 class="mt-4 text-3xl font-semibold sm:text-5xl">页面没有找到</h1>
+      <p class="mx-auto mt-4 max-w-xl text-base leading-8 text-white/65">
+        链接可能已经失效，或者页面地址发生了变化。你可以回到首页，或通过下方入口继续浏览。
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/" class="btn btn-light">
+          返回首页
+          <Icon name="arrow-right" size={16} />
+        </a>
+        <a href="/news/" class="btn border border-white/20 text-white/85 transition hover:border-white/40 hover:bg-white/5">
+          查看资讯
+        </a>
+        <a href="/contact/" class="btn border border-white/20 text-white/85 transition hover:border-white/40 hover:bg-white/5">
+          联系我们
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

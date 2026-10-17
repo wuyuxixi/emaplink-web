@@ -1,0 +1,38 @@
+---
+const items = [
+  { label: '公司简介', href: '/about/' },
+  { label: '企业文化', href: '/about/culture/' },
+  { label: '荣誉资质', href: '/about/honors/' },
+  { label: '行业案例', href: '/about/cases/' },
+  { label: '联系我们', href: '/contact/' },
+];
+
+const current = Astro.url.pathname;
+---
+
+<nav aria-label="关于我们" class="lg:sticky lg:top-24">
+  <p class="hidden text-xs font-semibold tracking-[0.16em] text-muted lg:block">关于联易</p>
+  <ul class="flex gap-1 overflow-x-auto pb-1 lg:mt-4 lg:flex-col lg:gap-0.5 lg:overflow-visible lg:pb-0">
+    {
+      items.map((item) => {
+        const active = current === item.href || (item.href !== '/about/' && current.startsWith(item.href));
+        return (
+          <li class="shrink-0">
+            <a
+              href={item.href}
+              aria-current={active ? 'page' : undefined}
+              class:list={[
+                'flex whitespace-nowrap rounded-lg px-3.5 py-2.5 text-sm transition lg:px-3',
+                active
+                  ? 'bg-ink-950 font-semibold text-white'
+                  : 'text-ink-900/60 hover:bg-white hover:text-brand-600',
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

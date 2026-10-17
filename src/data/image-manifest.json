@@ -1,0 +1,285 @@
+{
+  "generatedAt": "2026-10-17T15:59:43.704Z",
+  "assets": [
+    {
+      "source": "https://www.emaplink.com.cn/images3/index/banner1.png",
+      "local": "/images/home/hero-1.webp",
+      "width": 1920,
+      "height": 705,
+      "bytes": 119614
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images/banner-2.png",
+      "local": "/images/home/hero-2.webp",
+      "width": 1920,
+      "height": 703,
+      "bytes": 23448
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images/banner-3.png",
+      "local": "/images/home/hero-3.webp",
+      "width": 1920,
+      "height": 703,
+      "bytes": 63018
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-insert/banner.png",
+      "local": "/images/products/zsac-gateway/banner.webp",
+      "width": 1600,
+      "height": 467,
+      "bytes": 30414
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-insert/bottom.png",
+      "local": "/images/products/zsac-gateway/diagram.webp",
+      "width": 1600,
+      "height": 384,
+      "bytes": 36190
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-insert/middle_bg.jpg",
+      "local": "/images/products/zsac-gateway/diagram-bg.webp",
+      "width": 1600,
+      "height": 733,
+      "bytes": 47430
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-app/banner.png",
+      "local": "/images/products/zsac-server/banner.webp",
+      "width": 1600,
+      "height": 493,
+      "bytes": 30646
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-app/bottom.png",
+      "local": "/images/products/zsac-server/diagram-alt.webp",
+      "width": 1600,
+      "height": 384,
+      "bytes": 36190
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-app/middle.png",
+      "local": "/images/products/zsac-server/diagram.webp",
+      "width": 1600,
+      "height": 733,
+      "bytes": 97050
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-model/banner.png",
+      "local": "/images/products/zsac-crypto-module/banner.webp",
+      "width": 1600,
+      "height": 496,
+      "bytes": 34212
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-model/ZSAC.png",
+      "local": "/images/products/zsac-crypto-module/diagram.webp",
+      "width": 312,
+      "height": 296,
+      "bytes": 12836
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-model/1.png",
+      "local": "/images/products/zsac-crypto-module/gallery-1.webp",
+      "width": 632,
+      "height": 436,
+      "bytes": 31436
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-model/2.png",
+      "local": "/images/products/zsac-crypto-module/gallery-2.webp",
+      "width": 632,
+      "height": 436,
+      "bytes": 19940
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-model/3.png",
+      "local": "/images/products/zsac-crypto-module/gallery-3.webp",
+      "width": 632,
+      "height": 436,
+      "bytes": 27002
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-model/4.png",
+      "local": "/images/products/zsac-crypto-module/gallery-4.webp",
+      "width": 632,
+      "height": 436,
+      "bytes": 20094
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/products-dynamic/banner.png",
+      "local": "/images/products/zsac-otp/banner.webp",
+      "width": 1600,
+      "height": 496,
+      "bytes": 57230
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/programme-insert/banner.png",
+      "local": "/images/solutions/multi-terminal-access/banner.webp",
+      "width": 1600,
+      "height": 648,
+      "bytes": 32542
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/programme-insert/bg.png",
+      "local": "/images/solutions/multi-terminal-access/bg.webp",
+      "width": 1600,
+      "height": 665,
+      "bytes": 68032
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/programme-interactive/bg.jpg",
+      "local": "/images/solutions/data-exchange/banner.webp",
+      "width": 1600,
+      "height": 859,
+      "bytes": 103312
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/programme-app/banner.png",
+      "local": "/images/solutions/app-protection/banner.webp",
+      "width": 1600,
+      "height": 648,
+      "bytes": 32472
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images/qiyewenhua1.png",
+      "local": "/images/about/culture-1.webp",
+      "width": 667,
+      "height": 294,
+      "bytes": 33488
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images/qiyewenhua3.png",
+      "local": "/images/about/culture-2.webp",
+      "width": 669,
+      "height": 298,
+      "bytes": 22084
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images/con-1.png",
+      "local": "/images/about/contact-map.webp",
+      "width": 337,
+      "height": 382,
+      "bytes": 20642
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images/about-banner.png",
+      "local": "/images/about/banner.webp",
+      "width": 1920,
+      "height": 613,
+      "bytes": 26262
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/CN112948777B.png",
+      "local": "/images/about/credentials/patent-1.webp",
+      "width": 560,
+      "height": 790,
+      "bytes": 48706
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/CN112565155B.png",
+      "local": "/images/about/credentials/patent-2.webp",
+      "width": 560,
+      "height": 790,
+      "bytes": 48444
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/CN112559561B.png",
+      "local": "/images/about/credentials/patent-3.webp",
+      "width": 560,
+      "height": 790,
+      "bytes": 48050
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/1.png",
+      "local": "/images/about/credentials/cert-1.webp",
+      "width": 731,
+      "height": 1013,
+      "bytes": 152942
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/5.JPG",
+      "local": "/images/about/credentials/cert-2.webp",
+      "width": 1200,
+      "height": 1698,
+      "bytes": 154344
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/2025.png",
+      "local": "/images/about/credentials/high-tech-2025.webp",
+      "width": 1200,
+      "height": 848,
+      "bytes": 85096
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/ZSAC.png",
+      "local": "/images/about/credentials/zsac.webp",
+      "width": 793,
+      "height": 1122,
+      "bytes": 99028
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/ZSAC-ONE.png",
+      "local": "/images/about/credentials/zsac-one.webp",
+      "width": 793,
+      "height": 1122,
+      "bytes": 105180
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/ZSAC-MM.png",
+      "local": "/images/about/credentials/zsac-mm.webp",
+      "width": 790,
+      "height": 1111,
+      "bytes": 103432
+    },
+    {
+      "source": "https://www.emaplink.com.cn/attach/credentials/ZSAC-OTP.png",
+      "local": "/images/about/credentials/zsac-otp.webp",
+      "width": 789,
+      "height": 1115,
+      "bytes": 101608
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/news-details/132-1.png",
+      "local": "/images/news/shared/132-1.webp",
+      "width": 620,
+      "height": 840,
+      "bytes": 94668
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/news-details/132-2.jpeg",
+      "local": "/images/news/shared/132-2.webp",
+      "width": 727,
+      "height": 1024,
+      "bytes": 33336
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/news-details/132-3.png",
+      "local": "/images/news/shared/132-3.webp",
+      "width": 722,
+      "height": 1024,
+      "bytes": 75164
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/news-details/132-4.png",
+      "local": "/images/news/shared/132-4.webp",
+      "width": 723,
+      "height": 1024,
+      "bytes": 33504
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/news-details/126-1.png",
+      "local": "/images/news/shared/126-1.webp",
+      "width": 833,
+      "height": 592,
+      "bytes": 35710
+    },
+    {
+      "source": "https://www.emaplink.com.cn/images3/news-details/83-1.png",
+      "local": "/images/news/shared/83-1.webp",
+      "width": 548,
+      "height": 13139,
+      "bytes": 691518
+    }
+  ]
+}

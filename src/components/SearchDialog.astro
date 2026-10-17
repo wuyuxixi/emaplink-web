@@ -1,0 +1,233 @@
+---
+import Icon from './ui/Icon.astro';
+---
+
+<dialog
+  id="search-dialog"
+  class="m-auto w-[min(44rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-line bg-white p-0 shadow-menu backdrop:bg-ink-950/50"
+  aria-label="站内搜索"
+>
+  <div class="flex items-center gap-3 border-b border-line px-4 py-3">
+    <Icon name="search" size={18} class="shrink-0 text-ink-900/45" />
+    <input
+      id="search-input"
+      type="search"
+      class="h-10 w-full bg-transparent text-base text-ink-900 outline-none placeholder:text-ink-900/35"
+      placeholder="搜索产品、方案或资讯…"
+      autocomplete="off"
+      spellcheck="false"
+      aria-label="搜索关键词"
+      aria-controls="search-results"
+    />
+    <button
+      type="button"
+      class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ink-900/50 transition hover:bg-paper"
+      aria-label="关闭搜索"
+      data-search-close
+    >
+      <Icon name="close" size={18} />
+    </button>
+  </div>
+
+  <div class="max-h-[min(32rem,70vh)] overflow-y-auto p-2" id="search-results" aria-live="polite">
+    <p class="px-3 py-8 text-center text-sm text-muted">输入关键词开始搜索</p>
+  </div>
+
+  <div class="flex items-center justify-between border-t border-line bg-paper px-4 py-2.5 text-[0.6875rem] text-muted">
+    <span>支持产品、解决方案与新闻全文检索</span>
+    <span class="hidden sm:inline">↑ ↓ 选择 · Enter 打开 · Esc 关闭</span>
+  </div>
+</dialog>
+
+<script>
+  type SearchItem = {
+    title: string;
+    description: string;
+    url: string;
+    type: 'product' | 'solution' | 'page' | 'news';
+    body?: string;
+    date?: string;
+  };
+
+  const dialog = document.querySelector<HTMLDialogElement>('#search-dialog');
+  const input = document.querySelector<HTMLInputElement>('#search-input');
+  const results = document.querySelector<HTMLElement>('#search-results');
+  const openers = document.querySelectorAll<HTMLElement>('[data-search-open]');
+  const closeButton = document.querySelector<HTMLElement>('[data-search-close]');
+
+  let index: SearchItem[] | null = null;
+  let loading: Promise<SearchItem[]> | null = null;
+  let activeIndex = -1;
+  let currentResults: SearchItem[] = [];
+
+  const typeLabel: Record<SearchItem['type'], string> = {
+    product: '产品',
+    solution: '解决方案',
+    page: '页面',
+    news: '资讯',
+  };
+
+  async function loadIndex() {
+    if (index) return index;
+    if (!loading) {
+      loading = fetch('/search-index.json')
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json() as Promise<SearchItem[]>;
+        })
+        .then((items) => {
+          index = items;
+          return items;
+        })
+        .catch(() => {
+          index = [];
+          return [];
+        });
+    }
+    return loading;
+  }
+
+  function escapeHtml(value: string) {
+    return value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function highlight(text: string, query: string) {
+    const safe = escapeHtml(text);
+    if (!query) return safe;
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return safe.replace(new RegExp(escaped, 'gi'), (match) => `<mark class="rounded bg-amber-100 px-0.5">${match}</mark>`);
+  }
+
+  function score(item: SearchItem, query: string) {
+    const q = query.toLowerCase();
+    let value = 0;
+    if (item.title.toLowerCase().includes(q)) value += 12;
+    if (item.description.toLowerCase().includes(q)) value += 5;
+    if (item.body?.toLowerCase().includes(q)) value += 1;
+    return value;
+  }
+
+  function render(query: string) {
+    if (!results) return;
+
+    if (!query.trim()) {
+      activeIndex = -1;
+      currentResults = [];
+      results.innerHTML = '<p class="px-3 py-8 text-center text-sm text-muted">输入关键词开始搜索</p>';
+      return;
+    }
+
+    const q = query.trim().toLowerCase();
+    currentResults = (index ?? [])
+      .map((item) => ({ item, value: score(item, q) }))
+      .filter((entry) => entry.value > 0)
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 12)
+      .map((entry) => entry.item);
+
+    activeIndex = currentResults.length ? 0 : -1;
+
+    if (!currentResults.length) {
+      results.innerHTML = `
+        <div class="px-3 py-10 text-center">
+          <p class="text-sm text-muted">没有找到与“${escapeHtml(query)}”相关的内容</p>
+          <a href="/news/" class="mt-3 inline-flex text-sm font-semibold text-brand-600">查看全部资讯 →</a>
+        </div>`;
+      return;
+    }
+
+    results.innerHTML = currentResults
+      .map(
+        (item, position) => `
+        <a
+          href="${item.url}"
+          class="search-result flex items-start gap-3 rounded-xl px-3 py-3 transition hover:bg-paper ${position === activeIndex ? 'bg-paper' : ''}"
+          data-search-result
+          data-index="${position}"
+        >
+          <span class="mt-0.5 shrink-0 rounded-md bg-brand-100 px-1.5 py-0.5 text-[0.625rem] font-semibold text-brand-700">${typeLabel[item.type]}</span>
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold text-ink-900">${highlight(item.title, query)}</span>
+            <span class="mt-0.5 block truncate text-xs text-muted">${highlight(item.description, query)}</span>
+          </span>
+        </a>`,
+      )
+      .join('');
+  }
+
+  function setActive(nextIndex: number) {
+    const nodes = Array.from(results?.querySelectorAll<HTMLElement>('[data-search-result]') ?? []);
+    if (!nodes.length) return;
+    activeIndex = (nextIndex + nodes.length) % nodes.length;
+    nodes.forEach((node, i) => node.classList.toggle('bg-paper', i === activeIndex));
+    nodes[activeIndex]?.scrollIntoView({ block: 'nearest' });
+  }
+
+  async function open() {
+    if (!dialog) return;
+    if (!dialog.open) dialog.showModal();
+    await loadIndex();
+    setTimeout(() => input?.focus(), 40);
+    render(input?.value ?? '');
+  }
+
+  function close() {
+    if (dialog?.open) dialog.close();
+  }
+
+  openers.forEach((opener) => opener.addEventListener('click', () => void open()));
+  closeButton?.addEventListener('click', close);
+
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) close();
+  });
+
+  dialog?.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    close();
+  });
+
+  input?.addEventListener('input', () => render(input.value));
+
+  input?.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      close();
+      return;
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setActive(activeIndex + 1);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setActive(activeIndex - 1);
+    } else if (event.key === 'Enter') {
+      const active = currentResults[activeIndex];
+      if (active) {
+        event.preventDefault();
+        window.location.href = active.url;
+      }
+    }
+  });
+
+  results?.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      const target = (event.target as HTMLElement).closest<HTMLAnchorElement>('[data-search-result]');
+      if (target) {
+        event.preventDefault();
+        window.location.href = target.href;
+      }
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+      event.preventDefault();
+      void open();
+    }
+  });
+</script>

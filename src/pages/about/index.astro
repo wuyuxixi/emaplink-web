@@ -1,0 +1,98 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AboutNav from '@/components/AboutNav.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Icon from '@/components/ui/Icon.astro';
+import { company } from '@/data/about';
+
+const focus = [
+  {
+    title: '国产动态软件密码',
+    description: '聚焦国产动态软件密码接入安全体系建设，以创新密码技术解决“端”到“云”的接入安全痛点。',
+    icon: 'key',
+  },
+  {
+    title: '端到云的接入安全',
+    description: '围绕设备、人员、数据三类对象，构建从终端接入到应用访问的完整安全链路。',
+    icon: 'network',
+  },
+  {
+    title: '生态战略伙伴',
+    description: '以差异化的核心技术赋能生态战略伙伴，共同服务行业客户的接入安全需求。',
+    icon: 'users',
+  },
+  {
+    title: '多行业服务',
+    description: '密码技术与产品广泛服务于公安、金融、交通、工业、政务、物联网、云服务等行业。',
+    icon: 'layers',
+  },
+] as const;
+---
+
+<BaseLayout
+  title="公司简介"
+  description={company.intro.slice(0, 120)}
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: '公司简介',
+    description: company.intro,
+    url: 'https://www.emaplink.com.cn/about/',
+  }}
+>
+  <PageHero
+    eyebrow="关于我们"
+    title="公司简介"
+    description={company.brandLine}
+    breadcrumbs={[{ label: '首页', href: '/' }, { label: '关于我们' }]}
+    compact
+  />
+
+  <section class="section">
+    <div class="container-page grid gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
+      <AboutNav />
+
+      <div>
+        <div class="max-w-3xl">
+          <p class="text-xs font-semibold tracking-[0.18em] text-brand-600">{company.brandSubline}</p>
+          <h2 class="mt-4 text-3xl font-semibold leading-tight tracking-[-0.02em] text-ink-900 sm:text-4xl">
+            {company.brandLine}
+          </h2>
+          <p class="mt-6 text-base leading-8 text-muted sm:text-lg">{company.intro}</p>
+        </div>
+
+        <div class="mt-12 grid gap-4 sm:grid-cols-2">
+          {
+            focus.map((item, index) => (
+              <div class="card p-6">
+                <div class="flex items-center justify-between">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-100 text-brand-600">
+                    <Icon name={item.icon} size={19} />
+                  </span>
+                  <span class="font-mono text-[0.6875rem] tracking-wider text-muted">0{index + 1}</span>
+                </div>
+                <h3 class="mt-5 text-base font-semibold text-ink-900">{item.title}</h3>
+                <p class="mt-2 text-sm leading-6 text-muted">{item.description}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="relative mt-12 overflow-hidden rounded-3xl bg-ink-950 p-8 text-white sm:p-10">
+          <div
+            class="pointer-events-none absolute inset-0 opacity-[0.07]"
+            style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 64px 64px;"
+            aria-hidden="true"
+          ></div>
+          <p class="relative text-xs font-semibold tracking-[0.16em] text-cyan-400">我们的目标</p>
+          <p class="relative mt-4 max-w-2xl text-2xl font-semibold leading-relaxed sm:text-3xl">
+            真正解决用户“接入安全”，让国密“接”万物，物联“真”安全。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

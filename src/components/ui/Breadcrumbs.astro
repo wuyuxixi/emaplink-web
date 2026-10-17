@@ -1,0 +1,60 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { items, tone = 'light', class: className = '' } = Astro.props;
+---
+
+<nav aria-label="面包屑" class:list={['text-sm', className]}>
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+    {
+      items.map((item, index) => {
+        const isLast = index === items.length - 1;
+        return (
+          <li class="flex items-center gap-2">
+            {item.href && !isLast ? (
+              <a
+                href={item.href}
+                class:list={[
+                  'transition-colors',
+                  tone === 'dark'
+                    ? 'text-white/60 hover:text-white'
+                    : 'text-muted hover:text-brand-600',
+                ]}
+              >
+                {item.label}
+              </a>
+            ) : (
+              <span
+                aria-current={isLast ? 'page' : undefined}
+                class:list={[
+                  tone === 'dark' ? 'text-white/90' : 'text-ink-900',
+                ]}
+              >
+                {item.label}
+              </span>
+            )}
+            {!isLast && (
+              <span
+                aria-hidden="true"
+                class:list={[
+                  tone === 'dark' ? 'text-white/25' : 'text-line',
+                ]}
+              >
+                /
+              </span>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

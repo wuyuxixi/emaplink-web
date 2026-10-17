@@ -1,0 +1,198 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import HomeHero from '@/components/HomeHero.astro';
+import NewsRow from '@/components/NewsRow.astro';
+import ProductCard from '@/components/ProductCard.astro';
+import SolutionCard from '@/components/SolutionCard.astro';
+import Icon from '@/components/ui/Icon.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { ecosystem, heroSlides, industries, services, valueCards } from '@/data/home';
+import { products } from '@/data/products';
+import { solutions } from '@/data/solutions';
+
+const newsEntries = (
+  await getCollection('news', ({ data }) => !data.draft)
+)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title="联易软件｜ZSAC 接入安全，国密接入安全体系"
+  description="联易软件聚焦国产动态软件密码接入安全体系建设，以 ZSAC 接入安全机制为多形态终端、数据共享与用户认证提供合规、易用、有效的密码安全服务。"
+  preloadImage="/images/home/hero-3.webp"
+>
+  <HomeHero slides={heroSlides} />
+
+  <div class="relative z-20 -mt-7">
+    <div class="container-page">
+      <ul class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line shadow-card lg:grid-cols-4">
+        {
+          services.map((service) => (
+            <li class="flex items-start gap-3 bg-white p-4 sm:p-5">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-600">
+                <Icon name={service.icon} size={19} />
+              </span>
+              <span>
+                <span class="block text-sm font-semibold text-ink-900">{service.title}</span>
+                <span class="mt-0.5 block text-xs text-muted">{service.subtitle}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <section class="section" id="ecosystem">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="ZSAC 接入安全生态"
+        title="设备、用户、应用、授权，一张网统一管理"
+        lead="为用户提供技术可控、职责可管、服务可塑的接入安全体系，让身份、权限与访问边界围绕同一条密码信任链展开。"
+      />
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          ecosystem.map((item, index) => (
+            <div class="group card relative overflow-hidden p-5 transition duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-card">
+              <span class="absolute right-4 top-4 font-mono text-[0.6875rem] text-muted">
+                0{index + 1}
+              </span>
+              <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-100 text-brand-600 transition group-hover:bg-brand-600 group-hover:text-white">
+                <Icon name={item.icon} size={20} />
+              </span>
+              <h3 class="mt-5 text-base font-semibold text-ink-900">{item.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-muted">{item.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white" id="products">
+    <div class="container-page">
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <SectionHeading
+          eyebrow="产品中心"
+          title="围绕接入安全，构建完整产品矩阵"
+          lead="从终端准入到应用保护，从密码模块到动态令，按场景组合成可落地的接入安全能力。"
+        />
+        <a
+          href="/contact/"
+          class="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand-600 transition hover:text-brand-700"
+        >
+          获取产品资料
+          <Icon name="arrow-right" size={15} />
+        </a>
+      </div>
+
+      <div class="mt-10 grid gap-5 sm:grid-cols-2">
+        {products.map((product, index) => <ProductCard product={product} index={index + 1} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-ink-950 py-20 text-white lg:py-24" id="solutions">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.06]"
+      style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 72px 72px;"
+      aria-hidden="true"
+    ></div>
+    <div class="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl" aria-hidden="true"></div>
+
+    <div class="container-page relative">
+      <SectionHeading
+        tone="dark"
+        eyebrow="解决方案"
+        title="ZSAC 接入安全解决方案"
+        lead="面向金融、能源、工业、电力、交通、大型国央企、政务、应急、环保、公安等领域，提供场景化、全生命周期的接入安全防护体系。"
+      />
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {solutions.map((solution, index) => <SolutionCard solution={solution} index={index + 1} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-page">
+      <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <SectionHeading
+          eyebrow="为什么选择联易"
+          title="安全、易用、合规、经济"
+          lead="以软密码模块为核心，把复杂的密码能力做成可适配、可管理、可复用的接入安全底座。"
+        />
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          {
+            valueCards.map((value) => (
+              <div class="card p-5">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-ink-950 text-cyan-400">
+                  <Icon name={value.icon} size={19} />
+                </span>
+                <h3 class="mt-4 text-base font-semibold text-ink-900">{value.title}</h3>
+                <p class="mt-2 text-sm leading-6 text-muted">{value.description}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="mt-14 border-t border-line pt-8">
+        <p class="text-xs font-semibold tracking-[0.16em] text-muted">服务行业</p>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {
+            industries.map((industry) => (
+              <li class="rounded-full border border-line bg-white px-3.5 py-1.5 text-sm text-ink-900/70">
+                {industry}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white" id="news">
+    <div class="container-page">
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <SectionHeading
+          eyebrow="新闻动态"
+          title="了解企业资讯，洞察行业趋势"
+          lead="关注密码技术、数据安全与接入安全的最新政策、趋势与落地实践。"
+        />
+        <a
+          href="/news/"
+          class="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand-600 transition hover:text-brand-700"
+        >
+          查看全部资讯
+          <Icon name="arrow-right" size={15} />
+        </a>
+      </div>
+
+      <div class="mt-8 border-t border-line">
+        {
+          newsEntries.length > 0 ? (
+            newsEntries.map((entry) => (
+              <NewsRow
+                title={entry.data.title}
+                summary={entry.data.summary}
+                date={entry.data.date}
+                href={`/news/${entry.id}/`}
+                source={entry.data.source}
+              />
+            ))
+          ) : (
+            <p class="py-10 text-sm text-muted">资讯内容正在整理中。</p>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

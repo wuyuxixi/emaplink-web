@@ -1,0 +1,90 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AboutNav from '@/components/AboutNav.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import { company } from '@/data/about';
+---
+
+<BaseLayout
+  title="企业文化"
+  description="联易软件以“联合创新、相互成就”为使命，以“高效合作、持续共赢”为价值观，与客户和伙伴共同成长。"
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: '企业文化',
+    description: '联易软件的使命与价值观。',
+    url: 'https://www.emaplink.com.cn/about/culture/',
+  }}
+>
+  <PageHero
+    eyebrow="关于我们"
+    title="企业文化"
+    description="联合创新、相互成就；高效合作、持续共赢。"
+    breadcrumbs={[{ label: '首页', href: '/' }, { label: '关于我们', href: '/about/' }, { label: '企业文化' }]}
+    compact
+  />
+
+  <section class="section">
+    <div class="container-page grid gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
+      <AboutNav />
+
+      <div>
+        <div class="grid gap-4 lg:grid-cols-2">
+          <div class="relative overflow-hidden rounded-3xl bg-ink-950 p-8 text-white sm:p-10">
+            <div
+              class="pointer-events-none absolute inset-0 opacity-[0.07]"
+              style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 56px 56px;"
+              aria-hidden="true"
+            ></div>
+            <p class="relative text-xs font-semibold tracking-[0.18em] text-cyan-400">联易使命</p>
+            <p class="relative mt-5 text-3xl font-semibold leading-tight sm:text-4xl">{company.mission}</p>
+            <p class="relative mt-5 text-sm leading-7 text-white/65">{company.missionText}</p>
+          </div>
+
+          <div class="relative overflow-hidden rounded-3xl border border-line bg-white p-8 sm:p-10">
+            <p class="text-xs font-semibold tracking-[0.18em] text-brand-600">联易价值观</p>
+            <p class="mt-5 text-3xl font-semibold leading-tight text-ink-900 sm:text-4xl">{company.values}</p>
+            <p class="mt-5 text-sm leading-7 text-muted">{company.valuesText}</p>
+          </div>
+        </div>
+
+        <div class="mt-12 grid gap-4 sm:grid-cols-2">
+          <figure class="overflow-hidden rounded-2xl border border-line bg-white">
+            <img
+              src="/images/about/culture-1.webp"
+              alt="海面上的帆船与海鸥，象征联合创新与持续前行"
+              width="667"
+              height="294"
+              class="aspect-[16/9] w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption class="px-5 py-4 text-sm text-muted">联合创新，持续前行</figcaption>
+          </figure>
+          <figure class="overflow-hidden rounded-2xl border border-line bg-white">
+            <img
+              src="/images/about/culture-2.webp"
+              alt="商务合作的握手瞬间，象征相互成就与持续共赢"
+              width="669"
+              height="298"
+              class="aspect-[16/9] w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption class="px-5 py-4 text-sm text-muted">相互成就，持续共赢</figcaption>
+          </figure>
+        </div>
+
+        <div class="mt-12 rounded-2xl border border-line bg-white p-6 sm:p-8">
+          <p class="text-xs font-semibold tracking-[0.16em] text-muted">我们相信</p>
+          <p class="mt-4 text-xl font-medium leading-relaxed text-ink-900 sm:text-2xl">
+            真正有价值的安全，不是增加复杂度，而是让合规、易用与有效同时发生。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

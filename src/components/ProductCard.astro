@@ -1,0 +1,50 @@
+---
+import type { Product } from '@/data/products';
+import Icon from './ui/Icon.astro';
+
+interface Props {
+  product: Product;
+  index: number;
+}
+
+const { product, index } = Astro.props;
+
+const iconBySlug: Record<string, 'device' | 'apps' | 'key' | 'lock'> = {
+  'zsac-gateway': 'device',
+  'zsac-server': 'apps',
+  'zsac-crypto-module': 'key',
+  'zsac-otp': 'lock',
+};
+---
+
+<a
+  href={`/products/${product.slug}/`}
+  class="group card relative flex flex-col overflow-hidden p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-card sm:p-7"
+>
+  <div
+    class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-100/70 blur-2xl transition duration-500 group-hover:bg-brand-100"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative flex items-start justify-between">
+    <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-ink-950 text-cyan-400 shadow-sm transition duration-300 group-hover:bg-brand-600 group-hover:text-white">
+      <Icon name={iconBySlug[product.slug] ?? 'shield'} size={26} />
+    </span>
+    <span class="font-mono text-[0.6875rem] tracking-wider text-muted">0{index}</span>
+  </div>
+
+  <h3 class="relative mt-8 text-xl font-semibold leading-snug text-ink-900 transition group-hover:text-brand-600">
+    {product.name}
+  </h3>
+  <p class="relative mt-2 line-clamp-2 text-sm leading-6 text-muted">{product.tagline}</p>
+
+  <span class="relative mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600">
+    了解详情
+    <Icon name="arrow-right" size={15} class="transition-transform duration-200 group-hover:translate-x-1" />
+  </span>
+
+  <span
+    class="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-500/40 to-transparent opacity-0 transition group-hover:opacity-100"
+    aria-hidden="true"
+  ></span>
+</a>

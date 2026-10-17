@@ -1,0 +1,64 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  align?: 'left' | 'center';
+  tone?: 'light' | 'dark';
+  as?: 'h1' | 'h2';
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  lead,
+  align = 'left',
+  tone = 'light',
+  as: Heading = 'h2',
+  class: className = '',
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'max-w-3xl',
+    align === 'center' && 'mx-auto text-center',
+    className,
+  ]}
+>
+  {
+    eyebrow && (
+      <p
+        class:list={[
+          'eyebrow',
+          tone === 'dark' && 'text-cyan-400',
+        ]}
+      >
+        {eyebrow}
+      </p>
+    )
+  }
+  <Heading
+    class:list={[
+      'section-title mt-4',
+      tone === 'dark' && 'text-white',
+      Heading === 'h1' && 'text-[2.25rem] leading-[1.12] sm:text-5xl lg:text-[3.5rem]',
+    ]}
+  >
+    {title}
+  </Heading>
+  {
+    lead && (
+      <p
+        class:list={[
+          'section-lead',
+          tone === 'dark' && 'text-white/70',
+          align === 'center' && 'mx-auto',
+        ]}
+      >
+        {lead}
+      </p>
+    )
+  }
+</div>
