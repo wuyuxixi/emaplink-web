@@ -20,13 +20,14 @@ pnpm preview    # 预览 dist
 
 | 命令 | 说明 |
 |---|---|
-| `pnpm dev` | 开发服务器 |
-| `pnpm build` | 构建静态站，并生成 148 个旧 URL 别名 |
+| `pnpm dev` | 开发服务器；自动转 WebP，并监听新增 PNG/JPG |
+| `pnpm build` | 先自动转 WebP，再构建静态站并生成 148 个旧 URL 别名 |
 | `pnpm preview` | 预览构建结果 |
 | `pnpm check` | Astro/TypeScript 检查 |
-| `pnpm check:content` | 校验资讯 frontmatter、图片、slug、legacyPath |
+| `pnpm check:content` | 先自动转 WebP，再校验 frontmatter、图片、slug、legacyPath |
 | `pnpm check:links` | 扫描 `dist` 内部链接、资源、锚点、旧文章别名 |
-| `pnpm optimize:image` | 把 PNG/JPG 批量或单张转为 WebP |
+| `pnpm auto-webp` | 手动跑一次自动转换（更新 MD、删除原图） |
+| `pnpm optimize:image` | 手动把 PNG/JPG 批量或单张转为 WebP（保留原图） |
 | `pnpm test` | Vitest 单元/内容测试 |
 | `pnpm test:e2e` | Playwright 端到端测试（使用本机 Edge） |
 | `pnpm lighthouse` | 对首页/产品/文章跑 Lighthouse（需本机 Chrome/Edge） |
@@ -42,6 +43,8 @@ emaplink-web/
 │  └─ web.config              # 构建时补充 IIS 301
 ├─ scripts/
 │  ├─ migrate/                # 抓取、转换、归档、素材脚本
+│  ├─ auto-webp.mjs           # 自动 PNG/JPG -> WebP（三个命令自动调用）
+│  ├─ optimize-image.mjs      # 手动转换（保留原图）
 │  ├─ generate-aliases.mjs
 │  ├─ check-content.mjs
 │  ├─ check-links.mjs
@@ -81,6 +84,8 @@ emaplink-web/
 5. `pnpm dev` 预览；`pnpm check:content` 校验；`pnpm build` 发布。
 
 **不需要封面。** 列表/首页不展示封面；详情页封面为可选字段。
+
+**PNG/JPG 不需要手动转 WebP。** `pnpm check:content`、`pnpm dev`、`pnpm build` 会自动把 `/images/news/` 下被引用的 PNG/JPG 转成 WebP，更新 Markdown 路径并删除原图；`pnpm dev` 运行期间新增图片也会自动处理。
 
 完整说明见 [docs/adding-news.md](docs/adding-news.md)。
 

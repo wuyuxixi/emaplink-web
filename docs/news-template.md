@@ -30,7 +30,8 @@ draft: false
 print("代码块示例")
 ```
 
-![图片描述](/images/news/2026-11-02-my-news/image-1.webp)
+<!-- 图片可以是 PNG/JPG；check:content / dev / build 会自动转 WebP 并更新下面的路径 -->
+![图片描述](/images/news/2026-11-02-my-news/image-1.png)
 
 > 引用或提示内容。
 

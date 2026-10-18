@@ -85,9 +85,9 @@ print("代码块")
 - 不要把“发布时间：……”“出处为：……”写进正文；分别用 `date`、`source`。
 - 免责声明由模板统一渲染，不用重复写。
 
-## 4. 图片（PNG/JPG 可以直接用）
+## 4. 图片（PNG/JPG 会自动转 WebP）
 
-### 4.1 直接使用 PNG/JPG
+### 4.1 放入 PNG/JPG 并引用
 
 1. 建目录，目录名与文章 slug 完全一致：
 
@@ -109,49 +109,69 @@ public/images/news/2026-11-05-my-news/02.jpg
 ![图片描述](/images/news/2026-11-05-my-news/02.jpg)
 ```
 
-4. 直接运行：
+4. 直接运行任意一个：
 
 ```bash
 pnpm check:content
+pnpm dev
 pnpm build
 ```
 
-站点会把 PNG/JPG 原样复制到 `dist/images/news/...`，**不需要改代码，也不强制转 WebP**。
-`pnpm check:content` 会检查这些路径是否存在。
+**不需要手动转 WebP。** 这三个命令都会先自动处理：
 
-### 4.2 建议转成 WebP（减小体积）
+- 找到 Markdown 里引用的 `/images/news/**/*.png|jpg|jpeg`；
+- 转成同名 `.webp`；
+- 自动把 Markdown 中的图片后缀改成 `.webp`；
+- 转换成功后删除原 PNG/JPG；
+- 转换失败（图损坏/缺失）则保留原图，Markdown 不变，输出 warning。
 
-PNG/JPG 可以用，但截图/照片通常较大。项目已带 `sharp`，可以一键转换：
+日志示例：
+
+```text
+auto-webp: 转换 2 张，更新 1 个 Markdown，删除 2 张原图
+```
+
+### 4.2 自动转换发生的三个阶段
+
+| 命令 | 行为 |
+|---|---|
+| `pnpm check:content` | 先自动转 WebP，再校验 frontmatter/图片/slug |
+| `pnpm dev` | 启动时先转一次；运行期间监听 `src/content/news` 和 `public/images/news`，新增/修改 MD 或 PNG/JPG 后约 0.5 秒自动转换 |
+| `pnpm build` | 先自动转 WebP，再执行 Astro 构建与旧 URL 别名生成 |
+
+规则：
+
+- 只处理 `/images/news/` 下的 PNG/JPG/JPEG；产品、荣誉、Logo 等其它图片不动。
+- 最大宽度 1200px（不放大），WebP 质量 82，自动纠正 EXIF 方向。
+- 如果同名 `.webp` 已存在，会覆盖为最新转换结果。
+- 同一张图被多篇文章引用时，会统一更新。
+- 原图删除发生在 Markdown 更新成功之后；如果删除失败，只保留原图并记 warning。
+
+### 4.3 手动转换（可选）
+
+如果希望提前转换，或想保留原图，也可以手动执行：
 
 ```bash
-# 整个目录批量转（PNG/JPG -> 同名 .webp）
+# 整个目录批量转（PNG/JPG -> 同名 .webp，保留原图）
 pnpm optimize:image public/images/news/2026-11-05-my-news
 
 # 单张转
 pnpm optimize:image public/images/news/2026-11-05-my-news/01.png
+
+# 只跑一次自动转换（会更新 MD 并删除原图）
+pnpm auto-webp
 ```
 
-转换后把 Markdown 里的后缀改成 `.webp`：
+> 正常流程不需要手动执行；`check:content` / `dev` / `build` 已自动完成。
 
-```markdown
-![图片描述](/images/news/2026-11-05-my-news/01.webp)
-```
-
-脚本会：
-
-- 自动纠正 EXIF 方向；
-- 最大宽度 1200px（不放大）；
-- 输出 WebP，质量 82；
-- 批量模式在同一个目录生成 `.webp`，不删除原图。
-
-### 4.3 注意事项
+### 4.4 注意事项
 
 | 事项 | 要求 |
 |---|---|
 | 路径 | 必须是 `/images/news/{slug}/...`，不要写 `./images/...` 或 `../images/...` |
 | 目录名 | 与文章文件名去掉 `.md` 后完全一致 |
 | 文件名 | 建议英文/数字/连字符，避免空格和中文 |
-| 扩展名 | 与实际文件一致；转 WebP 后记得改 MD |
+| 扩展名 | 初始与实际文件一致；自动转换后 MD 会自动变成 `.webp` |
 | alt | 每张图都写描述性 alt |
 | 尺寸 | 宽度 ≤ 1200px，单张 ≤ 500KB 更佳 |
 | 封面 | 不需要；列表/首页不展示封面，详情页 `cover` 可选 |
@@ -161,9 +181,9 @@ pnpm optimize:image public/images/news/2026-11-05-my-news/01.png
 ## 5. 预览与校验
 
 ```bash
-pnpm dev            # 本地预览，保存 MD 后自动刷新
-pnpm check:content  # 校验字段、日期、slug、图片、legacyPath
-pnpm build          # 构建；错误会指出文件名与字段
+pnpm dev            # 启动 + 自动转 WebP + 监听新增图片
+pnpm check:content  # 先自动转 WebP，再校验字段/图片/slug
+pnpm build          # 先自动转 WebP，再构建；错误会指出文件名与字段
 ```
 
 - 列表、详情、分页、搜索索引会自动包含新文章。
@@ -188,6 +208,7 @@ pnpm build
 | 旧链接没跳转 | 没有填 `legacyPath` | 补 `legacyPath` 后重新构建 |
 | 图片不显示 | 路径不是 `/images/...` | 检查 `public/images/news/{slug}/` 与引用路径 |
 | 新文章写成了 `news-127.md` | 与已有 ID 127 的文章重名 | 改用日期 slug，如 `2026-11-05-my-news.md` |
-| 图片是 PNG/JPG | 格式本身没问题 | 放 `public/images/news/{slug}/`，用绝对路径引用即可 |
-| 图片太大 | PNG/JPG 未压缩 | `pnpm optimize:image public/images/news/{slug}` 后把 MD 后缀改为 `.webp` |
+| 图片是 PNG/JPG | 格式本身没问题 | 放 `public/images/news/{slug}/`，用绝对路径引用；三个命令会自动转 WebP |
+| 自动转换失败 | 图片损坏/不是有效图片/文件缺失 | 看终端 `auto-webp` warning；修复图片或路径后重跑 |
+| 想保留原图 | 自动转换会删除原图 | 提前手动 `pnpm optimize:image`，或备份原图 |
 | 列表没有新文章 | `draft: true` 或日期写成未来 | 改 `draft: false`，确认日期 |
