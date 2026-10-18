@@ -6,6 +6,12 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const DIST = path.join(ROOT, 'dist');
 const OUT = path.join(ROOT, 'docs', 'content-inventory', 'data', 'links.csv');
 
+const newsDir = path.join(ROOT, 'src', 'content', 'news');
+const newsSlugs = (await fs.readdir(newsDir))
+  .filter((file) => file.endsWith('.md'))
+  .map((file) => file.replace(/\.md$/, ''))
+  .sort();
+
 const pages = [
   '/index.html',
   '/products/zsac-gateway/index.html',
@@ -21,11 +27,7 @@ const pages = [
   '/about/cases/index.html',
   '/contact/index.html',
   '/news/index.html',
-  '/news/2026-10-13-websocket-access-control/index.html',
-  '/news/2026-08-22-crypto-evaluation-rule/index.html',
-  '/news/2026-08-18-civil-aviation-crypto-standard/index.html',
-  '/news/2026-05-30-password-defines-security/index.html',
-  '/news/2026-05-30-mlps-compliance/index.html',
+  ...newsSlugs.map((slug) => `/news/${slug}/index.html`),
   '/404.html',
 ];
 

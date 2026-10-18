@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import matter from 'gray-matter';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DIST = path.join(ROOT, 'dist');
@@ -67,6 +68,17 @@ async function main() {
     await fs.readFile(path.join(ROOT, 'src', 'data', 'legacy-news.json'), 'utf8'),
   );
 
+  const mdDir = path.join(ROOT, 'src', 'content', 'news');
+  const mdFiles = (await fs.readdir(mdDir)).filter((file) => file.endsWith('.md'));
+  const mdByLegacy = new Map();
+  for (const file of mdFiles) {
+    const raw = await fs.readFile(path.join(mdDir, file), 'utf8');
+    const parsed = matter(raw);
+    if (parsed.data.legacyPath) {
+      mdByLegacy.set(parsed.data.legacyPath, file.replace(/\.md$/, ''));
+    }
+  }
+
   const redirects = [];
 
   for (const [oldPath, target] of mainRedirects) {
@@ -84,7 +96,8 @@ async function main() {
   }
 
   for (const item of legacy) {
-    const target = item.published && item.slug ? `/news/${item.slug}/` : '/news/';
+    const slug = mdByLegacy.get(item.legacyPath);
+    const target = slug ? `/news/${slug}/` : '/news/';
     await writeAlias(item.legacyPath, target);
     redirects.push({ from: `/${item.legacyPath}`, to: target });
   }
@@ -116,7 +129,7 @@ ${rules}
   await fs.writeFile(path.join(DIST, 'web.config'), webConfig, 'utf8');
 
   console.log(
-    `generate-aliases: ${redirects.length} legacy URLs (${legacy.filter((item) => item.published).length} published news) -> dist`,
+    `generate-aliases: ${redirects.length} legacy URLs (${mdByLegacy.size} published news) -> dist`,
   );
 }
 

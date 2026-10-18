@@ -35,12 +35,15 @@ test('home renders hero, products, solutions and news', async ({ page }) => {
   expect(broken).toEqual([]);
 });
 
-test('news list is text-first and has five rows', async ({ page }) => {
+test('news list is text-first and paginates', async ({ page }) => {
   await page.goto('/news/');
   await expect(page.locator('h1')).toContainText('了解企业资讯');
-  await expect(page.locator('[data-news-row]')).toHaveCount(5);
+  await expect(page.locator('[data-news-row]')).toHaveCount(10);
   await expect(page.locator('[data-news-row] img')).toHaveCount(0);
   await expect(page.locator('[data-news-row]').first()).toContainText('最新');
+  await page.getByRole('link', { name: '下一页' }).click();
+  await expect(page).toHaveURL(/\/news\/page\/2\/$/);
+  await expect(page.locator('[data-news-row]')).toHaveCount(10);
 });
 
 test('article renders tables, code, toc and disclaimer', async ({ page }) => {

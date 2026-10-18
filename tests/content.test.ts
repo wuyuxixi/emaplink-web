@@ -20,9 +20,9 @@ async function loadEntries() {
 }
 
 describe('news content', () => {
-  it('has five published articles with valid frontmatter', async () => {
+  it('has all 121 published articles with valid frontmatter', async () => {
     const entries = await loadEntries();
-    expect(entries).toHaveLength(5);
+    expect(entries).toHaveLength(121);
 
     for (const entry of entries) {
       const result = newsSchema.safeParse(entry.data);
@@ -60,6 +60,6 @@ describe('news content', () => {
       }
     }
 
-    expect(legacyPaths.size).toBe(5);
+    expect(legacyPaths.size).toBe(121);
   });
 });

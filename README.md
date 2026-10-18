@@ -4,7 +4,7 @@
 
 - 项目路径：`E:\workspace\emaplink-web`
 - 旧仓库：`E:\workspace\official-website`（保留不动，仅作素材/历史参考）
-- 当前范围：14 个主导航页面 + 初版 5 篇资讯；其余 116 篇资讯归档，后续按 Markdown 补充
+- 当前范围：14 个主导航页面 + 全部 121 篇资讯
 - 新闻内容由 `src/content/news/*.md` 驱动，新增文章不需要改代码
 
 ## 快速开始
@@ -49,7 +49,7 @@ emaplink-web/
 │  └─ lighthouse.mjs
 ├─ src/
 │  ├─ components/             # Header/Footer/卡片/图标/搜索/灯箱
-│  ├─ content/news/           # 初版 5 篇 Markdown
+│  ├─ content/news/           # 121 篇 Markdown
 │  ├─ content.config.ts
 │  ├─ data/                   # 站点、产品、方案、关于、图片清单、旧资讯清单
 │  ├─ layouts/
@@ -59,7 +59,7 @@ emaplink-web/
 │  └─ styles/global.css       # Tailwind 4 + 设计令牌
 ├─ tests/                     # Vitest + Playwright
 ├─ docs/
-│  ├─ content-inventory/      # 全站内容清单 + 116 篇归档
+│  ├─ content-inventory/      # 全站内容清单 + 116 篇迁移底稿
 │  ├─ adding-news.md
 │  ├─ news-template.md
 │  ├─ design-system.md
@@ -94,8 +94,8 @@ emaplink-web/
 
 ## 当前状态
 
-- 构建：20 个正式页 + 148 个旧 URL 别名；`dist` 约 4.23MB。
-- 内容：5 篇资讯已发布；116 篇归档。
+- 构建：148 个页面（14 栏目 + 121 资讯 + 12 个分页 + 404）+ 148 个旧 URL 别名；`dist` 约 24.85MB，图片约 15.56MB。
+- 内容：121 篇资讯全部发布，每篇都有独立详情页。
 - 检查：`astro check` 0 errors；`check:content` 通过；`check:links` 0 问题。
 - 测试：Vitest 5 项通过；Playwright 8 项通过。
 - Lighthouse（移动端，本机预览）：首页/产品/文章 Performance 100、Accessibility 100、Best Practices 100、SEO 100。
@@ -103,5 +103,5 @@ emaplink-web/
 ## 说明
 
 - 行业案例页原为空，现使用站内 7 篇公开报道整理 3 个案例，标注“据公开报道整理”；不虚构客户与数字。
-- 116 篇未迁移资讯的旧 URL 暂指向 `/news/`；补 MD 并填写 `legacyPath` 后自动改指新详情。
+- 121 篇资讯的旧 URL 已全部指向新详情页（`/news/{slug}/`）；`legacyPath` 继续作为旧 URL 映射依据。
 - 未做生产部署；`dist/` 可直接部署，见 [docs/deploy.md](docs/deploy.md)。

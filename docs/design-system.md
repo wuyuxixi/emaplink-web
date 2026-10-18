@@ -111,4 +111,4 @@
 - 纯静态；无 jQuery/Bootstrap/WOW/canvas。
 - CSS ≤ 35KB gzip；JS ≤ 30KB gzip（不含按需搜索索引）。
 - 图片 AVIF/WebP + 懒加载 + 宽高；Hero 预加载。
-- 当前 `dist` 约 4.2MB，图片约 2.9MB。
+- 当前 `dist` 约 24.85MB，图片约 15.56MB（121 篇资讯、199 张资讯图）。

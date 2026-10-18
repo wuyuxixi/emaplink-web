@@ -8,7 +8,7 @@ pnpm build
 ```
 
 - 输出目录：`dist/`
-- 正式页：19 个（14 个栏目页 + 5 篇资讯）+ 404。
+- 正式页：148 个（14 个栏目页 + 121 篇资讯 + 12 个分页 + 404）。
 - 旧 URL 别名：148 个（写入 `dist/`）。
 - 同时生成：`sitemap-index.xml`、`robots.txt`、`_redirects`、`web.config`、`search-index.json`。
 - 无服务端运行时，纯静态文件。
