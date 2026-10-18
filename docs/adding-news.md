@@ -19,6 +19,7 @@ src/content/news/2026-11-02-my-news.md
 - 文件名去掉 `.md` 就是 **slug**，详情页 URL 为 `/news/{slug}/`。
 - 建议 slug 用英文小写、数字和连字符；中文标题放 frontmatter。
 - 同名文件会冲突；`pnpm check:content` 会报错。
+- **不要用 `news-127.md`**：项目里已经有 ID 127 的文章（`news-127.md`）。“第 127 篇”是序号，不是旧文章 ID；新文章请用日期 slug，例如 `2026-11-05-my-news.md`。
 
 ## 2. 填写 frontmatter
 
@@ -84,20 +85,78 @@ print("代码块")
 - 不要把“发布时间：……”“出处为：……”写进正文；分别用 `date`、`source`。
 - 免责声明由模板统一渲染，不用重复写。
 
-## 4. 图片（可选）
+## 4. 图片（PNG/JPG 可以直接用）
 
-1. 在 `public/images/news/{slug}/` 下放图片。
-2. 在 Markdown 中用绝对路径引用：
+### 4.1 直接使用 PNG/JPG
 
-```markdown
-![图片描述](/images/news/2026-11-02-my-news/image-1.webp)
+1. 建目录，目录名与文章 slug 完全一致：
+
+```text
+public/images/news/2026-11-05-my-news/
 ```
 
-建议：
+2. 把 PNG/JPG 放进去，例如：
 
-- 宽度 ≤ 1200px，单张 ≤ 500KB。
-- 优先 WebP/PNG；图表截图保留清晰度。
-- 每张图都写 alt。
+```text
+public/images/news/2026-11-05-my-news/01.png
+public/images/news/2026-11-05-my-news/02.jpg
+```
+
+3. 在 Markdown 中用 **绝对路径** 引用，扩展名与真实文件一致：
+
+```markdown
+![图片描述](/images/news/2026-11-05-my-news/01.png)
+![图片描述](/images/news/2026-11-05-my-news/02.jpg)
+```
+
+4. 直接运行：
+
+```bash
+pnpm check:content
+pnpm build
+```
+
+站点会把 PNG/JPG 原样复制到 `dist/images/news/...`，**不需要改代码，也不强制转 WebP**。
+`pnpm check:content` 会检查这些路径是否存在。
+
+### 4.2 建议转成 WebP（减小体积）
+
+PNG/JPG 可以用，但截图/照片通常较大。项目已带 `sharp`，可以一键转换：
+
+```bash
+# 整个目录批量转（PNG/JPG -> 同名 .webp）
+pnpm optimize:image public/images/news/2026-11-05-my-news
+
+# 单张转
+pnpm optimize:image public/images/news/2026-11-05-my-news/01.png
+```
+
+转换后把 Markdown 里的后缀改成 `.webp`：
+
+```markdown
+![图片描述](/images/news/2026-11-05-my-news/01.webp)
+```
+
+脚本会：
+
+- 自动纠正 EXIF 方向；
+- 最大宽度 1200px（不放大）；
+- 输出 WebP，质量 82；
+- 批量模式在同一个目录生成 `.webp`，不删除原图。
+
+### 4.3 注意事项
+
+| 事项 | 要求 |
+|---|---|
+| 路径 | 必须是 `/images/news/{slug}/...`，不要写 `./images/...` 或 `../images/...` |
+| 目录名 | 与文章文件名去掉 `.md` 后完全一致 |
+| 文件名 | 建议英文/数字/连字符，避免空格和中文 |
+| 扩展名 | 与实际文件一致；转 WebP 后记得改 MD |
+| alt | 每张图都写描述性 alt |
+| 尺寸 | 宽度 ≤ 1200px，单张 ≤ 500KB 更佳 |
+| 封面 | 不需要；列表/首页不展示封面，详情页 `cover` 可选 |
+
+> 常见错误：把图片放在 `src/content/news/` 旁边，然后用 `./01.png` 引用。当前项目不会处理相对图片路径，页面会 404。请统一放 `public/images/news/{slug}/`。
 
 ## 5. 预览与校验
 
@@ -128,4 +187,7 @@ pnpm build
 | 页面 404 | 文件名/日期不符合约定 | 检查文件名与 `pnpm check:content` |
 | 旧链接没跳转 | 没有填 `legacyPath` | 补 `legacyPath` 后重新构建 |
 | 图片不显示 | 路径不是 `/images/...` | 检查 `public/images/news/{slug}/` 与引用路径 |
+| 新文章写成了 `news-127.md` | 与已有 ID 127 的文章重名 | 改用日期 slug，如 `2026-11-05-my-news.md` |
+| 图片是 PNG/JPG | 格式本身没问题 | 放 `public/images/news/{slug}/`，用绝对路径引用即可 |
+| 图片太大 | PNG/JPG 未压缩 | `pnpm optimize:image public/images/news/{slug}` 后把 MD 后缀改为 `.webp` |
 | 列表没有新文章 | `draft: true` 或日期写成未来 | 改 `draft: false`，确认日期 |

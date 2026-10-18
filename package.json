@@ -10,6 +10,7 @@
     "check": "astro check",
     "check:content": "node scripts/check-content.mjs",
     "check:links": "node scripts/check-links.mjs",
+    "optimize:image": "node scripts/optimize-image.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "lighthouse": "node scripts/lighthouse.mjs"

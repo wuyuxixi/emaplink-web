@@ -26,6 +26,7 @@ pnpm preview    # 预览 dist
 | `pnpm check` | Astro/TypeScript 检查 |
 | `pnpm check:content` | 校验资讯 frontmatter、图片、slug、legacyPath |
 | `pnpm check:links` | 扫描 `dist` 内部链接、资源、锚点、旧文章别名 |
+| `pnpm optimize:image` | 把 PNG/JPG 批量或单张转为 WebP |
 | `pnpm test` | Vitest 单元/内容测试 |
 | `pnpm test:e2e` | Playwright 端到端测试（使用本机 Edge） |
 | `pnpm lighthouse` | 对首页/产品/文章跑 Lighthouse（需本机 Chrome/Edge） |
