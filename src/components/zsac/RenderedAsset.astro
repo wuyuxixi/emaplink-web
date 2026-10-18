@@ -1,0 +1,36 @@
+---
+interface Props {
+  kind: "gateway" | "phone" | "drone" | "camera" | "helmet";
+  sizes: string;
+  priority?: boolean;
+  lazy?: boolean;
+}
+const { kind, sizes, priority = false, lazy = false } = Astro.props;
+const widths = kind === "gateway" ? [480, 800, 1200] : [240, 480, 720];
+const base = `/images/products/zsac-gateway/renders/${kind}`;
+---
+
+<img
+  class:list={["zsac-render", `zsac-render-${kind}`]}
+  src={`${base}-${widths[1]}.webp`}
+  srcset={widths.map((width) => `${base}-${width}.webp ${width}w`).join(", ")}
+  sizes={sizes}
+  width="1536"
+  height="1024"
+  alt=""
+  aria-hidden="true"
+  loading={lazy ? "lazy" : "eager"}
+  fetchpriority={priority ? "high" : "auto"}
+  decoding="async"
+  draggable="false"
+/>
+<style>
+  .zsac-render {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    user-select: none;
+    pointer-events: none;
+  }
+</style>

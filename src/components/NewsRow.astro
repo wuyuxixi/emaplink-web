@@ -1,5 +1,5 @@
 ---
-import Icon from './ui/Icon.astro';
+import Icon from "./ui/Icon.astro";
 
 interface Props {
   title: string;
@@ -12,21 +12,21 @@ interface Props {
 
 const { title, summary, date, href, source, featured = false } = Astro.props;
 
-const formatted = new Intl.DateTimeFormat('zh-CN', {
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
+const formatted = new Intl.DateTimeFormat("zh-CN", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
 })
   .format(date)
-  .replaceAll('/', '.');
+  .replaceAll("/", ".");
 ---
 
 <a
   href={href}
   data-news-row
   class:list={[
-    'group grid gap-3 border-b border-line py-5 transition sm:grid-cols-[7.5rem_1fr_auto] sm:items-start sm:gap-5',
-    featured && 'sm:py-7',
+    "news-row group grid gap-3 py-5 transition sm:grid-cols-[7.5rem_1fr_auto] sm:items-start sm:gap-5",
+    featured && "sm:py-7",
   ]}
 >
   <span class="flex items-center gap-2">
@@ -35,19 +35,34 @@ const formatted = new Intl.DateTimeFormat('zh-CN', {
         最新
       </span>
     )}
-    <time datetime={date.toISOString()} class="font-mono text-xs tracking-wide text-muted">
+    <time
+      datetime={date.toISOString()}
+      class="font-mono text-xs tracking-wide text-muted"
+    >
       {formatted}
     </time>
   </span>
 
   <span class="min-w-0">
-    <span class:list={['block font-semibold text-ink-900 transition group-hover:text-brand-600', featured ? 'text-lg leading-7' : 'text-base leading-7']}>
+    <span
+      class:list={[
+        "block font-semibold text-ink-900 transition group-hover:text-brand-600",
+        featured ? "text-lg leading-7" : "text-base leading-7",
+      ]}
+    >
       {title}
     </span>
-    <span class:list={['mt-1 block text-sm leading-6 text-muted', featured ? 'line-clamp-3' : 'line-clamp-2']}>
+    <span
+      class:list={[
+        "mt-1 block text-sm leading-6 text-muted",
+        featured ? "line-clamp-3" : "line-clamp-2",
+      ]}
+    >
       {summary}
     </span>
-    {source && <span class="mt-2 block text-xs text-muted">来源：{source}</span>}
+    {source && (
+      <span class="mt-2 block text-xs text-muted">来源：{source}</span>
+    )}
   </span>
 
   <span class="hidden h-9 w-9 items-center justify-center rounded-full border border-line text-ink-900/40 transition group-hover:border-brand-500 group-hover:text-brand-600 sm:flex">

@@ -1,0 +1,92 @@
+[
+  {
+    "file": "gateway-480.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 26860
+  },
+  {
+    "file": "gateway-800.webp",
+    "width": 800,
+    "height": 533,
+    "bytes": 55298
+  },
+  {
+    "file": "gateway-1200.webp",
+    "width": 1200,
+    "height": 800,
+    "bytes": 100364
+  },
+  {
+    "file": "phone-240.webp",
+    "width": 240,
+    "height": 160,
+    "bytes": 5464
+  },
+  {
+    "file": "phone-480.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 10916
+  },
+  {
+    "file": "phone-720.webp",
+    "width": 720,
+    "height": 480,
+    "bytes": 18916
+  },
+  {
+    "file": "drone-240.webp",
+    "width": 240,
+    "height": 160,
+    "bytes": 12320
+  },
+  {
+    "file": "drone-480.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 31180
+  },
+  {
+    "file": "drone-720.webp",
+    "width": 720,
+    "height": 480,
+    "bytes": 52104
+  },
+  {
+    "file": "camera-240.webp",
+    "width": 240,
+    "height": 160,
+    "bytes": 6372
+  },
+  {
+    "file": "camera-480.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 15852
+  },
+  {
+    "file": "camera-720.webp",
+    "width": 720,
+    "height": 480,
+    "bytes": 27288
+  },
+  {
+    "file": "helmet-240.webp",
+    "width": 240,
+    "height": 160,
+    "bytes": 7806
+  },
+  {
+    "file": "helmet-480.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 19148
+  },
+  {
+    "file": "helmet-720.webp",
+    "width": 720,
+    "height": 480,
+    "bytes": 33668
+  }
+]

@@ -1,0 +1,145 @@
+---
+import Icon from "./ui/Icon.astro";
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+const mode =
+  slug === "zsac-gateway"
+    ? "gateway"
+    : slug === "zsac-server"
+      ? "server"
+      : slug === "zsac-crypto-module"
+        ? "crypto"
+        : "otp";
+const labels = {
+  gateway: "终端身份 · 双向认证",
+  server: "业务应用 · 可信接入",
+  crypto: "自主密码 · 开放集成",
+  otp: "动态口令 · 身份鉴别",
+};
+---
+
+<div
+  class:list={["product-art", `art-${mode}`]}
+  role="img"
+  aria-label={`${labels[mode]}能力示意`}
+>
+  <div class="art-aura" aria-hidden="true"></div>
+  <div class="art-floor" aria-hidden="true"></div>
+  {mode === "gateway" && (
+    <>
+      <svg
+        class="art-connectors"
+        viewBox="0 0 600 340"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M105 115L290 190L480 90M290 190L470 270"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-dasharray="5 7"
+        />
+      </svg>
+      <div class="art-satellite satellite-left">
+        <Icon name="device" size={33} />
+        <span>终端设备</span>
+      </div>
+      <div class="art-satellite satellite-right">
+        <Icon name="network" size={31} />
+        <span>业务网络</span>
+      </div>
+      <div class="art-satellite satellite-bottom">
+        <Icon name="check" size={27} />
+        <span>可信准入</span>
+      </div>
+      <div class="art-module">
+        <Icon name="key" size={38} />
+        <strong>ZSAC</strong>
+        <span>智能准入控制</span>
+      </div>
+    </>
+  )}
+  {mode === "server" && (
+    <>
+      <div class="art-apps">
+        <span>
+          <Icon name="apps" size={27} />
+        </span>
+        <span>
+          <Icon name="users" size={27} />
+        </span>
+        <span>
+          <Icon name="file" size={27} />
+        </span>
+      </div>
+      <div class="art-rack">
+        <div class="rack-heading">
+          ZSAC<span class="art-status"></span>
+        </div>
+        {[0, 1, 2].map((item) => (
+          <div class="rack-slot">
+            <span class="rack-led"></span>
+            <span class="rack-vents"></span>
+            <Icon
+              name={item === 0 ? "key" : item === 1 ? "layers" : "network"}
+              size={20}
+            />
+          </div>
+        ))}
+      </div>
+      <div class="art-caption-chip">
+        <Icon name="check" size={16} />
+        应用系统零改造接入
+      </div>
+    </>
+  )}
+  {mode === "crypto" && (
+    <>
+      <div class="crypto-plate plate-one"></div>
+      <div class="crypto-plate plate-two"></div>
+      <div class="art-module crypto-module">
+        <Icon name="key" size={42} />
+        <strong>ZSAC</strong>
+        <span>软密码模块</span>
+      </div>
+      <span class="art-floating-label label-sdk">SDK</span>
+      <span class="art-floating-label label-api">API</span>
+      <span class="art-caption-chip">
+        <Icon name="check" size={16} />
+        多形态终端适配
+      </span>
+    </>
+  )}
+  {mode === "otp" && (
+    <>
+      <div class="otp-token">
+        <div class="token-heading">
+          ZSAC
+          <Icon name="lock" size={20} />
+        </div>
+        <div class="token-display">
+          <span>动态口令</span>
+          <strong aria-hidden="true">••• •••</strong>
+          <div class="token-progress">
+            <span></span>
+          </div>
+        </div>
+        <div class="token-bottom">
+          <span>身份验证</span>
+          <span class="art-status"></span>
+        </div>
+      </div>
+      <div class="otp-identity">
+        <Icon name="users" size={32} />
+        <span>可信身份</span>
+      </div>
+      <span class="art-caption-chip">
+        <Icon name="check" size={16} />
+        国密多因素认证
+      </span>
+    </>
+  )}
+  <span class="art-annotation">{labels[mode]}</span>
+</div>

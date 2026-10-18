@@ -1,39 +1,33 @@
 ---
-import { site } from '@/data/site';
-import Icon from './ui/Icon.astro';
+import { site } from "@/data/site";
+import ButtonLink from "./ui/ButtonLink.astro";
 ---
 
-<section class="relative overflow-hidden bg-ink-950 py-16 text-white lg:py-20">
-  <div
-    class="pointer-events-none absolute inset-0 opacity-[0.06]"
-    style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 72px 72px;"
-    aria-hidden="true"
-  ></div>
-  <div class="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" aria-hidden="true"></div>
-
-  <div class="container-page relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-    <div class="max-w-2xl">
-      <p class="eyebrow text-cyan-400">Contact</p>
-      <h2 class="mt-4 text-3xl font-semibold leading-tight tracking-[-0.02em] sm:text-4xl">
-        让接入安全，从一次沟通开始
-      </h2>
-      <p class="mt-4 text-base leading-8 text-white/60">
-        7X12 小时服务，专家一对一。告诉我们你的终端、数据与应用场景，我们一起梳理可行的接入安全路径。
-      </p>
-    </div>
-
-    <div class="flex flex-col gap-3 sm:flex-row lg:shrink-0">
-      <a href={site.phoneHref} class="btn btn-light">
-        <Icon name="phone" size={16} />
-        {site.phone}
-      </a>
-      <a
-        href="/contact/"
-        class="btn border border-white/20 text-white/85 transition hover:border-white/40 hover:bg-white/5"
-      >
-        前往联系页
-        <Icon name="arrow-right" size={16} />
-      </a>
+<section class="contact-band">
+  <div class="container-page">
+    <div class="contact-band-shell" data-reveal>
+      <div class="contact-band-core">
+        <div>
+          <p class="eyebrow">与联易一起，连接信任</p>
+          <h2>
+            你的安全场景，
+            <br />
+            值得一次认真沟通。
+          </h2>
+          <p>从终端、数据到应用，我们一起梳理可行的接入安全路径。</p>
+        </div>
+        <div class="contact-band-actions">
+          <ButtonLink
+            href="/contact/"
+            label="聊聊你的需求"
+            icon="arrow-up-right"
+          />
+          <a class="contact-phone" href={site.phoneHref}>
+            {site.phone}
+            <span>7 × 12 小时 · 专家一对一</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -19,6 +19,7 @@
   "dependencies": {
     "@astrojs/sitemap": "latest",
     "astro": "latest",
+    "gsap": "^3.15.0",
     "sharp": "latest",
     "zod": "latest"
   },

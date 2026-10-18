@@ -1,114 +1,62 @@
-# 设计系统
+# 联易软件设计系统
 
-## 1. 概念
+## 视觉方向
 
-**信任网格 / Trust Grid**：以细网格、连接节点、深色科技底与克制的蓝绿光效，表达“设备—用户—应用—授权”的可信连接。避免黑客风、锁头堆砌、过度渐变和廉价科技蓝。
+白色是页面主色，清亮的品牌蓝负责行动入口。首页以白色与浅蓝灰交替区分章节，少量深海军蓝用于核心机制标题、方案选中态及服务条，避免白底、白卡和浅蓝插画混成同一层。色调保持明亮，正文采用更清晰的深蓝灰。
 
-## 2. 设计令牌
+保留首页 ZSAC 核心连接设备、用户、应用的构图。参考 [Veltro](https://veltro-astro.pages.dev/) 的文字节奏、错落展示、按钮翻动、悬停反馈，使用联易自己的内容和机制示意。
 
-定义在 `src/styles/global.css` 的 `@theme` 中。
+## 颜色与字体
 
-### 色板
+| 角色 | 值 |
+| --- | --- |
+| 页面底色 | `#ffffff` |
+| 次级背景 | `#f7fbff` |
+| 蓝色表面 | `#edf6ff` |
+| 主要标题 | `#17263c` |
+| 正文 | `#293a51` |
+| 次级文字 | `#607086` |
+| 品牌蓝 | `#2467d6` |
+| 品牌蓝悬停 | `#1759bb` |
+| 边界 | `#e8eef8` |
 
-| Token | 值 | 用途 |
-|---|---|---|
-| `ink-950` | `#06131F` | 深色 Hero、页脚、CTA |
-| `ink-900` | `#0A1D2E` | 深色区块、标题 |
-| `navy-800` | `#0E2F4F` | 深色层次 |
-| `brand-700` | `#084D86` | 主色 hover |
-| `brand-600` | `#0062A2` | 主色（沿用旧站） |
-| `brand-500` | `#1583C7` | 链接/强调 |
-| `brand-100` | `#E6F1F9` | 浅色底 |
-| `cyan-400` | `#3CC8E6` | 深色底强调 |
-| `green-500` | `#6DBE45` | Logo 绿，少量点缀 |
-| `signal-600` | `#D94F28` | 可访问橙，少量强调 |
-| `paper` | `#F7F9FB` | 页面底色 |
-| `surface` | `#FFFFFF` | 卡片 |
-| `line` | `#DCE5EC` | 边框 |
-| `muted` | `#5A6B7B` | 次级文字 |
-| `text` | `#132433` | 正文 |
+Manrope 拉丁可变字体在本地托管，中文使用系统中文字体。标题 500 字重、紧字距；主要正文 16px；辅助信息 13px。机制图内部允许更小标注，图本身有完整的可访问说明。
 
-### 字体
+全站基础规则在 `src/styles/global.css`，本轮白色主题与精细交互在 `src/styles/bright.css`。后者只覆盖外观与细节，不更改内容数据。
 
-- 中文系统栈：`"PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", sans-serif`。
-- 不加载 CJK WebFont，避免数 MB 下载。
-- Display：56/64、48/56、40/48、32/40。
-- Body：16/28、18/30；中文行高 1.7。
-- Eyebrow：12/16，字距 0.12em，大写。
-- 数字：等宽/表格数字，用于日期、序号。
+首页对比度与排版规则在 `src/styles/home-contrast.css`，只通过 `.home-page` 作用于首页。主文字 `#142d43`，正文 `#3d5369`，章节浅底 `#eef3f8`，外壳 `#dce8f4`，局部深色 `#173c57`。沿用本地 Manrope 与系统中文字体，首页标题加重至 550，正文以 16–17px 为主。
 
-### 布局
+## 布局与组件
 
-- 容器：`min(100% - 2.5rem, 75rem)`（1200px）；移动端边距 1rem。
-- 12 栏网格；区块间距 96/64px。
-- 卡片圆角 16px；按钮 pill；1px 边框。
-- 阴影：`--shadow-card`、`--shadow-menu`。
+- 首页 Banner 保持左右分栏；手机改为文案在上、机制图在下。
+- 理念段落采用侧注加大字正文，随自然滚动逐字显现。
+- 产品采用两列错落陈列，四种机制图对应终端、服务端、软密码模块和动态令；手机与减少动态效果模式取消错位。
+- 方案维持明确按钮控制与键盘可用的场景切换。
+- 按钮使用文字滚动层与独立圆形箭头。重复的动画文字标记 `aria-hidden`，避免辅助技术重复朗读。
+- 首页新闻采用一主两辅的文字布局，主新闻与摘要形成清楚层级；手机改为顺序排列，摘要限制为 2–3 行。新闻列表页仍保留原有列表。
+- 首页优势在桌面使用双层浅色卡片，手机使用标题与说明并列的单列；服务条使用深色，增强章节结束的识别。
+- CTA 与内页页头保持明亮；页脚保留已确认的深蓝绿背景。
 
-### 动效
+## 动效
 
-- 进入：12px 上移 + 淡入，400ms，`cubic-bezier(.2,.7,.2,1)`。
-- 轮播：7s 自动；悬停/聚焦暂停；支持前后/圆点/暂停。
-- 全部尊重 `prefers-reduced-motion`。
+通过 GSAP 3.15、ScrollTrigger、SplitText 实现，入口为 `src/scripts/motion.ts`。
 
-## 3. 组件
+- 标题：逐字上移展开，按行遮罩，0.95 秒并按字数错开。
+- 理念：主句缩短、辅助说明独立排版。文字透明度由 0.55 到 1，随滚动进度显现，保持较清楚的初始文字颜色。
+- 模块：26px 上移与淡入，一次触发；产品卡片只做淡入，保留 CSS 错位排版，避免位移动画冲突。
+- Banner：保留核心轻浮动，并增加鼠标小幅视差。
+- 按钮：文字翻动、圆形箭头跟随、按下反馈。
+- 产品：示意部件位移、固定箭头变色，已删除媒体内跟随鼠标的提示图标。
+- 辅助：页顶阅读进度线、滚动后出现的返回顶部入口、页脚字标入场。
 
-| 组件 | 文件 | 说明 |
-|---|---|---|
-| Header | `src/components/SiteHeader.astro` | 吸顶、Mega Menu、移动抽屉、搜索入口 |
-| Footer | `src/components/SiteFooter.astro` | 深色、四栏、ICP、回到顶部 |
-| Logo | `src/components/ui/Logo.astro` | 浅色/深色底两种呈现 |
-| Icon | `src/components/ui/Icon.astro` | 内联 SVG 线性图标 |
-| ButtonLink | `src/components/ui/ButtonLink.astro` | primary / ghost / light / text |
-| SectionHeading | `src/components/ui/SectionHeading.astro` | eyebrow + 标题 + lead |
-| PageHero | `src/components/ui/PageHero.astro` | 内页深色 Hero + 面包屑 + 右侧要点 |
-| Breadcrumbs | `src/components/ui/Breadcrumbs.astro` | 可见面包屑 |
-| HomeHero | `src/components/HomeHero.astro` | 首页 3 屏轮播 |
-| ProductCard | `src/components/ProductCard.astro` | 图标卡，无图片 |
-| SolutionCard | `src/components/SolutionCard.astro` | 深色/浅色两种 tone |
-| NewsRow | `src/components/NewsRow.astro` | 文字索引行，无封面 |
-| Pagination | `src/components/Pagination.astro` | 10 条/页 |
-| CtaBand | `src/components/CtaBand.astro` | 联系 CTA |
-| SearchDialog | `src/components/SearchDialog.astro` | 站内搜索弹层 |
-| AboutNav | `src/components/AboutNav.astro` | 关于页侧栏 |
+不接管浏览器滚动，不改变光标的正常使用。触屏不启用鼠标跟随。使用 `gsap.matchMedia()` 处理动态减少动画偏好和鼠标条件变化，并释放事件及拆字包装。
 
-## 4. 页面模板
+中文长段落关闭 SplitText 的英文单词防断行机制，保留自然中文换行；网格子项使用 `min-width: 0`。标题 SplitText 的自动重排跟随视口变化。
 
-- **首页**：Hero 轮播 → 服务条 → ZSAC 生态 → 产品 4 卡 → 方案 3 卡（深色）→ 价值 4 卡 → 行业标签 → 最新 3 条资讯（文字）→ CTA。
-- **产品页**：PageHero + 产品介绍双栏 + 功能 Bento（7 项 + CTA 卡）→ 核心机制/核心能力（按数据）→ 生态（可选）→ 优势 → 适用场景（深色）→ 相关产品 → CTA。
-- **解决方案页**：PageHero + 市场需求双栏 → 方案思路（深色）+ 3 能力 → 方案应用 3 卡 → 适用场景 → 相关方案（浅色卡）→ CTA。
-- **新闻列表**：PageHero + 计数/搜索 → “最新”标记行 + 文字索引 → 分页 → CTA。
-- **新闻详情**：面包屑 → 标题/日期/来源/复制链接 → 760px 正文 + TOC → 免责声明 → 上下篇 → 相关阅读 → 图片灯箱。
-- **关于**：PageHero + 侧栏 + 品牌语/简介/关注卡/目标；文化页使命/价值观/照片；荣誉页 2 列证书卡 + 灯箱；案例页 3 案例 + 6 行业卡 + 标签；联系页联系卡 + 地址卡。
-- **404**：品牌化提示 + 返回首页/资讯/联系。
+## 可读性与退化
 
-## 5. 新闻设计约束
+动画文字保留完整的屏幕阅读器标签。无 JavaScript 时所有内容直接显示、所有详情链接可用。开启减少动态效果时不加载动画模块；运行中切换偏好会还原拆字和滚动动画。主要功能的键盘操作保持可用。
 
-- **列表/首页不展示封面**；封面只在详情页 frontmatter 显式提供时展示。
-- 列表为文字优先的编辑索引：日期 + 标题 + 摘要 + 来源 + 箭头；最新一篇加“最新”标记。
-- 新增资讯不需要找封面图。
-- 详情页无默认 banner；正文 760px，表格横向滚动，代码块，图片灯箱，TOC。
+## 素材
 
-## 6. 内容规范
-
-- 标题：简洁、事实性；不虚构客户、数据、资质。
-- 按钮：动词 + 对象，如“探索产品”“获取产品资料”“查看全部资讯”。
-- 日期：`YYYY年M月D日`（详情）、`YYYY.MM.DD`（列表）。
-- 来源：详情页显示“来源：xxx”；列表仅在摘要下方小字显示。
-- 图片：内容图必须有 alt；装饰图 `alt=""`；图片内文字尽量转为 HTML。
-- 文案修正：PINEER → PIONEER、DIGITAI → DIGITAL、SS0 → SSO、删除 Click、统一“适用场景”。
-
-## 7. 可访问性
-
-- 每页一个 h1；语义化 landmark；跳转到主内容。
-- Header/Mega Menu/移动抽屉：`aria-expanded`、`aria-controls`、Escape、焦点陷阱、焦点归还。
-- 轮播：暂停/播放、前后、键盘、`aria-roledescription`。
-- 灯箱：原生 `<dialog>`，Esc/遮罩关闭。
-- 对比度 AA；橙色只作小面积强调。
-- 表格 `scope`；代码块横向滚动。
-
-## 8. 性能
-
-- 纯静态；无 jQuery/Bootstrap/WOW/canvas。
-- CSS ≤ 35KB gzip；JS ≤ 30KB gzip（不含按需搜索索引）。
-- 图片 AVIF/WebP + 懒加载 + 宽高；Hero 预加载。
-- 当前 `dist` 约 24.85MB，图片约 15.56MB（121 篇资讯、199 张资讯图）。
+`ProductVisual.astro` 的四组图是自绘机制示意，不是实物照片、实时控制台或动态口令。没有引入参考站照片、商标、代码、虚构客户数据或第三方跟踪服务。

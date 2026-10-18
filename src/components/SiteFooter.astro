@@ -1,111 +1,86 @@
 ---
-import { footerNav, site } from '@/data/site';
-import Icon from './ui/Icon.astro';
-import Logo from './ui/Logo.astro';
+import { footerNav, site } from "@/data/site";
+import Icon from "./ui/Icon.astro";
 ---
 
-<footer class="relative overflow-hidden bg-ink-950 text-white">
-  <div
-    class="pointer-events-none absolute inset-0 opacity-[0.07]"
-    style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 64px 64px;"
+<footer class="site-footer">
+  <div class="footer-atmosphere" aria-hidden="true"></div>
+  <div class="footer-dot-field" aria-hidden="true"></div>
+  <svg
+    class="footer-globe"
+    viewBox="0 0 600 600"
+    fill="none"
     aria-hidden="true"
-  ></div>
-  <div class="pointer-events-none absolute -top-32 right-0 h-80 w-80 rounded-full bg-brand-500/20 blur-3xl" aria-hidden="true"></div>
-
-  <div class="container-page relative py-14 lg:py-16">
-    <div class="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-      <div>
-        <Logo tone="on-dark" />
-        <p class="mt-5 max-w-sm text-sm leading-7 text-white/60">
-          聚焦国产动态软件密码接入安全体系建设，以创新密码技术、产品与服务，让每一次接入都可信。
-        </p>
-        <div class="mt-6 space-y-2.5 text-sm text-white/65">
-          <a href={site.phoneHref} class="flex items-center gap-2.5 transition hover:text-white">
-            <Icon name="phone" size={15} class="text-cyan-400" />
-            {site.phone}
-          </a>
-          <a href={site.emailHref} class="flex items-center gap-2.5 transition hover:text-white">
-            <Icon name="mail" size={15} class="text-cyan-400" />
-            {site.email}
-          </a>
-          <p class="flex items-start gap-2.5">
-            <Icon name="pin" size={15} class="mt-0.5 shrink-0 text-cyan-400" />
-            <span>{site.address}</span>
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <h2 class="text-xs font-semibold tracking-[0.16em] text-white/65">产品中心</h2>
-        <ul class="mt-4 space-y-2.5">
-          {
-            footerNav.products.map((item) => (
-              <li>
-                <a href={item.href} class="text-sm text-white/65 transition hover:text-white">
-                  {item.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      <div>
-        <h2 class="text-xs font-semibold tracking-[0.16em] text-white/65">解决方案</h2>
-        <ul class="mt-4 space-y-2.5">
-          {
-            footerNav.solutions.map((item) => (
-              <li>
-                <a href={item.href} class="text-sm text-white/65 transition hover:text-white">
-                  {item.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      <div>
-        <h2 class="text-xs font-semibold tracking-[0.16em] text-white/65">关于我们</h2>
-        <ul class="mt-4 space-y-2.5">
-          {
-            footerNav.about.map((item) => (
-              <li>
-                <a href={item.href} class="text-sm text-white/65 transition hover:text-white">
-                  {item.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
-
-    <div class="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/65 sm:flex-row sm:items-center sm:justify-between">
-      <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <span>{site.copyright}</span>
-        <span class="hidden text-white/20 sm:inline">|</span>
-        <a href={site.icpUrl} target="_blank" rel="noopener noreferrer" class="transition hover:text-white/70">
-          {site.icp}
+  >
+    <circle cx="300" cy="300" r="250" />
+    <g class="footer-globe-grid">
+      <ellipse cx="300" cy="300" rx="80" ry="250" />
+      <ellipse cx="300" cy="300" rx="160" ry="250" />
+      <ellipse cx="300" cy="300" rx="222" ry="250" />
+      <ellipse cx="300" cy="300" rx="250" ry="70" />
+      <ellipse cx="300" cy="300" rx="250" ry="150" />
+      <ellipse cx="300" cy="300" rx="250" ry="215" />
+      <path d="M50 300h500M300 50v500" />
+    </g>
+    <ellipse
+      class="footer-globe-orbit"
+      cx="300"
+      cy="300"
+      rx="283"
+      ry="102"
+      transform="rotate(-28 300 300)"
+    />
+  </svg>
+  <div class="container-page">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="联易软件首页">
+          <img
+            src="/images/logo-footer.png"
+            alt="联易软件 emaplink"
+            width="217"
+            height="82"
+            loading="eager"
+            decoding="async"
+          />
         </a>
+        <p>
+          联于政通，易于人和。
+          <br />
+          以密码技术，连接可信的数字世界。
+        </p>
+        <a href={site.emailHref}>
+          {site.email} <Icon name="arrow-up-right" size={16} />
+        </a>
+        <p class="footer-address">{site.address}</p>
       </div>
-      <a
-        href="#top"
-        class="inline-flex items-center gap-1.5 self-start text-xs text-white/65 transition hover:text-white sm:self-auto"
-        data-back-to-top
-      >
-        回到顶部
-        <Icon name="top" size={14} />
+      <nav aria-label="底部产品导航">
+        <h2>产品与方案</h2>
+        {footerNav.products.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+        <a href="/#solutions">
+          探索解决方案 <Icon name="arrow-up-right" size={14} />
+        </a>
+      </nav>
+      <nav aria-label="底部公司导航">
+        <h2>了解联易</h2>
+        {footerNav.about.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">
+      emaplink<span>®</span>
+    </div>
+    <div class="footer-bottom">
+      <span>{site.copyright}</span>
+      <a href={site.icpUrl} target="_blank" rel="noopener noreferrer">
+        {site.icp}
+      </a>
+      <a href="#top">
+        回到顶部 <Icon name="top" size={16} />
       </a>
     </div>
   </div>
 </footer>
-
-<script>
-  document.querySelectorAll<HTMLElement>('[data-back-to-top]').forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  });
-</script>

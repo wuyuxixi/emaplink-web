@@ -1,31 +1,31 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import PageHero from '@/components/ui/PageHero.astro';
-import Icon from '@/components/ui/Icon.astro';
-import { contact } from '@/data/about';
-import { site } from '@/data/site';
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/ui/PageHero.astro";
+import Icon from "@/components/ui/Icon.astro";
+import { contact } from "@/data/about";
+import { site } from "@/data/site";
 
 const channels = [
   {
-    label: '电话',
+    label: "电话",
     value: site.phone,
     href: site.phoneHref,
-    description: '7X12 小时服务，专家一对一',
-    icon: 'phone',
+    description: "7X12 小时服务，专家一对一",
+    icon: "phone",
   },
   {
-    label: '邮箱',
+    label: "邮箱",
     value: site.email,
     href: site.emailHref,
-    description: '产品资料、方案咨询与商务合作',
-    icon: 'mail',
+    description: "产品资料、方案咨询与商务合作",
+    icon: "mail",
   },
   {
-    label: '地址',
+    label: "地址",
     value: site.address,
     href: contact.mapUrl,
-    description: '陕西省西安市高新区西安软件园',
-    icon: 'pin',
+    description: "陕西省西安市高新区西安软件园",
+    icon: "pin",
   },
 ] as const;
 ---
@@ -34,18 +34,18 @@ const channels = [
   title="联系我们"
   description={`联系联易软件：电话 ${site.phone}，邮箱 ${site.email}，地址 ${site.address}。`}
   jsonLd={{
-    '@context': 'https://schema.org',
-    '@type': 'ContactPage',
-    name: '联系我们',
-    description: '联易软件联系方式与办公地址。',
-    url: 'https://www.emaplink.com.cn/contact/',
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "联系我们",
+    description: "联易软件联系方式与办公地址。",
+    url: "https://www.emaplink.com.cn/contact/",
   }}
 >
   <PageHero
     eyebrow="联系我们"
     title="让我们聊聊你的接入安全场景"
     description="无论是终端准入、数据交互还是用户认证，我们都可以从现有系统与业务边界出发，一起梳理可落地的安全路径。"
-    breadcrumbs={[{ label: '首页', href: '/' }, { label: '联系我们' }]}
+    breadcrumbs={[{ label: "首页", href: "/" }, { label: "联系我们" }]}
     compact
   />
 
@@ -53,36 +53,40 @@ const channels = [
     <div class="container-page grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
       <div>
         <p class="eyebrow">联系方式</p>
-        <h2 class="mt-3 text-2xl font-semibold text-ink-900 sm:text-3xl">随时与联易软件取得联系</h2>
+        <h2 class="mt-3 text-2xl font-semibold text-ink-900 sm:text-3xl">
+          随时与联易软件取得联系
+        </h2>
 
         <div class="mt-8 space-y-3">
-          {
-            channels.map((channel) => (
-              <a
-                href={channel.href}
-                class="group card flex items-start gap-4 p-5 transition hover:border-brand-500/40 hover:shadow-card"
-                target={channel.icon === 'pin' ? '_blank' : undefined}
-                rel={channel.icon === 'pin' ? 'noopener noreferrer' : undefined}
-              >
-                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-600 transition group-hover:bg-brand-600 group-hover:text-white">
-                  <Icon name={channel.icon} size={19} />
+          {channels.map((channel) => (
+            <a
+              href={channel.href}
+              class="group card flex items-start gap-4 p-5 transition hover:border-brand-500/40 hover:shadow-card"
+              target={channel.icon === "pin" ? "_blank" : undefined}
+              rel={channel.icon === "pin" ? "noopener noreferrer" : undefined}
+            >
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-600 transition group-hover:bg-brand-600 group-hover:text-white">
+                <Icon name={channel.icon} size={19} />
+              </span>
+              <span class="min-w-0">
+                <span class="block text-xs font-semibold tracking-[0.14em] text-muted">
+                  {channel.label}
                 </span>
-                <span class="min-w-0">
-                  <span class="block text-xs font-semibold tracking-[0.14em] text-muted">
-                    {channel.label}
-                  </span>
-                  <span class="mt-1 block break-words text-base font-semibold text-ink-900">
-                    {channel.value}
-                  </span>
-                  <span class="mt-1 block text-xs text-muted">{channel.description}</span>
+                <span class="mt-1 block break-words text-base font-semibold text-ink-900">
+                  {channel.value}
                 </span>
-              </a>
-            ))
-          }
+                <span class="mt-1 block text-xs text-muted">
+                  {channel.description}
+                </span>
+              </span>
+            </a>
+          ))}
         </div>
 
-        <div class="mt-8 rounded-2xl bg-ink-950 p-6 text-white">
-          <p class="text-xs font-semibold tracking-[0.16em] text-cyan-400">合作咨询</p>
+        <div class="mt-8 rounded-2xl tonal-panel p-6">
+          <p class="text-xs font-semibold tracking-[0.16em] text-cyan-400">
+            合作咨询
+          </p>
           <p class="mt-3 text-lg font-semibold leading-7">
             需要产品资料、方案建议或生态合作？
           </p>
@@ -106,20 +110,17 @@ const channels = [
       </div>
 
       <div>
-        <div class="relative overflow-hidden rounded-3xl border border-line bg-ink-950 p-8 text-white sm:p-10">
-          <div
-            class="pointer-events-none absolute inset-0 opacity-[0.08]"
-            style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 56px 56px;"
-            aria-hidden="true"
-          ></div>
-          <div class="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-cyan-400/10 blur-3xl" aria-hidden="true"></div>
-
+        <div class="relative overflow-hidden rounded-3xl border border-line tonal-panel p-8 sm:p-10">
           <div class="relative">
             <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-400">
               <Icon name="pin" size={24} />
             </span>
-            <p class="mt-6 text-xs font-semibold tracking-[0.16em] text-cyan-400">办公地址</p>
-            <p class="mt-3 text-xl font-semibold leading-8">联易软件 · 西安软件园</p>
+            <p class="mt-6 text-xs font-semibold tracking-[0.16em] text-cyan-400">
+              办公地址
+            </p>
+            <p class="mt-3 text-xl font-semibold leading-8">
+              联易软件 · 西安软件园
+            </p>
             <p class="mt-2 text-sm leading-7 text-white/65">{site.address}</p>
             <a
               href={contact.mapUrl}
@@ -135,12 +136,16 @@ const channels = [
 
         <div class="mt-4 grid gap-3 sm:grid-cols-2">
           <div class="rounded-2xl border border-line bg-white p-5">
-            <p class="text-xs font-semibold tracking-[0.14em] text-muted">服务时间</p>
+            <p class="text-xs font-semibold tracking-[0.14em] text-muted">
+              服务时间
+            </p>
             <p class="mt-2 text-base font-semibold text-ink-900">7X12 小时</p>
             <p class="mt-1 text-xs text-muted">专家一对一响应</p>
           </div>
           <div class="rounded-2xl border border-line bg-white p-5">
-            <p class="text-xs font-semibold tracking-[0.14em] text-muted">服务范围</p>
+            <p class="text-xs font-semibold tracking-[0.14em] text-muted">
+              服务范围
+            </p>
             <p class="mt-2 text-base font-semibold text-ink-900">全国</p>
             <p class="mt-1 text-xs text-muted">产品咨询、方案设计与交付支持</p>
           </div>
@@ -148,5 +153,4 @@ const channels = [
       </div>
     </div>
   </section>
-
 </BaseLayout>

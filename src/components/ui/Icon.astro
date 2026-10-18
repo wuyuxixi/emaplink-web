@@ -40,7 +40,7 @@ interface Props {
   class?: string;
 }
 
-const { name, size = 20, strokeWidth = 1.7, class: className = '' } = Astro.props;
+const { name, size = 20, strokeWidth = 1.35, class: className = '' } = Astro.props;
 
 const icons: Record<IconName, string> = {
   'arrow-right': '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',

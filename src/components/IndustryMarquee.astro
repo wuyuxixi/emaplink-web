@@ -1,0 +1,338 @@
+---
+import { industries } from "@/data/home";
+import Icon from "./ui/Icon.astro";
+const englishNames: Record<string, string> = {
+  金融: "Finance",
+  能源: "Energy",
+  工业: "Industry",
+  电力: "Electric Power",
+  交通: "Transportation",
+  大型国央企: "State-owned Enterprises",
+  政务: "Government Services",
+  应急: "Emergency Management",
+  环保: "Environmental Protection",
+  公安: "Public Security",
+};
+---
+
+<section class="industry-marquee" aria-label="行业案例" data-industry-marquee>
+  <div class="marquee-heading">
+    <span aria-hidden="true"></span>
+    <a href="/about/cases/" class="marquee-title">
+      让信任走进更多行业 <Icon name="arrow-up-right" size={16} />
+    </a>
+    <span aria-hidden="true"></span>
+  </div>
+  <div class="marquee-window">
+    <div class="marquee-track" id="industry-marquee-track">
+      {[false, true].map((duplicate) => (
+        <ul
+          class="marquee-group"
+          aria-label={duplicate ? undefined : "服务行业"}
+          aria-hidden={duplicate ? "true" : undefined}
+        >
+          {industries.map((industry) => (
+            <li class="marquee-industry">
+              <span class="industry-cn">{industry}</span>
+              <span class="industry-en" lang="en">
+                {englishNames[industry]}
+              </span>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+  <div class="marquee-controls">
+    <button
+      type="button"
+      class="marquee-toggle"
+      aria-label="暂停行业滚动"
+      aria-pressed="false"
+      aria-controls="industry-marquee-track"
+      data-marquee-toggle
+      hidden
+    >
+      <span class="marquee-pause-icon">
+        <Icon name="pause" size={14} />
+      </span>
+      <span class="marquee-play-icon">
+        <Icon name="play" size={14} />
+      </span>
+      <span data-marquee-toggle-label>暂停</span>
+    </button>
+  </div>
+</section>
+<script>
+  document
+    .querySelectorAll<HTMLElement>("[data-industry-marquee]")
+    .forEach((marquee) => {
+      const toggle = marquee.querySelector<HTMLButtonElement>(
+        "[data-marquee-toggle]",
+      );
+      const label = marquee.querySelector<HTMLElement>(
+        "[data-marquee-toggle-label]",
+      );
+      if (!toggle || !label) return;
+      marquee.dataset.enhanced = "true";
+      toggle.hidden = false;
+      toggle.addEventListener("click", () => {
+        const paused = marquee.dataset.paused !== "true";
+        marquee.dataset.paused = String(paused);
+        toggle.setAttribute("aria-pressed", String(paused));
+        toggle.setAttribute(
+          "aria-label",
+          paused ? "继续行业滚动" : "暂停行业滚动",
+        );
+        label.textContent = paused ? "继续" : "暂停";
+      });
+    });
+</script>
+<style>
+  .industry-marquee {
+    --marquee-gap: clamp(3rem, 5vw, 5rem);
+    margin-top: 70px;
+    padding: 32px 0 6px;
+    border-radius: 26px;
+    background: #fff;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .marquee-heading {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-inline: 30px;
+  }
+  .marquee-heading > span {
+    height: 1px;
+    background: #e5edf7;
+    flex: 1;
+    min-width: 0;
+  }
+  .marquee-title {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 42px;
+    padding: 9px 20px;
+    border: 1px solid #eaf1fb;
+    border-radius: 999px;
+    background: #f6faff;
+    color: #3b587b;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition:
+      color 400ms var(--bright-ease),
+      background 400ms var(--bright-ease);
+  }
+  .marquee-title svg {
+    flex-shrink: 0;
+    transition: transform 500ms var(--bright-ease);
+  }
+  .marquee-title:hover {
+    background: #edf5ff;
+    color: var(--bright-blue);
+  }
+  .marquee-title:hover svg {
+    transform: translate(2px, -2px);
+  }
+  .marquee-window {
+    overflow: hidden;
+    margin-top: 18px;
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 5%,
+      #000 95%,
+      transparent
+    );
+  }
+  .marquee-track {
+    width: 100%;
+  }
+  .marquee-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px var(--marquee-gap);
+    padding: 28px 20px;
+  }
+  .marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+  .marquee-industry {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 9px;
+    min-width: 154px;
+    text-align: center;
+  }
+  .industry-cn {
+    color: #425c7c;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: -0.025em;
+    white-space: nowrap;
+  }
+  .industry-en {
+    color: #70829b;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+  [data-enhanced="true"] .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: industry-marquee-scroll 44s linear infinite;
+  }
+  [data-enhanced="true"] .marquee-group {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    gap: var(--marquee-gap);
+    padding: 30px var(--marquee-gap) 30px 0;
+  }
+  [data-enhanced="true"] .marquee-group[aria-hidden="true"] {
+    display: flex;
+  }
+  .marquee-window:hover .marquee-track,
+  [data-paused="true"] .marquee-track {
+    animation-play-state: paused;
+  }
+  .marquee-controls {
+    display: flex;
+    justify-content: flex-end;
+    min-height: 44px;
+    padding-inline: 22px;
+  }
+  .marquee-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 64px;
+    min-height: 44px;
+    padding: 5px 9px;
+    color: #68819f;
+    font-size: 12px;
+    border-radius: 999px;
+    transition:
+      background 300ms var(--bright-ease),
+      color 300ms var(--bright-ease);
+  }
+  .marquee-toggle[hidden] {
+    display: none;
+  }
+  .marquee-toggle:hover {
+    background: #f0f7ff;
+    color: var(--bright-blue);
+  }
+  .marquee-toggle > span {
+    display: inline-flex;
+    align-items: center;
+  }
+  .marquee-toggle .marquee-play-icon {
+    display: none;
+  }
+  [data-paused="true"] .marquee-toggle .marquee-play-icon {
+    display: inline-flex;
+  }
+  [data-paused="true"] .marquee-toggle .marquee-pause-icon {
+    display: none;
+  }
+  @keyframes industry-marquee-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (max-width: 767px) {
+    .industry-marquee {
+      --marquee-gap: 40px;
+      margin-top: 42px;
+      padding-top: 25px;
+      border-radius: 22px;
+    }
+    .marquee-heading {
+      padding-inline: 14px;
+      gap: 10px;
+    }
+    .marquee-title {
+      font-size: 12px;
+      padding: 8px 13px;
+      gap: 6px;
+      min-height: 38px;
+    }
+    .marquee-title svg {
+      width: 14px;
+      height: 14px;
+    }
+    .marquee-window {
+      margin-top: 15px;
+      mask-image: linear-gradient(
+        90deg,
+        transparent,
+        #000 7%,
+        #000 93%,
+        transparent
+      );
+    }
+    .marquee-industry {
+      min-width: 142px;
+      gap: 8px;
+    }
+    .industry-cn {
+      font-size: 25px;
+    }
+    .industry-en {
+      font-size: 12px;
+    }
+    .marquee-controls {
+      padding-inline: 13px;
+    }
+    .marquee-group {
+      gap: 25px 18px;
+      padding-inline: 15px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-enhanced="true"] .marquee-track {
+      width: 100%;
+      animation: none;
+      display: block;
+    }
+    [data-enhanced="true"] .marquee-group {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px 18px;
+      padding: 24px 15px;
+    }
+    [data-enhanced="true"] .marquee-group[aria-hidden="true"] {
+      display: none;
+    }
+    .marquee-window {
+      mask-image: none;
+    }
+    .marquee-controls {
+      display: none;
+    }
+    .marquee-industry {
+      min-width: 0;
+      flex: 0 0 calc(50% - 9px);
+    }
+    .industry-en {
+      white-space: normal;
+      max-width: 100%;
+    }
+    .industry-cn {
+      font-size: clamp(22px, 2.4vw, 30px);
+    }
+  }
+</style>

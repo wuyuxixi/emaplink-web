@@ -10,3 +10,5 @@ blob-report/
 .env
 .env.*
 !.env.example
+.taste-skill/
+design-assets-audit.png

@@ -1,16 +1,17 @@
 ---
-import '../styles/global.css';
-import Seo from '@/components/Seo.astro';
-import SiteFooter from '@/components/SiteFooter.astro';
-import SiteHeader from '@/components/SiteHeader.astro';
-import { site } from '@/data/site';
+import "../styles/global.css";
+import "../styles/bright.css";
+import Seo from "@/components/Seo.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import { site } from "@/data/site";
 
 interface Props {
   title: string;
   description: string;
   canonical?: string;
   image?: string;
-  type?: 'website' | 'article';
+  type?: "website" | "article";
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   bodyClass?: string;
@@ -22,16 +23,16 @@ const {
   description,
   canonical,
   image,
-  type = 'website',
+  type = "website",
   noindex = false,
   jsonLd,
-  bodyClass = '',
+  bodyClass = "",
   preloadImage,
 } = Astro.props;
 
 const organization = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
+  "@context": "https://schema.org",
+  "@type": "Organization",
   name: site.legalName,
   alternateName: site.name,
   url: site.url,
@@ -39,18 +40,18 @@ const organization = {
   telephone: site.phone,
   email: site.email,
   address: {
-    '@type': 'PostalAddress',
+    "@type": "PostalAddress",
     streetAddress: site.address,
-    addressCountry: 'CN',
+    addressCountry: "CN",
   },
 };
 
 const website = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
+  "@context": "https://schema.org",
+  "@type": "WebSite",
   name: site.name,
   url: site.url,
-  inLanguage: 'zh-CN',
+  inLanguage: "zh-CN",
 };
 
 const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
@@ -63,7 +64,17 @@ const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+    <meta name="theme-color" content="#ffffff" />
+    <link
+      rel="preload"
+      href="/fonts/manrope-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+    )}
     <Seo
       title={title}
       description={description}
@@ -75,11 +86,66 @@ const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     />
   </head>
   <body class={bodyClass}>
-    <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+    <a class="skip-link" href="#main">
+      跳到主要内容
+    </a>
     <SiteHeader />
     <main id="main">
       <slot />
     </main>
     <SiteFooter />
+    <a
+      href="#top"
+      class="floating-top is-visible"
+      data-floating-top
+      aria-label="回到页面顶部"
+    >
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+          d="M12 19V5m-6 6 6-6 6 6"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+    <script>
+      document
+        .querySelectorAll<HTMLElement>(".btn, .text-link")
+        .forEach((control) => {
+          if (control.querySelector(".button-label")) return;
+          Array.from(control.childNodes)
+            .filter(
+              (node) =>
+                node.nodeType === Node.TEXT_NODE && node.textContent?.trim(),
+            )
+            .forEach((node) => {
+              const label = document.createElement("span");
+              label.className = "button-label";
+              const original = document.createElement("span");
+              original.textContent = node.textContent!.trim();
+              const copy = original.cloneNode(true) as HTMLElement;
+              copy.setAttribute("aria-hidden", "true");
+              label.append(original, copy);
+              node.replaceWith(label);
+            });
+        });
+      let cleanupMotion: (() => void) | undefined;
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        void (async () => {
+          const { initMotion } = await import("../scripts/motion");
+          await Promise.race([
+            document.fonts.ready,
+            new Promise((resolve) => setTimeout(resolve, 600)),
+          ]);
+          cleanupMotion = initMotion();
+        })();
+      }
+      document.addEventListener("astro:before-swap", () => cleanupMotion?.(), {
+        once: true,
+      });
+    </script>
   </body>
 </html>

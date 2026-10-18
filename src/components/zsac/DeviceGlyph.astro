@@ -1,0 +1,74 @@
+---
+interface Props {
+  kind: string;
+  class?: string;
+}
+const { kind, class: className } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 80 80"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  {kind === "phone" && (
+    <>
+      <path d="M26 9h27l5 5v52l-5 5H26l-5-5V14z" fill="#dcecff" />
+      <rect x="25" y="10" width="29" height="59" rx="6" fill="#f7fbff" />
+      <path d="M34 11v4h11v-4M37 62h5" />
+      <path
+        d="M31 25h6v7h-6zM43 25h6v7h-6zM31 39h6v7h-6zM43 39h6v7h-6z"
+        fill="#9fc7ff"
+        stroke="none"
+      />
+    </>
+  )}
+  {kind === "drone" && (
+    <>
+      <path
+        d="m30 35-14-16M50 35l14-16M30 44 16 61M50 44l14 17"
+        stroke-width="4"
+      />
+      <ellipse cx="16" cy="18" rx="13" ry="4" fill="#dcecff" />
+      <ellipse cx="64" cy="18" rx="13" ry="4" fill="#dcecff" />
+      <ellipse cx="16" cy="62" rx="13" ry="4" fill="#dcecff" />
+      <ellipse cx="64" cy="62" rx="13" ry="4" fill="#dcecff" />
+      <path d="M25 36q15-15 30 0l-3 13H28z" fill="#e7f1ff" />
+      <path d="m31 49-4 11M49 49l4 11" />
+      <rect x="35" y="48" width="10" height="8" rx="3" fill="#2467d6" />
+    </>
+  )}
+  {kind === "camera" && (
+    <>
+      <path d="M29 9h22l7 8v49l-6 6H28l-6-6V17z" fill="#dcecff" />
+      <rect x="26" y="14" width="28" height="53" rx="5" fill="#f7fbff" />
+      <circle cx="40" cy="30" r="10" fill="#bdd8ff" />
+      <circle cx="40" cy="30" r="5" fill="#2467d6" />
+      <circle cx="40" cy="52" r="5" />
+      <path d="M35 62h10M33 10h14" />
+    </>
+  )}
+  {kind === "helmet" && (
+    <>
+      <path d="M12 45a28 28 0 0 1 56 0l-2 10H14z" fill="#e7f1ff" />
+      <path d="M40 18q17 8 18 27M11 45h58" />
+      <path d="m17 47 46 1-4 18-12-1-7-9-7 9-12 1z" fill="#bdd8ff" />
+      <path d="m24 52 10 2-6 6M46 54l10-2-4 8" />
+      <rect x="6" y="42" width="16" height="11" rx="3" fill="#2467d6" />
+    </>
+  )}
+  {kind === "server" && (
+    <>
+      <path d="m17 17 23-9 23 9v46l-23 9-23-9z" fill="#dcecff" />
+      <path d="m17 17 23 9 23-9M40 26v46M17 33l23 9 23-9M17 49l23 9 23-9" />
+      <path d="m24 26 8 3M24 42l8 3M24 58l8 3" />
+      <circle cx="53" cy="31" r="2" fill="#2467d6" stroke="none" />
+      <circle cx="53" cy="47" r="2" fill="#2467d6" stroke="none" />
+    </>
+  )}
+</svg>

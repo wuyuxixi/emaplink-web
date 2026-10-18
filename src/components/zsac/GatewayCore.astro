@@ -1,0 +1,87 @@
+---
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+---
+
+<svg class="gateway-core" viewBox="0 0 400 330" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient
+      id={`${id}-blue`}
+      x1="100"
+      y1="110"
+      x2="290"
+      y2="250"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#5b9aff" />
+      <stop offset="1" stop-color="#2467d6" />
+    </linearGradient>
+    <linearGradient
+      id={`${id}-shield`}
+      x1="150"
+      y1="30"
+      x2="250"
+      y2="180"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#a4d5ff" />
+      <stop offset="1" stop-color="#2467d6" />
+    </linearGradient>
+  </defs>
+  <path d="m24 225 176-92 176 92-176 96z" fill="#f0f6ff" stroke="#dceaff" />
+  <path d="m53 219 147-77 147 77-147 80z" stroke="#cbdfff" />
+  <path d="m76 208 124-65 124 65v28l-124 67-124-67z" fill="#d5e7ff" />
+  <path
+    d="m64 177 136-72 136 72v45l-136 74-136-74z"
+    fill={`url(#${id}-blue)`}
+  />
+  <path d="m64 177 136 74 136-74-136-72z" fill="#78aeff" />
+  <path d="m82 171 118-62 118 62-118 64z" stroke="#b6d8ff" />
+  <path
+    d="m95 148 105-55 105 55v24l-105 57-105-57z"
+    fill="#e6f2ff"
+    stroke="white"
+    stroke-width="2"
+  />
+  <path d="m96 148 104 56 104-56-104-55z" fill="#f8fcff" />
+  <path
+    d="M201 25q29 25 65 31v49c0 47-33 74-65 93-32-19-65-46-65-93V56q36-6 65-31z"
+    fill="#b6ddff"
+    stroke="white"
+    stroke-width="3"
+  />
+  <path
+    d="M201 37q25 23 54 28v40c0 38-26 64-54 81-28-17-54-43-54-81V65q29-5 54-28z"
+    fill={`url(#${id}-shield)`}
+    stroke="#e8f5ff"
+    stroke-width="2"
+  />
+  <text
+    x="201"
+    y="113"
+    text-anchor="middle"
+    fill="white"
+    font-family="Manrope, sans-serif"
+    font-weight="700"
+    font-size="29"
+    letter-spacing="1"
+  >
+    ZSAC
+  </text>
+  <path
+    d="m186 139 11 11 23-26"
+    stroke="white"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="m113 200 61 32M113 207l41 23M231 245l60-33"
+    stroke="#d7e9ff"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+  <circle cx="314" cy="211" r="3" fill="#d7e9ff" />
+</svg>
