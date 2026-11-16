@@ -71,7 +71,6 @@ export const mainNav: NavItem[] = [
   { label: '首页', href: '/' },
   { label: '产品中心', href: '/#products', children: productNav },
   { label: '解决方案', href: '/#solutions', children: solutionNav },
-  { label: '行业案例', href: '/about/cases/' },
   { label: '新闻动态', href: '/news/' },
   {
     label: '关于我们',
@@ -80,9 +79,10 @@ export const mainNav: NavItem[] = [
       { label: '公司简介', href: '/about/', description: '联于政通，易于人和' },
       { label: '企业文化', href: '/about/culture/', description: '联合创新、相互成就' },
       { label: '荣誉资质', href: '/about/honors/', description: '资质与产品认证' },
+      { label: '行业案例', href: '/about/cases/', description: '接入安全场景实践' },
+      { label: '联系我们', href: '/contact/', description: '沟通需求与获取支持' },
     ],
   },
-  { label: '联系我们', href: '/contact/' },
 ];
 
 export const footerNav = {

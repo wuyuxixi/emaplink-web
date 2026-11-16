@@ -7,10 +7,12 @@ import NewsRow from "@/components/NewsRow.astro";
 import ProductCard from "@/components/ProductCard.astro";
 import Icon from "@/components/ui/Icon.astro";
 import IndustryMarquee from "@/components/IndustryMarquee.astro";
+import HomeDecoration from "@/components/HomeDecoration.astro";
 import { ecosystem, services, valueCards } from "@/data/home";
 import { products } from "@/data/products";
 import { solutions } from "@/data/solutions";
 import "@/styles/home-contrast.css";
+import "@/styles/home-decoration.css";
 const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
@@ -22,10 +24,10 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
   bodyClass="home-page"
 >
   <HomeHero />
-  <section class="trust-statement-section" aria-label="联易的接入安全理念">
+  <section class="trust-statement-section" aria-label="联易的接入安全理念" data-trust-section>
+    <HomeDecoration variant="statement" />
     <div class="container-page trust-statement-layout">
       <div class="statement-side" data-reveal>
-        <p class="eyebrow">信任，从连接开始</p>
         <a class="text-link" href="/about/">
           联易的专注 <Icon name="arrow-up-right" size={18} />
         </a>
@@ -40,12 +42,10 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
       </div>
     </div>
   </section>
-  <section class="section ecosystem-section" id="ecosystem">
+  <section class="section ecosystem-section" id="ecosystem" data-trust-section>
+    <HomeDecoration variant="ecosystem" />
     <div class="container-page ecosystem-layout">
       <div class="ecosystem-copy">
-        <p class="eyebrow" data-reveal>
-          连接有界，信任无间
-        </p>
         <h2 class="section-title" data-reveal>
           复杂的接入，
           <br />
@@ -66,7 +66,7 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
           </div>
           <div class="ecosystem-items">
             {ecosystem.map((item) => (
-              <div>
+              <div tabindex="0">
                 <Icon name={item.icon} size={23} strokeWidth={1.3} />
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
@@ -82,13 +82,11 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
       </div>
     </div>
   </section>
-  <section class="section products-section" id="products">
+  <section class="section products-section" id="products" data-trust-section>
+    <HomeDecoration variant="products" />
     <div class="container-page">
       <div class="section-header">
         <div>
-          <p class="eyebrow" data-reveal>
-            产品中心
-          </p>
           <h2 class="section-title" data-reveal>
             把安全能力，
             <br />
@@ -113,13 +111,11 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
       </div>
     </div>
   </section>
-  <section class="section solutions-section" id="solutions">
+  <section class="section solutions-section" id="solutions" data-trust-section>
+    <HomeDecoration variant="solutions" />
     <div class="container-page">
       <div class="section-header">
         <div>
-          <p class="eyebrow" data-reveal>
-            解决方案
-          </p>
           <h2 class="section-title" data-reveal>
             从实际场景，
             <br />
@@ -186,12 +182,10 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
       <IndustryMarquee />
     </div>
   </section>
-  <section class="section values-section">
+  <section class="section values-section" data-trust-section>
+    <HomeDecoration variant="values" />
     <div class="container-page">
       <div class="values-heading">
-        <p class="eyebrow" data-reveal>
-          为什么选择联易
-        </p>
         <h2 class="section-title" data-reveal>
           好的安全，
           <br />
@@ -203,7 +197,7 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
       </div>
       <div class="value-list">
         {valueCards.map((value) => (
-          <article data-reveal>
+          <article data-reveal tabindex="0">
             <div class="value-core">
               <h3>{value.title}</h3>
               <p>{value.description}</p>
@@ -224,13 +218,11 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
       </div>
     </div>
   </section>
-  <section class="section news-section" id="news">
+  <section class="section news-section" id="news" data-trust-section>
+    <HomeDecoration variant="news" />
     <div class="container-page">
       <div class="section-header">
         <div>
-          <p class="eyebrow" data-reveal>
-            新闻动态
-          </p>
           <h2 class="section-title" data-reveal>
             关注此刻，思考下一步。
           </h2>
@@ -262,7 +254,7 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
       </div>
     </div>
   </section>
-  <CtaBand />
+  <CtaBand decorated />
 </BaseLayout>
 <script>
   document

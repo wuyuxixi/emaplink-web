@@ -1,12 +1,14 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { initHomeDecoration } from "./home-decoration";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export function initMotion() {
   const media = gsap.matchMedia();
   media.add("(prefers-reduced-motion: no-preference)", () => {
+    const cleanupHomeDecoration = initHomeDecoration();
     const splits: SplitText[] = [];
     const headings = document.querySelectorAll<HTMLElement>(
       "[data-text-reveal], main .section-title, .page-hero h1, .contact-band h2",
@@ -208,6 +210,7 @@ export function initMotion() {
     );
     ScrollTrigger.refresh();
     return () => {
+      cleanupHomeDecoration();
       pointerMedia.revert();
       splits.forEach((split) => split.revert());
       headings.forEach((element) => {

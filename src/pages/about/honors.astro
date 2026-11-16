@@ -21,7 +21,6 @@ const groups = ['企业资质', '产品认证', '发明专利'] as const;
   }}
 >
   <PageHero
-    eyebrow="关于我们"
     title="荣誉资质"
     description="以资质与认证为底座，持续验证产品与服务的合规性与可靠性。"
     breadcrumbs={[{ label: '首页', href: '/' }, { label: '关于我们', href: '/about/' }, { label: '荣誉资质' }]}
@@ -41,8 +40,7 @@ const groups = ['企业资质', '产品认证', '发明专利'] as const;
               <div>
                 <div class="flex items-end justify-between gap-4">
                   <div>
-                    <p class="eyebrow">{group}</p>
-                    <h2 class="mt-3 text-2xl font-semibold text-ink-900 sm:text-3xl">
+                    <h2 class="text-2xl font-semibold text-ink-900 sm:text-3xl">
                       {group === '企业资质' ? '企业资质与许可' : group === '产品认证' ? '商用密码产品认证' : '发明专利'}
                     </h2>
                   </div>

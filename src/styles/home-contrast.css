@@ -115,9 +115,6 @@
   grid-template-columns: 0.8fr 1.2fr;
   gap: 80px;
 }
-.home-page .ecosystem-copy .section-title {
-  margin-top: 19px;
-}
 .home-page .ecosystem-copy .section-lead {
   max-width: 380px;
   font-size: 17px;

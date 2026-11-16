@@ -59,7 +59,6 @@ const serviceJsonLd = {
   jsonLd={[breadcrumbJsonLd, serviceJsonLd]}
 >
   <PageHero
-    eyebrow="解决方案"
     title={solution.name}
     description={solution.tagline}
     breadcrumbs={[
@@ -74,8 +73,7 @@ const serviceJsonLd = {
   <section class="section">
     <div class="container-page grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
       <div>
-        <p class="eyebrow">市场需求</p>
-        <h2 class="section-title mt-4">把安全问题前置到接入与交互环节</h2>
+        <h2 class="section-title">把安全问题前置到接入与交互环节</h2>
         <div class="mt-6 rounded-2xl border border-line bg-white p-5">
           <p class="text-xs font-semibold tracking-[0.14em] text-muted">
             适用行业
@@ -115,7 +113,6 @@ const serviceJsonLd = {
     <div class="container-page relative">
       <SectionHeading
         tone="dark"
-        eyebrow="方案思路"
         title="以密码为信任起点，覆盖接入、传输与访问"
         lead={solution.solution.join(" ")}
       />
@@ -143,7 +140,6 @@ const serviceJsonLd = {
   <section class="section bg-white">
     <div class="container-page">
       <SectionHeading
-        eyebrow="方案应用"
         title="轻量落地，与现有系统协同"
         lead="从 SDK 集成到网关协同，方案围绕现有业务系统展开，尽量减少改造范围。"
       />
@@ -172,7 +168,6 @@ const serviceJsonLd = {
   <section class="section">
     <div class="container-page grid gap-10 rounded-3xl border border-line bg-white p-8 sm:p-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:p-12">
       <SectionHeading
-        eyebrow="适用场景"
         title="在复杂业务环境中保持安全与可用"
         lead={solution.scenarios}
       />
@@ -189,7 +184,7 @@ const serviceJsonLd = {
   <section class="section">
     <div class="container-page">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <SectionHeading eyebrow="相关方案" title="继续了解其他接入安全方案" />
+        <SectionHeading title="继续了解其他接入安全方案" />
         <a
           href="/#solutions"
           class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 transition hover:text-brand-700"

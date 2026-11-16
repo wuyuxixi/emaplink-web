@@ -29,7 +29,6 @@ const sectors = [
   }}
 >
   <PageHero
-    eyebrow="关于我们"
     title="行业案例"
     description="从食品安全追溯到药品监管，从终端准入到数据交互，把接入安全落在真实业务场景里。"
     breadcrumbs={[{ label: '首页', href: '/' }, { label: '关于我们', href: '/about/' }, { label: '行业案例' }]}
@@ -43,8 +42,7 @@ const sectors = [
       <div>
         <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p class="eyebrow">落地实践</p>
-            <h2 class="mt-3 text-2xl font-semibold text-ink-900 sm:text-3xl">从公开报道看场景落地</h2>
+            <h2 class="text-2xl font-semibold text-ink-900 sm:text-3xl">从公开报道看场景落地</h2>
           </div>
           <p class="max-w-md text-xs leading-5 text-muted">
             以下案例依据站内已有公开报道整理，用于说明业务场景与安全需求，不构成客户背书。
@@ -74,8 +72,7 @@ const sectors = [
         </div>
 
         <div class="mt-14">
-          <p class="eyebrow">行业覆盖</p>
-          <h2 class="mt-3 text-2xl font-semibold text-ink-900 sm:text-3xl">面向复杂行业的接入安全能力</h2>
+          <h2 class="text-2xl font-semibold text-ink-900 sm:text-3xl">面向复杂行业的接入安全能力</h2>
           <div class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {
               sectors.map((sector) => (

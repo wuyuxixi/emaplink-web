@@ -1,6 +1,7 @@
 ---
 import { industries } from "@/data/home";
 import Icon from "./ui/Icon.astro";
+import HomeDecoration from "./HomeDecoration.astro";
 const englishNames: Record<string, string> = {
   金融: "Finance",
   能源: "Energy",
@@ -15,7 +16,8 @@ const englishNames: Record<string, string> = {
 };
 ---
 
-<section class="industry-marquee" aria-label="行业案例" data-industry-marquee>
+<section class="industry-marquee" aria-label="行业案例" data-industry-marquee data-trust-section>
+  <HomeDecoration variant="industry" />
   <div class="marquee-heading">
     <span aria-hidden="true"></span>
     <a href="/about/cases/" class="marquee-title">

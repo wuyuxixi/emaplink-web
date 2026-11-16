@@ -1,0 +1,131 @@
+---
+interface Props {
+  variant: 'hero' | 'statement' | 'ecosystem' | 'products' | 'solutions' | 'industry' | 'values' | 'news' | 'contact';
+}
+type Route = { d: string; end: [number, number] };
+type Frame = { x: number; y: number; w: number; h: number; r: number; rotate?: number };
+const { variant } = Astro.props;
+// Each composition shares the geometry of the ZSAC module, with quiet areas for copy.
+const artwork: Record<Props['variant'], { height: number; frames: Frame[]; routes: Route[] }> = {
+  hero: {
+    height: 760,
+    frames: [
+      { x: 780, y: 48, w: 600, h: 600, r: 128, rotate: -14 },
+      { x: 842, y: 110, w: 476, h: 476, r: 96, rotate: -14 },
+    ],
+    routes: [
+      { d: 'M1440 148H1298Q1266 148 1266 180V226H1194', end: [1194, 226] },
+      { d: 'M980 760V662Q980 630 1012 630H1130V574', end: [1130, 574] },
+      { d: 'M1440 528H1378Q1346 528 1346 496V414', end: [1346, 414] },
+      { d: 'M698 122H756Q788 122 788 154V184', end: [788, 184] },
+    ],
+  },
+  statement: {
+    height: 320, frames: [{ x: -92, y: -144, w: 380, h: 380, r: 88, rotate: -18 }],
+    routes: [
+      { d: 'M0 274H304Q344 274 344 234V108Q344 76 376 76H482', end: [482, 76] },
+      { d: 'M1440 58H1334Q1302 58 1302 90V252Q1302 284 1270 284H1118', end: [1118, 284] },
+    ],
+  },
+  ecosystem: {
+    height: 760,
+    frames: [{ x: 712, y: 76, w: 650, h: 600, r: 100 }],
+    routes: [
+      { d: 'M1440 38H1284Q1252 38 1252 70V88H1120', end: [1120, 88] },
+      { d: 'M1440 636H1414Q1394 636 1394 616V482', end: [1394, 482] },
+      { d: 'M580 0V124Q580 156 612 156H620', end: [620, 156] },
+      { d: 'M578 760V732Q578 700 610 700H834', end: [834, 700] },
+    ],
+  },
+  products: {
+    height: 1560,
+    frames: [
+      { x: -240, y: 270, w: 650, h: 650, r: 132, rotate: -14 },
+      { x: 1060, y: 904, w: 610, h: 610, r: 120, rotate: 14 },
+    ],
+    routes: [
+      { d: 'M672 300H688Q720 300 720 332V496', end: [720, 496] },
+      { d: 'M768 550H752Q720 550 720 582V746', end: [720, 746] },
+      { d: 'M672 880H688Q720 880 720 912V1076', end: [720, 1076] },
+      { d: 'M768 1136H752Q720 1136 720 1168V1332', end: [720, 1332] },
+    ],
+  },
+  solutions: {
+    height: 1120,
+    frames: [{ x: 740, y: 196, w: 650, h: 592, r: 100 }],
+    routes: [
+      { d: 'M1440 202H1424Q1394 202 1394 232V374H1400', end: [1400, 374] },
+      { d: 'M1440 574H1424Q1394 574 1394 604V682H1400', end: [1400, 682] },
+      { d: 'M798 840V782Q798 750 830 750H1260', end: [1260, 750] },
+    ],
+  },
+  industry: {
+    height: 290, frames: [],
+    routes: [
+      { d: 'M0 54H220Q244 54 244 78V94H388', end: [388, 94] },
+      { d: 'M1440 236H1194Q1170 236 1170 212V196H1036', end: [1036, 196] },
+      { d: 'M602 0V28Q602 54 628 54H752', end: [752, 54] },
+      { d: 'M844 290V264Q844 238 818 238H684', end: [684, 238] },
+    ],
+  },
+  values: {
+    height: 770,
+    frames: [
+      { x: 634, y: 60, w: 352, h: 292, r: 58 },
+      { x: 970, y: 90, w: 352, h: 292, r: 58 },
+      { x: 612, y: 306, w: 352, h: 292, r: 58 },
+      { x: 994, y: 336, w: 352, h: 292, r: 58 },
+    ],
+    routes: [
+      { d: 'M0 640H150Q176 640 176 666V690H260', end: [260, 690] },
+      { d: 'M1440 674H1320Q1294 674 1294 648V622H1196', end: [1196, 622] },
+    ],
+  },
+  news: {
+    height: 730,
+    frames: [
+      { x: -300, y: -188, w: 450, h: 450, r: 96, rotate: -18 },
+      { x: 1290, y: 474, w: 450, h: 450, r: 96, rotate: 18 },
+    ], routes: [],
+  },
+  contact: {
+    height: 370,
+    frames: [{ x: 530, y: 24, w: 332, h: 332, r: 76, rotate: -12 }],
+    routes: [
+      { d: 'M0 52H494Q526 52 526 84V144Q526 176 558 176H648', end: [648, 176] },
+      { d: 'M1440 318H914Q882 318 882 286V232Q882 200 850 200H748', end: [748, 200] },
+    ],
+  },
+};
+const { height, frames, routes } = artwork[variant];
+---
+
+<div class:list={['home-decoration', `home-decoration--${variant}`]} data-home-decoration={variant} aria-hidden="true">
+  <div class="trust-scroll-layer">
+    <div class="trust-pointer-layer">
+      <svg class="trust-artwork" viewBox={`0 0 1440 ${height}`} fill="none" preserveAspectRatio="none" focusable="false">
+        {frames.map((frame, index) => (
+          <g class="trust-frame" data-frame={index}>
+            <g transform={`rotate(${frame.rotate ?? 0} ${frame.x + frame.w / 2} ${frame.y + frame.h / 2})`}>
+              <rect class="trust-frame-field" x={frame.x} y={frame.y} width={frame.w} height={frame.h} rx={frame.r} />
+              <rect class="trust-frame-edge" x={frame.x} y={frame.y} width={frame.w} height={frame.h} rx={frame.r} vector-effect="non-scaling-stroke" />
+              <rect class="trust-frame-inset" x={frame.x + 16} y={frame.y + 16} width={frame.w - 32} height={frame.h - 32} rx={frame.r - 16} vector-effect="non-scaling-stroke" />
+            </g>
+          </g>
+        ))}
+        {routes.map((route, index) => (
+          <g class="trust-route" data-route={index}>
+            <path class="trust-route-track" d={route.d} vector-effect="non-scaling-stroke" />
+            <path class="trust-route-signal" d={route.d} pathLength="1" vector-effect="non-scaling-stroke" />
+          </g>
+        ))}
+      </svg>
+      {routes.map((route, index) => (
+        <span class="trust-route trust-terminal" data-route={index} style={`left:${route.end[0] / 1440 * 100}%;top:${route.end[1] / height * 100}%`}>
+          <span class="trust-terminal-ring"></span>
+          <span class="trust-terminal-core"></span>
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

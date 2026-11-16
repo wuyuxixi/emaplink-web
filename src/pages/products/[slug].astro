@@ -85,7 +85,6 @@ const mechanismIcons = ["shield", "key", "network", "spark"] as const;
   ) : (
     <>
       <PageHero
-        eyebrow="产品中心"
         title={product.name}
         description={product.tagline}
         breadcrumbs={[
@@ -99,8 +98,7 @@ const mechanismIcons = ["shield", "key", "network", "spark"] as const;
       <section class="section">
         <div class="container-page grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
           <div>
-            <p class="eyebrow">产品介绍</p>
-            <h2 class="section-title mt-4">{product.shortName}</h2>
+            <h2 class="section-title">{product.shortName}</h2>
             {scenarioTags.length > 0 && (
               <div class="mt-6 rounded-2xl border border-line bg-white p-5">
                 <p class="text-xs font-semibold tracking-[0.14em] text-muted">
@@ -153,7 +151,6 @@ const mechanismIcons = ["shield", "key", "network", "spark"] as const;
     <section class="section bg-white">
       <div class="container-page">
         <SectionHeading
-          eyebrow="产品功能"
           title="从身份到准入的完整能力"
           lead="围绕可信身份、准入控制、状态管理与风险感知，形成可落地的产品能力组合。"
         />
@@ -203,7 +200,6 @@ const mechanismIcons = ["shield", "key", "network", "spark"] as const;
     <section class="section">
       <div class="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <SectionHeading
-          eyebrow="核心能力"
           title="把动态口令做成可落地的身份鉴别能力"
           lead="面向 WEB 系统的多因素认证，兼顾安全性与使用体验。"
         />
@@ -225,7 +221,6 @@ const mechanismIcons = ["shield", "key", "network", "spark"] as const;
     <section class="section bg-white">
       <div class="container-page">
         <SectionHeading
-          eyebrow="核心机制"
           title="从信任、密码、传输到进化，构成 ZSAC 的底层逻辑"
           lead="ZSAC 不是单一产品，而是一套可持续演进的接入安全机制。"
         />
@@ -268,8 +263,7 @@ const mechanismIcons = ["shield", "key", "network", "spark"] as const;
         <div class="relative overflow-hidden rounded-3xl tonal-panel p-8 sm:p-10 lg:p-14">
           <div class="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <div>
-              <p class="eyebrow text-cyan-400">ZSAC 接入安全生态</p>
-              <p class="mt-4 max-w-2xl text-2xl font-semibold leading-relaxed sm:text-3xl">
+              <p class="max-w-2xl text-2xl font-semibold leading-relaxed sm:text-3xl">
                 {product.ecosystem}
               </p>
             </div>
@@ -294,7 +288,6 @@ const mechanismIcons = ["shield", "key", "network", "spark"] as const;
     <section class="section bg-white">
       <div class="container-page">
         <SectionHeading
-          eyebrow="产品优势"
           title="安全、易用、合规、经济"
           lead="以软密码模块形态，把安全能力做成可复制、可规模化的产品能力。"
         />
@@ -322,7 +315,6 @@ const mechanismIcons = ["shield", "key", "network", "spark"] as const;
       <div class="container-page relative grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
         <SectionHeading
           tone="dark"
-          eyebrow="适用场景"
           title="适配多行业、多形态的接入场景"
           lead={product.scenarios}
         />
@@ -340,7 +332,7 @@ const mechanismIcons = ["shield", "key", "network", "spark"] as const;
   <section class="section">
     <div class="container-page">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <SectionHeading eyebrow="相关产品" title="继续了解完整产品矩阵" />
+        <SectionHeading title="继续了解完整产品矩阵" />
         <a
           href="/#products"
           class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 transition hover:text-brand-700"

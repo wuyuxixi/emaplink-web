@@ -1,14 +1,17 @@
 ---
 import { site } from "@/data/site";
 import ButtonLink from "./ui/ButtonLink.astro";
+import HomeDecoration from "./HomeDecoration.astro";
+interface Props { decorated?: boolean; }
+const { decorated = false } = Astro.props;
 ---
 
 <section class="contact-band">
   <div class="container-page">
     <div class="contact-band-shell" data-reveal>
-      <div class="contact-band-core">
+      <div class="contact-band-core" data-trust-section={decorated || undefined}>
+        {decorated && <HomeDecoration variant="contact" />}
         <div>
-          <p class="eyebrow">与联易一起，连接信任</p>
           <h2>
             你的安全场景，
             <br />

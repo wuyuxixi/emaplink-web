@@ -2,7 +2,6 @@
 import Breadcrumbs from "./Breadcrumbs.astro";
 import Icon from "./Icon.astro";
 interface Props {
-  eyebrow: string;
   title: string;
   description?: string;
   breadcrumbs: { label: string; href?: string }[];
@@ -12,7 +11,6 @@ interface Props {
   class?: string;
 }
 const {
-  eyebrow,
   title,
   description,
   breadcrumbs,
@@ -28,9 +26,6 @@ const {
     <Breadcrumbs items={breadcrumbs} />
     <div class="page-hero-layout">
       <div>
-        <p class="eyebrow" data-reveal>
-          {eyebrow}
-        </p>
         <h1 data-reveal>{title}</h1>
         {description && (
           <p class="page-hero-description" data-reveal>

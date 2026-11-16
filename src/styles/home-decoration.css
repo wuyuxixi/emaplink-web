@@ -1,0 +1,262 @@
+/* Trust paths: a homepage-only layer. Content never depends on this artwork. */
+.home-page [data-trust-section] {
+  position: relative;
+  isolation: isolate;
+  view-timeline-name: --trust-section;
+  view-timeline-axis: block;
+  --trust-timeline: --trust-section;
+}
+.home-page .home-decoration,
+.home-page .contact-band-core > .home-decoration {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: clip;
+  pointer-events: none;
+  user-select: none;
+  border-radius: inherit;
+  color: #2467d6;
+  contain: paint;
+}
+.home-page .trust-scroll-layer,
+.home-page .trust-pointer-layer {
+  position: absolute;
+  inset: -24px 0;
+}
+.home-page .trust-pointer-layer {
+  inset: 0;
+}
+.home-page .trust-artwork {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.home-page .trust-frame-field {
+  fill: #dce8f4;
+  opacity: 0.24;
+}
+.home-page .trust-frame-edge,
+.home-page .trust-frame-inset {
+  stroke: currentColor;
+  stroke-width: 1.25;
+  opacity: 0.16;
+}
+.home-page .trust-frame-inset {
+  opacity: 0.12;
+}
+.home-page .trust-route {
+  --route-strength: 0.12;
+  --node-strength: 0.24;
+}
+.home-page .trust-route-track,
+.home-page .trust-route-signal {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.home-page .trust-route-track {
+  opacity: 0.12;
+}
+.home-page .trust-route-signal {
+  opacity: var(--route-strength);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: opacity 450ms ease;
+}
+.home-page .trust-terminal {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+}
+.home-page .trust-terminal-ring {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid currentColor;
+  border-radius: 6px;
+  background: #fff;
+  opacity: var(--node-strength);
+  transition: opacity 450ms ease;
+}
+.home-page .trust-terminal-core {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: var(--node-strength);
+  transition: opacity 450ms ease;
+}
+.home-page .trust-frame {
+  opacity: 1;
+  transition: opacity 450ms ease;
+}
+.home-page .home-decoration--hero .trust-frame-field {
+  opacity: 0.16;
+}
+.home-page .home-decoration--statement .trust-frame-field,
+.home-page .home-decoration--news .trust-frame-field {
+  opacity: 0.32;
+}
+.home-page .home-decoration--products .trust-frame-edge {
+  stroke-width: 2;
+}
+.home-page .home-decoration--products .trust-frame-inset {
+  stroke-width: 8;
+  stroke: #dce8f4;
+  opacity: 0.8;
+}
+.home-page .home-decoration--values .trust-frame-field {
+  opacity: 0.12;
+}
+.home-page .home-decoration--values .trust-frame { opacity: 0.64; }
+.home-page .home-decoration--industry .trust-route-signal {
+  opacity: 0.12;
+}
+.home-page .home-decoration--contact .trust-frame-field {
+  fill: #fff;
+  opacity: 0.24;
+}
+.home-page .ecosystem-items > div:focus-visible,
+.home-page .value-list > article:focus-visible {
+  outline: 2px solid #2467d6;
+  outline-offset: 6px;
+  border-radius: 16px;
+}
+
+/* Read the existing controls' states; the ornament has no parallel state model. */
+.home-page .solutions-section:has([data-solution-choice="0"][aria-pressed="true"]) .home-decoration--solutions [data-route="0"],
+.home-page .solutions-section:has([data-solution-choice="1"][aria-pressed="true"]) .home-decoration--solutions [data-route="1"],
+.home-page .solutions-section:has([data-solution-choice="2"][aria-pressed="true"]) .home-decoration--solutions [data-route="2"],
+.home-page .ecosystem-section:has(.ecosystem-items > :nth-child(1):focus-visible) [data-route="0"],
+.home-page .ecosystem-section:has(.ecosystem-items > :nth-child(2):focus-visible) [data-route="1"],
+.home-page .ecosystem-section:has(.ecosystem-items > :nth-child(3):focus-visible) [data-route="2"],
+.home-page .ecosystem-section:has(.ecosystem-items > :nth-child(4):focus-visible) [data-route="3"],
+.home-page .products-section:has(.product-card:nth-child(1):focus-visible) [data-route="0"],
+.home-page .products-section:has(.product-card:nth-child(2):focus-visible) [data-route="1"],
+.home-page .products-section:has(.product-card:nth-child(3):focus-visible) [data-route="2"],
+.home-page .products-section:has(.product-card:nth-child(4):focus-visible) [data-route="3"] {
+  --route-strength: 0.135;
+  --node-strength: 0.4;
+}
+.home-page .values-section:has(.value-list > :nth-child(1):focus-visible) [data-frame="0"],
+.home-page .values-section:has(.value-list > :nth-child(2):focus-visible) [data-frame="1"],
+.home-page .values-section:has(.value-list > :nth-child(3):focus-visible) [data-frame="2"],
+.home-page .values-section:has(.value-list > :nth-child(4):focus-visible) [data-frame="3"] {
+  opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .home-page .ecosystem-section:has(.ecosystem-items > :nth-child(1):hover) [data-route="0"],
+  .home-page .ecosystem-section:has(.ecosystem-items > :nth-child(2):hover) [data-route="1"],
+  .home-page .ecosystem-section:has(.ecosystem-items > :nth-child(3):hover) [data-route="2"],
+  .home-page .ecosystem-section:has(.ecosystem-items > :nth-child(4):hover) [data-route="3"],
+  .home-page .products-section:has(.product-card:nth-child(1):hover) [data-route="0"],
+  .home-page .products-section:has(.product-card:nth-child(2):hover) [data-route="1"],
+  .home-page .products-section:has(.product-card:nth-child(3):hover) [data-route="2"],
+  .home-page .products-section:has(.product-card:nth-child(4):hover) [data-route="3"] {
+    --route-strength: 0.135;
+    --node-strength: 0.4;
+  }
+  .home-page .values-section:has(.value-list > :nth-child(1):hover) [data-frame="0"],
+  .home-page .values-section:has(.value-list > :nth-child(2):hover) [data-frame="1"],
+  .home-page .values-section:has(.value-list > :nth-child(3):hover) [data-frame="2"],
+  .home-page .values-section:has(.value-list > :nth-child(4):hover) [data-frame="3"] {
+    opacity: 1;
+  }
+}
+
+/* Static artwork is the default, including when JavaScript is disabled. */
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .home-page[data-trust-motion] .home-decoration:not(.home-decoration--news):not(.home-decoration--industry) .trust-scroll-layer {
+      animation: home-trust-drift linear both;
+      /* Keep the timeline separate: CSS minifiers may otherwise fold it into
+         an animation shorthand that older native-timeline browsers reject. */
+      animation-timeline: var(--trust-timeline);
+      animation-range: entry 0% exit 100%;
+    }
+    .home-page[data-trust-motion] :is(.home-decoration--statement, .home-decoration--products, .home-decoration--contact) .trust-route-signal {
+      animation: home-trust-connect linear both;
+      animation-timeline: var(--trust-timeline);
+      animation-range: entry 15% cover 60%;
+    }
+    .home-page[data-trust-motion] :is(.home-decoration--statement, .home-decoration--contact) .trust-terminal {
+      animation: home-trust-terminal linear both;
+      animation-timeline: var(--trust-timeline);
+      animation-range: entry 15% cover 60%;
+    }
+    .home-page[data-trust-motion] .home-decoration--statement .trust-terminal[data-route="1"] {
+      animation-range: entry 35% cover 75%;
+    }
+    .home-page[data-trust-motion] .home-decoration--values .trust-frame:nth-child(even) {
+      animation: home-trust-frame linear both;
+      animation-timeline: var(--trust-timeline);
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+@keyframes home-trust-drift {
+  from { transform: translateY(-12px); }
+  to { transform: translateY(12px); }
+}
+@keyframes home-trust-frame {
+  from { transform: translateY(8px); }
+  to { transform: translateY(-8px); }
+}
+@keyframes home-trust-connect {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes home-trust-terminal {
+  from { opacity: 0.25; }
+  to { opacity: 1; }
+}
+@media (max-width: 1023px) {
+  .home-page .home-decoration--ecosystem .trust-scroll-layer { inset-block: 38% 0; }
+  .home-page .home-decoration--values .trust-scroll-layer { inset-block: 26% 4%; }
+  .home-page .home-decoration--statement .trust-scroll-layer {
+    /* Keep the phrase and supporting sentence on a clear reading surface. */
+    mask-image: linear-gradient(to bottom, #000, #000 25%, transparent 38%, transparent 86%, #000 96%);
+  }
+  .home-page .home-decoration--contact .trust-scroll-layer {
+    mask-image: linear-gradient(90deg, transparent 42%, #000 58%);
+  }
+}
+@media (max-width: 767px) {
+  .home-page .trust-route:is([data-route="1"], [data-route="3"]),
+  .home-page .trust-frame:nth-child(even) {
+    display: none;
+  }
+  .home-page .home-decoration--hero .trust-pointer-layer {
+    width: 180%;
+    left: -80%;
+    right: auto;
+  }
+  .home-page .home-decoration--hero .trust-scroll-layer {
+    inset-block: 46% 0;
+  }
+  .home-page .trust-frame-field { opacity: 0.12; }
+  .home-page .home-decoration--values .trust-pointer-layer {
+    width: 160%;
+    left: -60%;
+    right: auto;
+  }
+  .home-page .home-decoration--products .trust-pointer-layer {
+    width: 220%;
+    left: -60%;
+    right: auto;
+  }
+  .home-page .home-decoration--products .trust-route { display: none; }
+  .home-page .home-decoration--contact .trust-scroll-layer {
+    width: 160%;
+    left: 25%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .home-decoration *,
+  .home-page .home-decoration {
+    animation: none !important;
+    transition: none !important;
+  }
+}
