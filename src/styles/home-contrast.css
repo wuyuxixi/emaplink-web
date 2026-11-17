@@ -226,7 +226,12 @@
 .home-page .product-card-link {
   padding-top: 23px;
 }
-.home-page .product-card-link > span {
+.home-page .product-card-link > span,
+.home-page .home-news-list [data-news-row] > span:last-child {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
   background: #e3edf8;
   color: #1f5c9d;
 }
@@ -480,7 +485,7 @@
   border: 0;
   border-radius: 20px;
   background: white;
-  grid-template-columns: 1fr 38px;
+  grid-template-columns: 1fr 40px;
   column-gap: 18px;
   row-gap: 12px;
 }
@@ -494,7 +499,16 @@
   grid-column: 2;
   grid-row: 2;
   align-self: center;
-  background: #e9f1fa;
+  transition: transform 450ms var(--motion), background 450ms var(--motion);
+}
+.home-page .home-news-list [data-news-row] > span:last-child svg {
+  width: 19px;
+  height: 19px;
+}
+.home-page .home-news-list [data-news-row]:hover > span:last-child {
+  background: var(--bright-blue);
+  color: white;
+  transform: rotate(0);
 }
 .home-page .home-news-list [data-news-row] time {
   color: #40668d;
@@ -564,8 +578,6 @@
   display: flex;
   align-self: flex-end;
   margin-top: auto;
-  background: var(--home-navy);
-  color: white;
   flex-shrink: 0;
 }
 

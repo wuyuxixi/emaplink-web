@@ -24,7 +24,6 @@ const pages = [
   '/about/index.html',
   '/about/culture/index.html',
   '/about/honors/index.html',
-  '/about/cases/index.html',
   '/contact/index.html',
   '/news/index.html',
   ...newsSlugs.map((slug) => `/news/${slug}/index.html`),

@@ -49,7 +49,6 @@ async function article() {
 }
 
 await full('honors-1440', '/about/honors/');
-await full('cases-1440', '/about/cases/');
 await full('contact-1440', '/contact/');
 await full('culture-1440', '/about/culture/');
 await article();

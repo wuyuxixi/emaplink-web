@@ -18,7 +18,6 @@ const mainRedirects = new Map([
   ['about.html', '/about/'],
   ['about1.html', '/about/culture/'],
   ['about2.html', '/about/honors/'],
-  ['industry-case.html', '/about/cases/'],
   ['contact.html', '/contact/'],
   ['news.html', '/news/'],
 ]);
@@ -30,7 +29,7 @@ const excludedRedirects = new Map([
   ['programme-drug.html', '/#solutions'],
   ['hezuo1.html', '/about/'],
   ['news-report.html', '/news/'],
-  ...[1, 2, 3, 4, 5, 6, 7].map((id) => [`report-details${id}.html`, '/about/cases/']),
+  ...[1, 2, 3, 4, 5, 6, 7].map((id) => [`report-details${id}.html`, '/news/']),
 ]);
 
 function aliasHtml(target) {

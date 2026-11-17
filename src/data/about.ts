@@ -92,37 +92,6 @@ export const honors: Honor[] = [
   },
 ];
 
-export type CaseStudy = {
-  title: string;
-  summary: string;
-  sector: string;
-  source: string;
-};
-
-export const cases: CaseStudy[] = [
-  {
-    title: '陕西省药品安全监管“陕药通”',
-    summary:
-      '依托陕西省药品安全监管综合业务系统，“陕药通”小程序实现信息登记、信息共享与监管码采集，并对信息查阅权限进行严格划分，减负企业、方便群众。',
-    sector: '政务 · 药品监管',
-    source: '据 2021 年 2 月公开报道整理',
-  },
-  {
-    title: '陕西“陕非冷链”进口非冷链物品追溯',
-    summary:
-      '继进口冷链食品追溯系统之后，陕西建立进口非冷链物品追溯系统，实现进口非冷链物品的追溯管理，并对生产经营单位实行实名销售与电子追溯码管理。',
-    sector: '政务 · 食品安全',
-    source: '据 2021 年 2 月公开报道整理',
-  },
-  {
-    title: '内蒙古“蒙冷链”冷链食品追溯',
-    summary:
-      '“蒙冷链”追溯平台覆盖进口冷链食品生产加工、销售、贮存、餐饮等环节，形成从供应链首站到消费环节的闭环追溯，做到“首站赋码、一码到底、来源可追、去向可查”。',
-    sector: '政务 · 冷链追溯',
-    source: '据 2021 年 2 月公开报道整理',
-  },
-];
-
 export const contact = {
   mapImage: '/images/about/contact-map.webp',
   mapAlt: '联易软件办公地址位置示意',

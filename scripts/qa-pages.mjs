@@ -16,7 +16,6 @@ const pages = [
   ['about', '/about/'],
   ['culture', '/about/culture/'],
   ['honors', '/about/honors/'],
-  ['cases', '/about/cases/'],
   ['contact', '/contact/'],
   ['not-found', '/404.html'],
 ];

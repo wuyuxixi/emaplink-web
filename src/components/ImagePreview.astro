@@ -1,0 +1,141 @@
+---
+import Icon from './ui/Icon.astro';
+interface Props { src: string; alt: string; }
+const { src, alt } = Astro.props;
+---
+
+<dialog id="image-preview-dialog" class="image-preview-dialog" aria-labelledby="image-preview-title" aria-describedby="image-preview-help">
+  <header class="preview-toolbar">
+    <h2 id="image-preview-title">场景图预览</h2>
+    <div class="preview-controls">
+      <button type="button" data-zoom-out aria-label="缩小图片">缩小</button>
+      <output data-zoom-level aria-label="缩放比例">100%</output>
+      <button type="button" data-zoom-in aria-label="放大图片">放大</button>
+      <button type="button" data-zoom-reset>重置</button>
+      <button type="button" data-preview-close aria-label="关闭图片预览" autofocus><Icon name="close" size={20} /></button>
+    </div>
+  </header>
+  <div class="preview-stage" data-preview-stage>
+    <img data-preview-image src={src} alt={alt} draggable="false" />
+  </div>
+  <p id="image-preview-help">滚轮缩放 · 放大后拖动查看 · Esc 关闭</p>
+</dialog>
+
+<style>
+  .image-preview-dialog {
+    margin: auto; padding: 0; width: min(1200px, calc(100vw - 32px));
+    max-width: none; max-height: calc(100dvh - 32px); overflow: hidden;
+    border: 0; border-radius: 16px; background: white; color: #173b56;
+    box-shadow: 0 24px 80px -24px rgb(9 30 51 / 0.5);
+  }
+  .image-preview-dialog::backdrop { background: rgb(9 27 45 / 0.78); }
+  .preview-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #dce6f0; }
+  h2 { font-size: 16px; font-weight: 600; }
+  .preview-controls { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+  button { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+  button:hover { background: #eaf2fc; }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button:focus-visible { outline: 2px solid #2563eb; outline-offset: -2px; }
+  output { width: 54px; text-align: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .preview-stage { display: grid; place-items: center; height: min(70dvh, 760px); padding: 24px; overflow: hidden; background: #f2f6fb; touch-action: none; }
+  .preview-stage[data-pannable="true"] { cursor: grab; }
+  .preview-stage[data-dragging="true"] { cursor: grabbing; }
+  img { display: block; max-width: 100%; max-height: 100%; min-width: 0; min-height: 0; object-fit: contain; user-select: none; }
+  #image-preview-help { padding: 10px 16px; color: #50677f; font-size: 12px; text-align: center; }
+  @media (max-width: 600px) {
+    .preview-toolbar { flex-wrap: wrap; gap: 4px; padding: 8px 12px; }
+    h2 { width: 100%; font-size: 14px; }
+    .preview-controls { width: 100%; justify-content: flex-end; }
+    .preview-stage { height: 60dvh; padding: 12px; }
+  }
+</style>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#image-preview-dialog')!;
+  const stage = dialog.querySelector<HTMLElement>('[data-preview-stage]')!;
+  const image = dialog.querySelector<HTMLImageElement>('[data-preview-image]')!;
+  const title = dialog.querySelector<HTMLElement>('#image-preview-title')!;
+  const level = dialog.querySelector<HTMLOutputElement>('[data-zoom-level]')!;
+  const zoomIn = dialog.querySelector<HTMLButtonElement>('[data-zoom-in]')!;
+  const zoomOut = dialog.querySelector<HTMLButtonElement>('[data-zoom-out]')!;
+  let scale = 1;
+  let x = 0;
+  let y = 0;
+  let drag: { id: number; x: number; y: number } | null = null;
+  let opener: HTMLButtonElement | null = null;
+  let previousOverflow = '';
+
+  function render() {
+    const maxX = Math.max(0, (image.offsetWidth * scale - stage.clientWidth) / 2 + 24);
+    const maxY = Math.max(0, (image.offsetHeight * scale - stage.clientHeight) / 2 + 24);
+    x = Math.max(-maxX, Math.min(maxX, x));
+    y = Math.max(-maxY, Math.min(maxY, y));
+    image.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+    level.value = `${Math.round(scale * 100)}%`;
+    zoomIn.disabled = scale >= 5;
+    zoomOut.disabled = scale <= 0.5;
+    stage.dataset.pannable = String(maxX > 0 || maxY > 0);
+  }
+
+  function zoom(next: number, clientX?: number, clientY?: number) {
+    const rect = stage.getBoundingClientRect();
+    const px = clientX === undefined ? 0 : clientX - rect.left - rect.width / 2;
+    const py = clientY === undefined ? 0 : clientY - rect.top - rect.height / 2;
+    const clamped = Math.max(0.5, Math.min(5, next));
+    const ratio = clamped / scale;
+    x = px - (px - x) * ratio;
+    y = py - (py - y) * ratio;
+    scale = clamped;
+    render();
+  }
+
+  function reset() { scale = 1; x = 0; y = 0; render(); }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-image-preview]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const source = button.querySelector('img');
+      if (!source) return;
+      opener = button;
+      image.src = source.currentSrc || source.src;
+      image.alt = source.alt;
+      title.textContent = source.alt || '场景图预览';
+      previousOverflow = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = 'hidden';
+      dialog.showModal();
+      reset();
+    });
+  });
+  image.addEventListener('load', render);
+  zoomIn.addEventListener('click', () => zoom(scale * 1.25));
+  zoomOut.addEventListener('click', () => zoom(scale / 1.25));
+  dialog.querySelector('[data-zoom-reset]')!.addEventListener('click', reset);
+  dialog.querySelector('[data-preview-close]')!.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => {
+    document.documentElement.style.overflow = previousOverflow;
+    drag = null;
+    stage.dataset.dragging = 'false';
+    opener?.focus({ preventScroll: true });
+  });
+  stage.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? stage.clientHeight : 1);
+    zoom(scale * Math.exp(-Math.max(-200, Math.min(200, delta)) * 0.002), event.clientX, event.clientY);
+  }, { passive: false });
+  stage.addEventListener('pointerdown', (event) => {
+    if (event.button !== 0 || stage.dataset.pannable !== 'true') return;
+    drag = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    stage.setPointerCapture(event.pointerId);
+    stage.dataset.dragging = 'true';
+  });
+  stage.addEventListener('pointermove', (event) => {
+    if (!drag || drag.id !== event.pointerId) return;
+    x += event.clientX - drag.x;
+    y += event.clientY - drag.y;
+    drag.x = event.clientX;
+    drag.y = event.clientY;
+    render();
+  });
+  stage.addEventListener('lostpointercapture', () => { drag = null; stage.dataset.dragging = 'false'; });
+  window.addEventListener('resize', () => { if (dialog.open) render(); });
+</script>

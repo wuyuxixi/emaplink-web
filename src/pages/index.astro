@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard.astro";
 import Icon from "@/components/ui/Icon.astro";
 import IndustryMarquee from "@/components/IndustryMarquee.astro";
 import HomeDecoration from "@/components/HomeDecoration.astro";
+import ImagePreview from "@/components/ImagePreview.astro";
 import { ecosystem, services, valueCards } from "@/data/home";
 import { products } from "@/data/products";
 import { solutions } from "@/data/solutions";
@@ -160,7 +161,14 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
           >
             {solutions.map((solution, index) => (
               <div data-solution-panel={index} hidden={index !== 0}>
-                <div class="solution-image">
+                <button
+                  type="button"
+                  class="solution-image"
+                  data-image-preview
+                  aria-label={`预览${solution.name}场景图`}
+                  aria-haspopup="dialog"
+                  aria-controls="image-preview-dialog"
+                >
                   <img
                     src={solution.heroImage}
                     alt={solution.heroAlt}
@@ -168,7 +176,8 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
                     height="500"
                     loading="eager"
                   />
-                </div>
+                  <span class="solution-image-hint"><Icon name="search" size={16} /> 点击预览</span>
+                </button>
                 <div class="solution-preview-copy">
                   <span>ZSAC 场景方案</span>
                   <strong>{solution.name}</strong>
@@ -255,7 +264,39 @@ const newsEntries = (await getCollection("news", ({ data }) => !data.draft))
     </div>
   </section>
   <CtaBand decorated />
+  <ImagePreview src={solutions[0].heroImage} alt={solutions[0].heroAlt} />
 </BaseLayout>
+<style>
+  .solution-option { position: relative; isolation: isolate; }
+  .solution-option[data-selected] {
+    transition: background-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .solution-option[data-selected]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px -22px rgb(23 60 87 / 0.45);
+    }
+    .solution-option[data-selected="false"]:hover { background: #c8def5; }
+    .solution-option[data-selected="false"]:hover > p { color: #34516d; }
+    .solution-option[data-selected="false"]:hover > .text-link { color: #194f96; }
+    .solution-option[data-selected="true"]:hover { background: #0c5b86; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .solution-option[data-selected] { transition: none; }
+    .solution-option[data-selected]:hover { transform: none; }
+  }
+  .solution-option > button { position: static; cursor: pointer; }
+  .solution-option > button::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+  .solution-option > .text-link { position: relative; z-index: 1; }
+  .solution-option:has(> button:focus-visible) { outline: 2px solid #2563eb; outline-offset: 4px; }
+  .solution-image { display: block; position: relative; width: 100%; cursor: zoom-in; }
+  .solution-image-hint {
+    position: absolute; bottom: 12px; right: 14px; display: inline-flex;
+    align-items: center; gap: 6px; padding: 7px 11px; border-radius: 999px;
+    background: white; color: #274f72; font-size: 12px;
+  }
+  .solution-image:focus-visible { outline: 2px solid #2563eb; outline-offset: -4px; }
+</style>
 <script>
   document
     .querySelectorAll<HTMLElement>("[data-solution-selector]")

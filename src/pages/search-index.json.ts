@@ -72,12 +72,6 @@ export async function GET() {
       type: 'page',
     },
     {
-      title: '行业案例',
-      description: '政务、金融、能源、交通、工业、物联网等行业的接入安全实践。',
-      url: '/about/cases/',
-      type: 'page',
-    },
-    {
       title: '联系我们',
       description: '联易软件联系电话、邮箱与办公地址。',
       url: '/contact/',

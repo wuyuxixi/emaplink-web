@@ -4,6 +4,7 @@ dist/
 .cache/
 test-results/
 playwright-report/
+.playwright-mcp/
 blob-report/
 .DS_Store
 *.log
